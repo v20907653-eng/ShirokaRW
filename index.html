@@ -1,1 +1,1023 @@
-# ShirokaRW
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ShirokaRW — Магазин</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0f1115;--bg-2:#161a22;--surface:#1a1f2b;--surface-2:#232936;
+  --border:#2a3142;--text:#e8ecf5;--muted:#8b93a7;--muted-2:#5c6478;
+  --green:#4ade80;--green-2:#22c55e;--red:#ef4444;--orange:#f59e0b;
+  --purple:#c084fc;--cyan:#22d3ee;--blue:#60a5fa;
+  --radius:12px;--radius-sm:8px;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.5;min-height:100vh;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+button{font:inherit;cursor:pointer;border:none;background:none;color:inherit}
+.container{width:100%;max-width:1400px;margin:0 auto;padding:0 24px}
+
+/* TOPBAR */
+.topbar{background:var(--bg-2);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:50}
+.topbar-inner{display:flex;align-items:center;justify-content:space-between;height:64px;gap:16px}
+.topbar-left{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.logo{display:flex;align-items:center;gap:10px}
+.logo-icon{width:36px;height:36px;display:grid;place-items:center;background:linear-gradient(135deg,rgba(74,222,128,.15),rgba(34,211,238,.1));border:1px solid rgba(74,222,128,.3);border-radius:9px;font-size:18px}
+.logo-text{font-weight:800;font-size:16px;letter-spacing:-.02em}
+.ip-block{display:inline-flex;align-items:center;gap:8px;padding:7px 14px;background:rgba(34,211,238,.06);border:1px solid rgba(34,211,238,.25);border-radius:8px;font-size:13px;color:var(--cyan);cursor:pointer;transition:all .15s;font-family:ui-monospace,monospace;font-weight:600}
+.ip-block:hover{background:rgba(34,211,238,.12);border-color:rgba(34,211,238,.5)}
+.ip-block.copied{background:rgba(74,222,128,.15);border-color:rgba(74,222,128,.5);color:var(--green)}
+.ip-block svg{opacity:.7}
+.ip-label{font-size:10px;color:var(--muted-2);font-weight:600;text-transform:uppercase;letter-spacing:.06em}
+.owner-block{display:inline-flex;align-items:center;gap:8px;padding:7px 14px;background:linear-gradient(135deg,rgba(245,158,11,.12),rgba(245,158,11,.05));border:1px solid rgba(245,158,11,.35);border-radius:8px;font-size:13px}
+.owner-crown{font-size:15px;filter:drop-shadow(0 0 6px rgba(245,158,11,.6))}
+.owner-label{font-size:10px;color:var(--muted-2);font-weight:700;text-transform:uppercase;letter-spacing:.08em}
+.owner-nick{font-weight:800;color:var(--orange)}
+.owner-status{width:7px;height:7px;border-radius:50%;background:var(--muted-2);transition:all .3s}
+.owner-status.online{background:var(--green);box-shadow:0 0 8px var(--green)}
+
+.nav-btn{display:inline-flex;align-items:center;gap:8px;padding:7px 14px;background:var(--surface);border:1px solid var(--border);border-radius:8px;font-size:13px;font-weight:600;color:var(--text);cursor:pointer;transition:all .15s;white-space:nowrap}
+.nav-btn:hover{background:var(--surface-2);border-color:#3a4256;transform:translateY(-1px)}
+.nav-btn.kp{border-color:rgba(34,211,238,.35);color:var(--cyan)}
+.nav-btn.kp:hover{background:rgba(34,211,238,.1);border-color:rgba(34,211,238,.6)}
+.nav-btn.rules{border-color:rgba(192,132,252,.35);color:var(--purple)}
+.nav-btn.rules:hover{background:rgba(192,132,252,.1);border-color:rgba(192,132,252,.6)}
+.nav-btn.vote{border-color:rgba(245,158,11,.4);color:#fbbf24;background:linear-gradient(135deg,rgba(245,158,11,.1),rgba(245,158,11,.03))}
+.nav-btn.vote:hover{background:linear-gradient(135deg,rgba(245,158,11,.2),rgba(245,158,11,.08));border-color:rgba(245,158,11,.7);box-shadow:0 6px 20px rgba(245,158,11,.25)}
+.nav-btn.ds{border-color:rgba(88,101,242,.5);color:#a5b4fc;background:rgba(88,101,242,.08)}
+.nav-btn.ds:hover{background:rgba(88,101,242,.18);border-color:rgba(88,101,242,.8)}
+
+.topbar-right{display:flex;align-items:center;gap:12px}
+.online-badge{display:inline-flex;align-items:center;gap:8px;padding:7px 14px;background:rgba(74,222,128,.06);border:1px solid rgba(74,222,128,.2);border-radius:8px;font-size:13px;color:var(--muted)}
+.online-badge b{color:var(--text);font-weight:600}
+.online-dot{width:7px;height:7px;background:var(--green);border-radius:50%;box-shadow:0 0 8px var(--green);animation:pulse-dot 2s infinite}
+@keyframes pulse-dot{0%,100%{opacity:1}50%{opacity:.4}}
+
+.filterbar{background:var(--bg-2);border-bottom:1px solid var(--border);padding:14px 0;position:sticky;top:64px;z-index:40}
+.filterbar-inner{display:flex;align-items:flex-end;gap:16px;flex-wrap:wrap}
+.filter-group{display:flex;flex-direction:column;gap:5px;min-width:160px}
+.filter-group label{font-size:11px;color:var(--muted-2);text-transform:uppercase;letter-spacing:.06em;font-weight:600}
+.filter-group select{padding:9px 30px 9px 12px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:13px;cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238b93a7' stroke-width='2.5'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center}
+.filter-group select:focus{outline:none;border-color:var(--green)}
+.filter-search{position:relative;flex:1;min-width:200px;max-width:320px;display:flex;align-items:center}
+.filter-search svg{position:absolute;left:12px;color:var(--muted-2)}
+.filter-search input{width:100%;padding:9px 12px 9px 38px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:13px}
+.filter-search input:focus{outline:none;border-color:var(--green)}
+
+main{padding:0 24px 80px}
+
+.promo-banner{margin:24px 0;background:linear-gradient(135deg,rgba(245,158,11,.15),rgba(239,68,68,.1),rgba(192,132,252,.1));border:2px solid rgba(245,158,11,.5);border-radius:18px;padding:26px 30px;position:relative;overflow:hidden;animation:promoPulse 3s ease-in-out infinite}
+@keyframes promoPulse{0%,100%{box-shadow:0 0 0 rgba(245,158,11,0)}50%{box-shadow:0 0 40px rgba(245,158,11,.35)}}
+.promo-banner::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 10% 20%,rgba(245,158,11,.15),transparent 40%),radial-gradient(circle at 90% 80%,rgba(192,132,252,.12),transparent 40%);pointer-events:none}
+.promo-inner{position:relative;display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center}
+.promo-tag{display:inline-block;padding:5px 12px;background:linear-gradient(135deg,#ef4444,#dc2626);color:#fff;border-radius:100px;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;margin-bottom:12px;box-shadow:0 4px 14px rgba(239,68,68,.5)}
+.promo-title{font-size:24px;font-weight:800;letter-spacing:-.02em;line-height:1.2;margin-bottom:10px}
+.promo-title .gradient{background:linear-gradient(135deg,#fbbf24,#f59e0b,#ef4444);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.promo-desc{font-size:14px;color:#e8ecf5;line-height:1.55;margin-bottom:14px;max-width:640px}
+.promo-desc b{color:var(--orange);font-weight:800}
+.promo-features{list-style:none;display:flex;flex-wrap:wrap;gap:10px;margin-bottom:0}
+.promo-features li{padding:7px 14px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:100px;font-size:12.5px;font-weight:600;display:flex;align-items:center;gap:6px}
+.promo-features li b{color:var(--green);font-weight:800}
+.promo-buttons{display:flex;flex-direction:column;gap:10px;min-width:220px}
+.promo-btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:14px 22px;border-radius:12px;font-size:14px;font-weight:800;cursor:pointer;transition:all .2s;text-decoration:none;border:none;font-family:inherit}
+.promo-btn.kp-btn{background:linear-gradient(135deg,#4ade80,#22c55e);color:#04140a;box-shadow:0 8px 28px rgba(74,222,128,.5)}
+.promo-btn.kp-btn:hover{transform:translateY(-2px);box-shadow:0 14px 40px rgba(74,222,128,.7)}
+.promo-btn.ds-btn{background:linear-gradient(135deg,#5865F2,#4752c4);color:#fff;box-shadow:0 8px 28px rgba(88,101,242,.5)}
+.promo-btn.ds-btn:hover{transform:translateY(-2px);box-shadow:0 14px 40px rgba(88,101,242,.7)}
+
+.payment-banner{margin:0 0 24px;background:linear-gradient(135deg,rgba(96,165,250,.1),rgba(192,132,252,.06));border:1px solid rgba(96,165,250,.4);border-radius:16px;padding:24px 28px;display:grid;grid-template-columns:auto 1fr auto;gap:24px;align-items:center}
+.payment-banner-icon{width:64px;height:64px;display:grid;place-items:center;font-size:32px;background:rgba(96,165,250,.12);border:1px solid rgba(96,165,250,.4);border-radius:16px;flex-shrink:0}
+.payment-banner-label{font-size:11px;color:#93c5fd;text-transform:uppercase;letter-spacing:.1em;font-weight:700;margin-bottom:8px}
+.payment-banner-title{font-size:17px;font-weight:700;margin-bottom:10px;line-height:1.35}
+.payment-banner-title b{color:#93c5fd}
+.payment-banner-note{font-size:12.5px;color:#c7d2fe;line-height:1.5}
+.payment-banner-note b{color:#a5b4fc}
+.payment-banner-badge{padding:10px 16px;background:rgba(74,222,128,.1);border:1px solid rgba(74,222,128,.35);border-radius:10px;color:#bbf7d0;font-size:13px;font-weight:700;display:flex;align-items:center;gap:8px;white-space:nowrap}
+.payment-banner-badge b{color:var(--green);font-weight:800}
+.discord-inline-btn{display:inline-flex;align-items:center;gap:10px;margin-top:14px;padding:12px 20px;background:linear-gradient(135deg,#5865F2,#4752c4);color:#fff;border-radius:10px;font-size:14px;font-weight:700;text-decoration:none;box-shadow:0 8px 24px rgba(88,101,242,.4);transition:all .2s}
+.discord-inline-btn:hover{transform:translateY(-2px);box-shadow:0 14px 36px rgba(88,101,242,.6)}
+
+.products-section{margin-top:8px}
+.products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px}
+.product-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:22px;display:flex;flex-direction:column;gap:14px;transition:all .25s;position:relative;overflow:hidden}
+.product-card:hover{transform:translateY(-3px);box-shadow:0 15px 40px rgba(0,0,0,.5)}
+.product-card.is-dmoder:hover{border-color:rgba(96,165,250,.7);box-shadow:0 15px 40px rgba(96,165,250,.2)}
+.product-card.is-dadmin:hover{border-color:rgba(239,68,68,.7);box-shadow:0 15px 40px rgba(239,68,68,.2)}
+.product-card.is-sponsor:hover{border-color:rgba(245,158,11,.8);box-shadow:0 15px 45px rgba(245,158,11,.25)}
+.product-card.is-sponsor{background:linear-gradient(180deg,rgba(245,158,11,.06),var(--surface))}
+.product-card.is-sponsor::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 0%,rgba(245,158,11,.1),transparent 60%);pointer-events:none}
+.product-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;position:relative}
+.product-icon{width:56px;height:56px;display:grid;place-items:center;font-size:28px;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:14px;flex-shrink:0}
+.product-card.is-dmoder .product-icon{background:rgba(96,165,250,.12);border-color:rgba(96,165,250,.35)}
+.product-card.is-dadmin .product-icon{background:rgba(239,68,68,.12);border-color:rgba(239,68,68,.35)}
+.product-card.is-sponsor .product-icon{background:rgba(245,158,11,.15);border-color:rgba(245,158,11,.4);box-shadow:0 0 25px rgba(245,158,11,.25)}
+.product-badge{padding:5px 10px;border-radius:6px;font-size:11px;font-weight:800;letter-spacing:.05em;text-transform:uppercase}
+.product-badge.badge-dmoder{background:rgba(96,165,250,.15);border:1px solid rgba(96,165,250,.4);color:#93c5fd}
+.product-badge.badge-dadmin{background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.4);color:#fca5a5}
+.product-badge.badge-sponsor{background:linear-gradient(135deg,rgba(245,158,11,.25),rgba(239,68,68,.15));border:1px solid rgba(245,158,11,.5);color:#fbbf24}
+.product-discount{padding:5px 10px;background:linear-gradient(135deg,#ef4444,#dc2626);color:#fff;border-radius:6px;font-size:12px;font-weight:800;flex-shrink:0;box-shadow:0 4px 14px rgba(239,68,68,.4)}
+.product-info{flex:1;min-width:0;position:relative}
+.product-name{font-size:17px;font-weight:800;margin-bottom:4px;line-height:1.3;letter-spacing:-.01em}
+.product-subtitle{font-size:12.5px;color:var(--muted);line-height:1.4}
+.product-features{list-style:none;display:flex;flex-direction:column;gap:7px;padding:14px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);position:relative}
+.product-features li{font-size:12.5px;color:var(--muted);display:flex;align-items:center;gap:8px;line-height:1.4}
+.product-features li::before{content:'▸';font-weight:700;flex-shrink:0}
+.product-card.is-dmoder .product-features li::before{color:var(--blue)}
+.product-card.is-dadmin .product-features li::before{color:var(--red)}
+.product-card.is-sponsor .product-features li::before{color:var(--orange)}
+.product-features b{color:var(--text);font-weight:700}
+.product-row{display:flex;align-items:center;justify-content:space-between;gap:12px;position:relative}
+.product-row-label{font-size:11px;color:var(--muted-2);text-transform:uppercase;letter-spacing:.06em;font-weight:600}
+.product-qty{display:flex;align-items:center;background:var(--bg);border:1px solid var(--border);border-radius:6px;overflow:hidden;height:30px}
+.product-qty button{width:28px;height:100%;color:var(--muted);font-size:14px}
+.product-qty button:hover{background:var(--surface-2);color:var(--text)}
+.product-qty input{width:40px;height:100%;background:transparent;border:none;color:var(--text);text-align:center;font-size:12px;font-weight:600;-moz-appearance:textfield}
+.product-qty input::-webkit-outer-spin-button,.product-qty input::-webkit-inner-spin-button{-webkit-appearance:none}
+.product-bottom{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-top:12px;position:relative}
+.product-prices{display:flex;flex-direction:column;gap:2px}
+.product-old{font-size:12px;color:var(--muted-2);text-decoration:line-through}
+.product-new{font-size:22px;font-weight:800;line-height:1}
+.product-card.is-dmoder .product-new{color:var(--blue)}
+.product-card.is-dadmin .product-new{color:var(--red)}
+.product-card.is-sponsor .product-new{color:var(--orange)}
+.btn-add{padding:10px 18px;background:var(--surface-2);border:1px solid var(--border);color:var(--text);border-radius:8px;font-size:13px;font-weight:700;transition:all .15s;white-space:nowrap}
+.btn-add:hover{transform:translateY(-1px)}
+.product-card.is-dmoder .btn-add:hover{background:var(--blue);color:#0a1424;border-color:var(--blue);box-shadow:0 6px 20px rgba(96,165,250,.4)}
+.product-card.is-dadmin .btn-add:hover{background:var(--red);color:#fff;border-color:var(--red);box-shadow:0 6px 20px rgba(239,68,68,.4)}
+.product-card.is-sponsor .btn-add{background:linear-gradient(135deg,#f59e0b,#d97706);color:#fff;border-color:transparent}
+.product-card.is-sponsor .btn-add:hover{box-shadow:0 6px 20px rgba(245,158,11,.6)}
+
+.modal{display:none;position:fixed;inset:0;z-index:100;align-items:center;justify-content:center;padding:20px}
+.modal.active{display:flex}
+.modal-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(4px)}
+.modal-box{position:relative;width:100%;max-width:460px;background:var(--bg-2);border:1px solid var(--border);border-radius:16px;padding:28px;box-shadow:0 30px 80px rgba(0,0,0,.6);animation:modalIn .25s;max-height:90vh;overflow-y:auto}
+.modal-box.wide{max-width:760px}
+@keyframes modalIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.modal-close{position:absolute;top:16px;right:16px;width:32px;height:32px;display:grid;place-items:center;color:var(--muted);font-size:14px;border-radius:8px;z-index:2}
+.modal-close:hover{background:var(--surface);color:var(--text)}
+.modal-head{text-align:center;margin-bottom:22px}
+.modal-head h3{font-size:20px;font-weight:800;margin-bottom:6px;letter-spacing:-.02em}
+.modal-head p{color:var(--muted);font-size:13px}
+
+.vote-list{display:flex;flex-direction:column;gap:12px;margin-bottom:18px}
+.vote-card{display:flex;align-items:center;gap:16px;padding:18px 20px;background:var(--surface);border:1px solid var(--border);border-radius:14px;text-decoration:none;color:inherit;transition:all .2s;position:relative;overflow:hidden}
+.vote-card:hover{transform:translateY(-3px);border-color:#3a4256;box-shadow:0 15px 35px rgba(0,0,0,.4)}
+.vote-card.mclist:hover{border-color:rgba(74,222,128,.6);box-shadow:0 15px 35px rgba(74,222,128,.15)}
+.vote-card.millida:hover{border-color:rgba(96,165,250,.6);box-shadow:0 15px 35px rgba(96,165,250,.15)}
+.vote-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px}
+.vote-card.mclist::before{background:linear-gradient(180deg,#4ade80,#22c55e)}
+.vote-card.millida::before{background:linear-gradient(180deg,#60a5fa,#3b82f6)}
+.vote-logo{width:52px;height:52px;flex-shrink:0;display:grid;place-items:center;border-radius:12px;font-size:20px;font-weight:800;font-family:ui-monospace,monospace}
+.vote-card.mclist .vote-logo{background:rgba(74,222,128,.12);border:1px solid rgba(74,222,128,.35);color:var(--green)}
+.vote-card.millida .vote-logo{background:rgba(96,165,250,.12);border:1px solid rgba(96,165,250,.35);color:var(--blue)}
+.vote-info{flex:1;min-width:0}
+.vote-name{font-size:15px;font-weight:700;letter-spacing:-.01em;margin-bottom:3px}
+.vote-desc{font-size:12px;color:var(--muted);line-height:1.4}
+.vote-url{font-size:11px;color:var(--muted-2);font-family:ui-monospace,monospace;margin-top:4px}
+.vote-btn{padding:9px 16px;border-radius:8px;font-size:12.5px;font-weight:700;flex-shrink:0;display:flex;align-items:center;gap:6px;transition:all .15s}
+.vote-card.mclist .vote-btn{background:rgba(74,222,128,.15);color:var(--green);border:1px solid rgba(74,222,128,.35)}
+.vote-card.mclist:hover .vote-btn{background:var(--green);color:#04140a}
+.vote-card.millida .vote-btn{background:rgba(96,165,250,.15);color:var(--blue);border:1px solid rgba(96,165,250,.35)}
+.vote-card.millida:hover .vote-btn{background:var(--blue);color:#0a1424}
+
+.vote-tip{padding:14px 16px;background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.25);border-radius:12px;color:#fbbf24;font-size:12.5px;line-height:1.5;text-align:center}
+.vote-tip b{color:var(--orange);font-weight:700}
+
+.info-section{display:flex;flex-direction:column;gap:16px}
+.info-highlight{padding:16px 18px;border-radius:12px;font-size:13.5px;line-height:1.6}
+.info-highlight.age{background:linear-gradient(135deg,rgba(34,211,238,.1),rgba(34,211,238,.04));border:1px solid rgba(34,211,238,.35);color:#a5f3fc}
+.info-highlight.age b{color:var(--cyan);font-weight:800;font-size:15px}
+.info-highlight.warn{background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.25);color:#fbbf24}
+.info-highlight.warn b{color:var(--orange);font-weight:700}
+.info-highlight.ok{background:rgba(74,222,128,.08);border:1px solid rgba(74,222,128,.25);color:#bbf7d0}
+.info-highlight.ok b{color:var(--green);font-weight:700}
+.info-highlight.discord{background:linear-gradient(135deg,rgba(88,101,242,.12),rgba(88,101,242,.05));border:1px solid rgba(88,101,242,.4);color:#c7d2fe}
+.info-highlight.discord b{color:#a5b4fc;font-weight:800}
+.info-highlight.hot{background:linear-gradient(135deg,rgba(239,68,68,.15),rgba(245,158,11,.1));border:2px solid rgba(239,68,68,.5);color:#fecaca;text-align:center;font-size:14.5px}
+.info-highlight.hot b{color:#fca5a5;font-weight:900;font-size:16px}
+
+.info-list{list-style:none;display:flex;flex-direction:column;gap:10px}
+.info-list li{display:flex;gap:12px;padding:12px 14px;background:var(--surface);border:1px solid var(--border);border-radius:10px;font-size:13px;color:var(--muted);line-height:1.5;transition:all .15s}
+.info-list li:hover{background:var(--surface-2);border-color:#3a4256}
+.info-list li .num{width:26px;height:26px;flex-shrink:0;display:grid;place-items:center;border-radius:8px;font-size:12px;font-weight:800;background:rgba(34,211,238,.15);color:var(--cyan);font-family:ui-monospace,monospace}
+.info-list.rules li .num{background:rgba(192,132,252,.15);color:var(--purple)}
+.info-list b{color:var(--text);font-weight:600}
+.info-list .bad{color:#fca5a5;font-weight:700}
+
+.rules-content{display:flex;flex-direction:column;gap:22px}
+.rules-section{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:18px 20px}
+.rules-section-title{font-size:15px;font-weight:800;color:var(--text);margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;letter-spacing:-.01em}
+.rules-section-title .section-num{width:30px;height:30px;flex-shrink:0;display:grid;place-items:center;background:linear-gradient(135deg,rgba(192,132,252,.2),rgba(192,132,252,.08));border:1px solid rgba(192,132,252,.4);color:var(--purple);border-radius:8px;font-size:13px;font-weight:800;font-family:ui-monospace,monospace}
+.rule{font-size:13px;color:var(--muted);line-height:1.65;padding:10px 0;border-bottom:1px solid rgba(42,49,66,.6)}
+.rule:last-child{border-bottom:none;padding-bottom:0}
+.rule:first-of-type{padding-top:0}
+.rule b{color:var(--text);font-weight:700}
+.rule .rule-num{color:var(--purple);font-weight:800;font-family:ui-monospace,monospace;margin-right:4px}
+.rule .punish{display:inline-block;padding:2px 8px;background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.35);color:#fca5a5;border-radius:6px;font-size:11.5px;font-weight:700;margin-left:4px}
+.rule-sub{padding:8px 0 8px 16px;border-left:2px solid var(--border);margin:6px 0 6px 4px;font-size:12.5px;color:var(--muted-2);line-height:1.6}
+.rule-sub b{color:var(--muted)}
+.rule-list{list-style:none;padding:6px 0 6px 16px;margin:4px 0 4px 4px;border-left:2px solid var(--border);display:flex;flex-direction:column;gap:5px;font-size:12.5px;color:var(--muted-2);line-height:1.55}
+.rule-list li::before{content:'— ';color:var(--purple)}
+.rule-list b{color:var(--muted)}
+.rule a{color:var(--cyan);text-decoration:underline}
+.rule a:hover{color:#67e8f9}
+
+.info-footer{padding:14px 16px;background:rgba(96,165,250,.06);border:1px solid rgba(96,165,250,.25);border-radius:12px;font-size:12.5px;color:#93c5fd;line-height:1.5}
+.info-footer b{color:var(--blue);font-weight:700}
+
+.discord-btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:12px;
+  width:100%;padding:16px 24px;margin-top:4px;
+  background:linear-gradient(135deg,#5865F2,#4752c4);
+  color:#fff;border-radius:12px;
+  font-size:15px;font-weight:700;letter-spacing:-.01em;
+  text-decoration:none;cursor:pointer;
+  box-shadow:0 8px 28px rgba(88,101,242,.45);
+  transition:all .2s;
+}
+.discord-btn:hover{transform:translateY(-2px);box-shadow:0 14px 40px rgba(88,101,242,.6);background:linear-gradient(135deg,#6772f3,#5865F2)}
+.discord-btn svg{width:22px;height:22px;flex-shrink:0}
+
+.btn-secondary{padding:12px 22px;background:var(--surface-2);border:1px solid var(--border);color:var(--text);border-radius:var(--radius-sm);font-size:14px;font-weight:600;transition:all .15s}
+.btn-secondary:hover{background:var(--surface);border-color:#3a4256}
+
+/* Донат-модалка */
+.donate-contact-card{padding:16px 18px;background:var(--surface);border:1px solid var(--border);border-radius:12px}
+.donate-contact-label{font-size:13px;color:var(--muted);margin-bottom:10px}
+.donate-contact-value{display:flex;align-items:center;gap:10px;font-size:16px;font-weight:800;color:var(--orange)}
+.donate-contact-list{display:flex;flex-direction:column;gap:8px;font-size:13px}
+.donate-contact-list code{font-family:ui-monospace,monospace;background:rgba(255,255,255,.06);padding:2px 8px;border-radius:6px;color:var(--cyan)}
+
+@media(max-width:1024px){
+  .payment-banner{grid-template-columns:auto 1fr;gap:20px}
+  .payment-banner-badge{grid-column:1/-1;justify-content:center}
+  .promo-inner{grid-template-columns:1fr}
+  .promo-buttons{flex-direction:row;min-width:0}
+  .promo-buttons .promo-btn{flex:1}
+}
+@media(max-width:768px){
+  .container{padding:0 16px}
+  .topbar-inner{height:auto;padding:12px 0;flex-wrap:wrap}
+  .topbar-left{gap:8px}
+  .ip-block,.owner-block,.nav-btn{font-size:12px;padding:6px 10px}
+  .owner-label{display:none}
+  .filter-group{min-width:130px;flex:1}
+  .filter-search{max-width:none;flex-basis:100%}
+  main{padding:0 16px 100px}
+  .payment-banner{padding:20px;grid-template-columns:1fr}
+  .modal-box{padding:22px 18px}
+  .vote-btn{display:none}
+  .promo-banner{padding:20px 18px}
+  .promo-title{font-size:18px}
+  .promo-desc{font-size:13px}
+  .promo-buttons{flex-direction:column}
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="container topbar-inner">
+    <div class="topbar-left">
+      <a href="#" class="logo">
+        <span class="logo-icon">⛏️</span>
+        <span class="logo-text">ShirokaRW</span>
+      </a>
+
+      <div class="owner-block" title="Владелец сервера">
+        <span class="owner-crown">👑</span>
+        <span class="owner-label">Владелец:</span>
+        <span class="owner-nick">meowl</span>
+        <span class="owner-status" id="owner-status"></span>
+      </div>
+
+      <button class="ip-block" id="ip-block" onclick="copyIP()" title="Скопировать IP">
+        <span class="ip-label">IP:</span>
+        <span id="ip-text">free.cloudblaze.org:20719</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      </button>
+
+      <button class="nav-btn vote" onclick="openVote()" title="Проголосовать за сервер">🗳️ Проголосовать</button>
+      <button class="nav-btn kp" onclick="openKP()" title="Набор КП">📋 Набор КП</button>
+      <button class="nav-btn rules" onclick="openRules()" title="Правила сервера">📜 Правила</button>
+      <a class="nav-btn ds" href="https://discord.gg/p4rEkdctc" target="_blank" rel="noopener" title="Discord сервера">
+        💬 Discord
+      </a>
+    </div>
+    <div class="topbar-right">
+      <div class="online-badge">
+        <span class="online-dot"></span>
+        <span>Онлайн — <b id="online-count">0</b> / <b id="online-max">0</b></span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="filterbar">
+  <div class="container filterbar-inner">
+    <div class="filter-group">
+      <label>Категория</label>
+      <select id="filter-category">
+        <option value="all">Все категории</option>
+        <option value="ranks">Привилегии</option>
+      </select>
+    </div>
+    <div class="filter-group">
+      <label>Валюта</label>
+      <select id="filter-currency">
+        <option value="rub">РУБЛИ</option>
+        <option value="usd">ДОЛЛАРЫ</option>
+      </select>
+    </div>
+    <div class="filter-search">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+      <input type="text" id="search" placeholder="Поиск товара...">
+    </div>
+  </div>
+</div>
+
+<main class="container">
+
+  <!-- ПРОМО-БАННЕР -->
+  <div class="promo-banner">
+    <div class="promo-inner">
+      <div>
+        <span class="promo-tag">🔥 ИДЁТ НАБОР НА МОДЕРАЦИЮ</span>
+        <h2 class="promo-title">
+          Наш сервер — <span class="gradient">лучшая копия RW</span> — бустит очень хорошими админами!
+        </h2>
+        <p class="promo-desc">
+          Заявка на КП <b>уже тут</b> — прямо на сайте! Хочешь стать частью команды? Подай заявку в Discord и вступай в ряды модерации. <b>Лучшие админы</b> — только у нас!
+        </p>
+        <ul class="promo-features">
+          <li>⭐ <b>Лучшая копия RW</b></li>
+          <li>👑 <b>Топ админы</b></li>
+          <li>🚀 <b>Буст сервера</b></li>
+          <li>🎯 <b>Быстрый ответ</b></li>
+        </ul>
+      </div>
+      <div class="promo-buttons">
+        <button class="promo-btn kp-btn" onclick="openKP()">
+          📋 Заявка на КП уже тут!
+        </button>
+        <a class="promo-btn ds-btn" href="https://discord.gg/p4rEkdctc" target="_blank" rel="noopener">
+          💬 Подать в Discord
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- БАННЕР: СВЯЗЬ ПО ДОНАТАМ -->
+  <div class="payment-banner">
+    <div class="payment-banner-icon">💬</div>
+    <div class="payment-banner-info">
+      <div class="payment-banner-label">💬 Связь по донатам</div>
+      <div class="payment-banner-title">
+        По вопросам донатов пиши <b>админам / владельцам</b> сервера
+      </div>
+      <div class="payment-banner-note">
+        📩 Свяжись с владельцем <b>meowl</b> или админами в <b>Discord</b> — они расскажут, как купить донат и что входит в каждый ранг.
+      </div>
+      <a class="discord-inline-btn" href="https://discord.gg/p4rEkdctc" target="_blank" rel="noopener">
+        💬 Написать в Discord
+      </a>
+    </div>
+    <div class="payment-banner-badge">
+      <span>⚡</span>
+      <span>Быстрый <b>ответ</b></span>
+    </div>
+  </div>
+
+  <section class="products-section">
+    <div class="products-grid" id="products-grid"></div>
+  </section>
+</main>
+
+<!-- МОДАЛКА: ПРОГОЛОСОВАТЬ -->
+<div class="modal" id="modal-vote">
+  <div class="modal-backdrop" onclick="closeVote()"></div>
+  <div class="modal-box wide">
+    <button class="modal-close" onclick="closeVote()">✕</button>
+
+    <div class="modal-head">
+      <h3>🗳️ Проголосуй за ShirokaRW</h3>
+      <p>Голосуй раз в сутки на мониторингах — поднимай сервер в топ и приводи новых игроков</p>
+    </div>
+
+    <div class="vote-list">
+      <a class="vote-card mclist" href="https://mclist.ru/servers/shirokasmp" target="_blank" rel="noopener">
+        <div class="vote-logo">MC</div>
+        <div class="vote-info">
+          <div class="vote-name">MCLIST</div>
+          <div class="vote-desc">Мониторинг серверов Minecraft — голосование раз в 24 часа</div>
+          <div class="vote-url">mclist.ru/servers/shirokasmp</div>
+        </div>
+        <div class="vote-btn">Голосовать →</div>
+      </a>
+
+      <a class="vote-card millida" href="https://millida.net/rating/servers/shirokasmp" target="_blank" rel="noopener">
+        <div class="vote-logo">M</div>
+        <div class="vote-info">
+          <div class="vote-name">Millida</div>
+          <div class="vote-desc">Рейтинг серверов с живым онлайном и отзывами игроков</div>
+          <div class="vote-url">millida.net/rating/servers/shirokasmp</div>
+        </div>
+        <div class="vote-btn">Голосовать →</div>
+      </a>
+    </div>
+
+    <div class="vote-tip">
+      💡 <b>Совет:</b> голосуй на обоих сайтах каждый день — так сервер быстрее поднимется в топе, и на него зайдёт больше игроков!
+    </div>
+  </div>
+</div>
+
+<!-- МОДАЛКА: СВЯЗЬ ПО ДОНАТАМ -->
+<div class="modal" id="modal">
+  <div class="modal-backdrop" onclick="closeModal()"></div>
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+
+    <div class="modal-head">
+      <h3 id="modal-title">💬 Связь по донатам</h3>
+      <p id="modal-subtitle">Свяжись с админами / владельцами</p>
+    </div>
+
+    <div class="info-section">
+
+      <div class="info-highlight discord">
+        💬 <b>По вопросам донатов пиши админам / владельцам</b><br>
+        Они расскажут, как купить донат и что входит в каждый ранг.
+      </div>
+
+      <div class="donate-contact-card">
+        <div class="donate-contact-label">👑 Владелец сервера</div>
+        <div class="donate-contact-value">
+          <span>👑</span> meowl
+        </div>
+      </div>
+
+      <div class="donate-contact-card">
+        <div class="donate-contact-label">🎮 Где связаться</div>
+        <div class="donate-contact-list">
+          <div>💬 <b style="color:var(--text)">Discord:</b> нажми кнопку ниже</div>
+          <div>🎮 <b style="color:var(--text)">В игре:</b> напиши в чат сервера <code>free.cloudblaze.org:20719</code></div>
+        </div>
+      </div>
+
+      <div class="info-highlight ok">
+        ✅ <b>Выдача доната — моментальная</b><br>
+        После подтверждения оплаты админ выдаст донат сразу — заходи на сервер и играй!
+      </div>
+
+      <a class="discord-btn" href="https://discord.gg/p4rEkdctc" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.79 19.79 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
+        💬 Написать админам в Discord
+      </a>
+
+      <button class="btn-secondary" style="width:100%" onclick="closeModal()">Закрыть</button>
+    </div>
+  </div>
+</div>
+
+<!-- МОДАЛКА: НАБОР КП -->
+<div class="modal" id="modal-kp">
+  <div class="modal-backdrop" onclick="closeKP()"></div>
+  <div class="modal-box wide">
+    <button class="modal-close" onclick="closeKP()">✕</button>
+
+    <div class="modal-head">
+      <h3>📋 Набор КП — присоединиться к команде</h3>
+      <p>🔥 ИДЁТ НАБОР НА МОДЕРАЦИЮ! Читай условия ниже</p>
+    </div>
+
+    <div class="info-section">
+      <div class="info-highlight hot">
+        🚨 <b>ИДЁТ НАБОР НА МОДЕРАЦИЮ!</b> 🚨<br>
+        Мы — лучшая копия RW с топовыми админами. Заявка на КП уже тут!
+      </div>
+
+      <div class="info-highlight age">
+        🎂 <b>Возраст: с 12 лет</b><br>
+        Приём в команду открыт для игроков <b>от 12 лет и старше</b>.
+        <div style="margin-top:12px;padding-top:12px;border-top:1px dashed rgba(34,211,238,.35);font-size:13px;color:#67e8f9">
+          ⚠️ <b>Исключения есть</b> — решение принимает команда проекта индивидуально.
+        </div>
+      </div>
+
+      <div>
+        <h4 style="font-size:14px;font-weight:700;margin-bottom:12px;color:var(--text)">📌 Требования:</h4>
+        <ul class="info-list">
+          <li><span class="num">1</span><div>Возраст <b>от 12 лет</b></div></li>
+          <li><span class="num">2</span><div>Играть на сервере <b>не менее 7 дней</b></div></li>
+          <li><span class="num">3</span><div>Быть <b>адекватным</b> и не нарушать правила</div></li>
+          <li><span class="num">4</span><div>Иметь <b>Discord</b> для связи</div></li>
+          <li><span class="num">5</span><div>Онлайн <b>от 2 часов в день</b></div></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 style="font-size:14px;font-weight:700;margin-bottom:12px;color:var(--text)">🛠️ Обязанности:</h4>
+        <ul class="info-list">
+          <li><span class="num">💬</span><div>Помогать новым игрокам</div></li>
+          <li><span class="num">⚖️</span><div>Следить за порядком</div></li>
+          <li><span class="num">🚫</span><div>Фиксировать нарушения</div></li>
+          <li><span class="num">📢</span><div>Сообщать о багах</div></li>
+        </ul>
+      </div>
+
+      <div class="info-highlight ok">
+        🎁 <b>Что ты получишь:</b><br>
+        Префикс <b>[МОДЕРАТОР]</b>, доступ к админ-командам, бесплатный кит PvP каждый день.
+      </div>
+
+      <div class="info-highlight discord">
+        💬 <b>Заявки подаются в Discord</b><br>
+        Нажми кнопку ниже → попадёшь на наш Discord-сервер → перейди в канал <b>#заявки</b> и заполни форму по шаблону.
+      </div>
+
+      <a class="discord-btn" href="https://discord.gg/p4rEkdctc" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.79 19.79 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
+        🚀 Подать заявку на МОДЕРАЦИЮ
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- МОДАЛКА: ПРАВИЛА -->
+<div class="modal" id="modal-rules">
+  <div class="modal-backdrop" onclick="closeRules()"></div>
+  <div class="modal-box wide">
+    <button class="modal-close" onclick="closeRules()">✕</button>
+
+    <div class="modal-head">
+      <h3>📜 Правила проекта ShirokaRW</h3>
+      <p>Играя на проекте, вы соглашаетесь с правилами и обязуетесь их выполнять</p>
+    </div>
+
+    <div class="rules-content">
+
+      <!-- РАЗДЕЛ 1 -->
+      <div class="rules-section">
+        <div class="rules-section-title"><span class="section-num">1</span> Основные положения</div>
+
+        <div class="rule"><span class="rule-num">1.1</span> Играя на проекте, вы соглашаетесь с правилами и обязуетесь их выполнять. Владелец аккаунта несет полную ответственность за его безопасность и действия, совершаемые с его использованием.</div>
+
+        <div class="rule"><span class="rule-num">1.2</span> Администрация вправе заблокировать аккаунт без объяснения причин, уведомления и возможности обжалования. Блокировка может быть временной или бессрочной.</div>
+
+        <div class="rule"><span class="rule-num">1.3</span> Средства, потраченные на услуги, являются пожертвованиями и не подлежат возврату. Администрация не несёт ответственности за ошибки, допущенные при оплате.</div>
+
+        <div class="rule"><span class="rule-num">1.4</span> Администрация не возвращает утраченные ресурсы и прогресс, даже если потеря произошла из-за багов, сбоев или других технических причин.</div>
+
+        <div class="rule"><span class="rule-num">1.5</span> <b>Игровой никнейм.</b> <span class="punish">Бан навсегда</span><br>Ник не должен содержать:
+          <ul class="rule-list">
+            <li>упоминания читов;</li>
+            <li>названия сторонних проектов;</li>
+            <li>ненормативную лексику, оскорбления;</li>
+            <li>сходства с никами команды проекта (например: crftr1 / TheJlun42);</li>
+            <li>упоминания политических деятелей, преступников, террористов и иных общественно опасных лиц;</li>
+            <li>Ник не должен нарушать правила сервера.</li>
+          </ul>
+          <div class="rule-sub">
+            • При блокировке все ресурсы, привилегии, внутриигровая валюта и предметы, связанные с аккаунтом, считаются безвозвратно утерянными.<br>
+            • Нарушение с использованием команды /nick — <span class="punish">Бан 1 день</span><br>
+            • Не уверены, допустим ли никнейм? — Спросите в поддержке: <a href="https://t.me/faketimehq" target="_blank">t.me/faketimehq</a>
+          </div>
+        </div>
+
+        <div class="rule"><span class="rule-num">1.6</span> Правила могут быть изменены без предварительного уведомления.</div>
+
+        <div class="rule"><span class="rule-num">1.7</span> На обжалование наказания дается 5 дней с момента его выдачи.</div>
+
+        <div class="rule"><span class="rule-num">1.8</span> Сообщения, нарушающие правила, даже в шутку, подлежат наказанию. Администрация не учитывает шуточный контекст.</div>
+
+        <div class="rule"><span class="rule-num">1.9</span> Администрация имеет право наказывать игроков, систематически нарушающих правила. Меры наказания определяются по усмотрению администрации.</div>
+
+        <div class="rule"><span class="rule-num">1.10</span> Администрация имеет право выдавать блокировки на срок, превышающий указанный в правилах, или назначать иные меры наказания по своему усмотрению.</div>
+
+        <div class="rule"><span class="rule-num">1.11</span> Игроки в чёрном списке теряют доступ ко всем частям проекта: игре, информации и техподдержке. Чёрный список представлен в формате открытого реестра — ЧСП FakeTime.<br>Тим с игроком, находящимся в чёрном списке, считается нарушением.</div>
+      </div>
+
+      <!-- РАЗДЕЛ 2 -->
+      <div class="rules-section">
+        <div class="rules-section-title"><span class="section-num">2</span> Игровой процесс</div>
+
+        <div class="rule"><span class="rule-num">2.1</span> <b>Выдача себя за члена модерации или администрации / Угрозы выдачи бана, мута итд</b> <span class="punish">мут 6 часов / IP-бан от 30 дней</span><br>Включает в себя:
+          <ul class="rule-list">
+            <li>Утверждения о наличии привилегий на других аккаунтах.</li>
+            <li>Попытки проверить других игроков.</li>
+            <li>Сообщения от лица администрации.</li>
+          </ul>
+        </div>
+
+        <div class="rule"><span class="rule-num">2.2</span> <b>Передача аккаунта / Использование чужих аккаунтов</b> <span class="punish">вечный бан в лобби / Бан на 90 дней</span></div>
+
+        <div class="rule"><span class="rule-num">2.3</span> <b>Взлом или попытка взлома чужих аккаунтов</b> <span class="punish">вечный IP-бан в лобби</span>
+          <ul class="rule-list">
+            <li>Игра с чужого аккаунта расценивается как взлом.</li>
+            <li>Продажа/Попытка продажи аккаунта</li>
+          </ul>
+        </div>
+
+        <div class="rule"><span class="rule-num">2.4</span> <b>Использование/Хранение читов, запрещённых модов или программ</b> <span class="punish">IP-бан на 30 дней</span>
+          <ul class="rule-list">
+            <li>Использование или хранение стороннего ПО, дающего игровое преимущество.</li>
+            <li>АнтиЧит может выдать наказание по этому правилу. Наказания от АнтиЧита обжалуются строго через специального бота, а не через команду проекта.</li>
+          </ul>
+          <div class="rule-sub">
+            <b>Примеры запрещённого ПО:</b>
+            <ul class="rule-list">
+              <li>Чит-клиенты, триггербот (автокликер в PvP);</li>
+              <li>Макросы и скрипты, автоматизирующие сложные игровые действия (например: автоторговля, перемещение, Baritone и аналоги). Исключение: AutoFish разрешён;</li>
+              <li>Боты или твинки, имитирующие поведение чит-клиентов (Отсутствие коллизии/KillAura/Урон сквозь блоки);</li>
+              <li>Сценарии, реагирующие на окружение (например, авто-дисконнект при обнаружении игрока рядом);</li>
+              <li>Спам-боты или любые другие скрипты, наносящие вред проекту.</li>
+            </ul>
+            <b>Запрещённые модификации:</b>
+            <ul class="rule-list">
+              <li>Макросы и моды дающие преимущество в PvP (например: TriggerBot);</li>
+              <li>Макросы и моды для автоматического взаимодействия с инвентарем или хранилищем. Исключение: ItemScroller;</li>
+              <li>Моды, для определения сида мира;</li>
+              <li>Моды, частично или полностью выполняющие функции чит-клиентов;</li>
+              <li>Карты и миникарты, частично или полностью выполняющие функции читов;</li>
+              <li>Моды и скрипты, раскрывающие скрытых/невидимых игроков методами, выходящими за рамки стандартных возможностей игры (например: ESP (подсветка контуров точной модели или хитбокса игрока), трейсеры/линии к игрокам).</li>
+            </ul>
+            <b>Примечание:</b> усиленные частицы, HP-индикаторы, подсветка блоков, на которых находится игрок под невидимостью — разрешены.
+            <ul class="rule-list">
+              <li>Любые приложения с возможностью прямой установки запрещённого ПО.</li>
+            </ul>
+            <b>• Важно!</b> Любые изменения в ванильных файлах клиента приравниваются к модификациям.<br><br>
+            <b>— Правила проверки на читы.</b> <span class="punish">Нарушения со стороны игрока расцениваются как нарушение правила 2.4</span><br>
+            <b>Порядок проверки:</b>
+            <ul class="rule-list">
+              <li>Модератор вправе инициировать проверку в любое время, даже без жалоб.</li>
+              <li>Проверка проводится при помощи AnyDesk / RustDesk / RuDesktop / В исключительных случаях (по решению модератора) допускается использование Discord.</li>
+              <li>До начала проверки добровольное признание даёт бан на 20 дней. После начала — признание не снижает срок. Шутки вроде "я читер" приравниваются к признанию. Признание вне процесса проверки также влечёт за собой наказание.</li>
+              <li>Любые формы оскорблений, давления, унижения или попыток принизить сотрудника запрещены.</li>
+              <li>Намеренное затягивание времени, игнорирование указаний и флуд/бред в чат расцениваются как отказ от проверки.</li>
+              <li>Модератор может загрузить дополнительное ПО только с официального сайта. Если модератор предлагает файл напрямую — он нарушает правила.</li>
+            </ul>
+            <b>Правила поведения во время проверки:</b>
+            <ul class="rule-list">
+              <li>Транслирование или запись экрана во время проверки (исключение, если игрок вёл прямую трансляцию на каких-либо стриминговых площадках, в таком случае необходимо скрыть экран во время проверки) расценивается как отказ от проверки.</li>
+              <li>Любое препятствие (задержки, отказ, спор, неадекватность, отключение игры) расценивается как отказ от проверки.</li>
+              <li>Проверяющий обязан записывать процесс проверки. Запись игрока запрещена. В случае жалобы, Администрация может запросить запись у модератора.</li>
+            </ul>
+            <b>Очистка системы:</b>
+            <ul class="rule-list">
+              <li>Запрещается заранее очищать: папку .minecraft, корзину, загрузки, prefetch, shellbag, JournalTrace, recent и так далее.</li>
+              <li>Запрещено выключение или перезапуск служб системы Windows: PcaSvc, CDPSvc, DPS, bam, Использование данных, SysMain, Event Log.</li>
+              <li>Если они отключены — включите. Гайд по включению необходимых служб Windows.</li>
+              <li>Бан может быть выдан, если ЗПО было удалено менее чем за 5 дней до проверки.</li>
+            </ul>
+            Для выявления обходов ЧСП, блокировок и других нарушений некоторые сотрудники могут проводить проверку социальных сетей игрока. Обратите внимание: такие проверки могут проводить только сотрудники, указанные ниже списком. Обычным модераторам проверять социальные сети запрещено — если такое произошло, отключайте сеанс с модератором и сообщите в поддержку в тг <a href="https://t.me/faketimehq" target="_blank">@faketimehq</a>.
+            <ul class="rule-list">
+              <li>crftr</li>
+              <li>TheJlun</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="rule"><span class="rule-num">2.4.1</span> Запрещён тим с игроком, который нарушает правило 2.4. <span class="punish">IP-бан 14 дней</span></div>
+
+        <div class="rule"><span class="rule-num">2.4.2</span> Запрещено распространение запрещенного ПО. <span class="punish">вечный IP-бан в лобби</span></div>
+
+        <div class="rule"><span class="rule-num">2.5</span> <b>Сделки с гарантом</b> <span class="punish">IP-бан 14 дней</span><br>Во время проведения сделок с гарантом запрещено:
+          <ul class="rule-list">
+            <li>обманывать гаранта;</li>
+            <li>срывать сделку.</li>
+          </ul>
+          <b>Условия проведения сделки:</b>
+          <ul class="rule-list">
+            <li>Сделка проводится на спавне при участии трёх лиц: гаранта и двух игроков.</li>
+            <li>Гарантом может быть только представитель команды проекта с рангом «Стажёр» или выше.</li>
+            <li>Вмешательство посторонних лиц, не участвующих в сделке, запрещено и карается наказанием.</li>
+            <li>Сделка считается завершённой, когда оба участника получили свои предметы.</li>
+          </ul>
+          <b>Важно:</b> если сделка проведена без гаранта и один из участников оказался обманут — жалоба рассматриваться не будет, даже при наличии доказательств.
+        </div>
+
+        <div class="rule"><span class="rule-num">2.6</span> Запрещена любая форма монетизации игровых ценностей: торговля за реальные деньги или любые неигровые ценности; просьбы или предложения пополнить чужой счёт, кошелёк или баланс; кооперация с игроками, занимающимися такой монетизацией; использование игровых ресурсов или ценностей в качестве платёжного средства за услуги, не относящиеся к проекту. <span class="punish">Наказание назначается администрацией</span></div>
+
+        <div class="rule"><span class="rule-num">2.7</span> Запрещены любые действия, мешающие работе модерации или администрации. <span class="punish">Наказание назначается администрацией</span></div>
+
+        <div class="rule"><span class="rule-num">2.8</span> Запрещены любые виды казино и азартных игр на сторонних платформах, не связанных с сервером. <span class="punish">Наказание назначается администрацией</span>
+          <ul class="rule-list">
+            <li>Запрещены казино-боты и проведение азартных игр в чате.</li>
+            <li>Разрешены только казино основанные на ванильных механиках игры или механизмах, без подкруток и внешнего вмешательства.</li>
+          </ul>
+        </div>
+
+        <div class="rule"><span class="rule-num">2.9</span> Запрещено обходить игровое наказание: играть со второго аккаунта, если на другом выдана блокировка; писать в чат, если на одном из твинков выдан мут. <span class="punish">Дублирование наказания по IP на аккаунт, с которого было нарушено правило. Срок удваивается</span>
+          <ul class="rule-list">
+            <li>Незнание о наличии наказания на другом аккаунте не освобождает от ответственности (исключение — совпадение IP-адреса).</li>
+          </ul>
+        </div>
+
+        <div class="rule"><span class="rule-num">2.10</span> Запрещено использование, распространение, сокрытие от администрации, а также умышленное неуведомление об обнаруженных игровых ошибках (багах, уязвимостях, недоработках), вне зависимости от того, дают ли они игровое преимущество или нет. К нарушениям относятся: личное использование багов, передача информации о них другим игрокам, демонстрация способов их применения, а также отказ сообщить администрации о найденной ошибке. <span class="punish">Бан от 3 дней</span></div>
+
+        <div class="rule"><span class="rule-num">2.11</span> Запрещено строить механизмы/выполнять действия, вызывающие сильную нагрузку на сервер. <span class="punish">Наказание назначается администрацией</span></div>
+
+        <div class="rule"><span class="rule-num">2.12</span> Запрещено распространение личных данных игроков без их согласия: ФИО, адрес, номер телефона, фото и так далее, в том числе и за пределами сервера. <span class="punish">От перманентного IP-мута до перманентного IP-бана в лобби</span>
+          <ul class="rule-list">
+            <li>Доксинг, сватинг, угрозы публикации личной информации.</li>
+          </ul>
+        </div>
+
+        <div class="rule"><span class="rule-num">2.13</span> Запрещено иметь предметы с оскорбительным названием или нарушающим правила сервера. <span class="punish">бан 2 часа</span> (найденный предмет изымается)</div>
+
+        <div class="rule"><span class="rule-num">2.14</span> Запрещено взаимодействие или помощь игрокам сверх лимита режима: совместные PvP/PvE-действия, защита, рейды, фарм, передача предметов, ресурсов или валюты, обмен информацией для координации, а также согласованные действия через сторонние средства связи. Чередование тиммейтов не спасает от лимита — все, с кем игрок был тиммейтом, считаются тиммейтами одновременно. Не действует, если игроки изначально не были тиммейтами и не получали общей выгоды. <span class="punish">IP-бан на 30 дней</span></div>
+      </div>
+
+      <!-- РАЗДЕЛ 3 -->
+      <div class="rules-section">
+        <div class="rules-section-title"><span class="section-num">3</span> Правила чата</div>
+
+        <div class="rule" style="padding-top:0"><b>— Модерируются все виды чата.</b></div>
+
+        <div class="rule"><span class="rule-num">3.1</span> Запрещена реклама любого сервера, магазина игровых/неигровых ресурсов, ПО, ютуберов, в том числе упоминание/призыв. <span class="punish">мут 8 часов / бан 14 дней / бан навсегда</span>
+          <ul class="rule-list">
+            <li>Любое упоминание сервера (в том числе его аббревиатуры или попытки скрыть её) ведёт к муту на 5 часов.</li>
+            <li>Реклама стрима на нашем сервере не считается нарушением, если в ходе стрима отсутствует реклама других серверов, их упоминание или демонстрация игры на сторонних проектах, кроме FakeTime.</li>
+            <li>Исключения: HolyWorld, FunTime, ReallyWorld, Hypixel, Cristalix, DiamondWorld.</li>
+          </ul>
+        </div>
+
+        <div class="rule"><span class="rule-num">3.2</span> Наглое вмешательство в чужие наказания. <span class="punish">мут 30 минут</span>
+          <ul class="rule-list">
+            <li>Запрещено вмешиваться в решения модераторов по наказаниям, которые они выдали другим игрокам.</li>
+            <li>Попытки оспорить или изменить чужое наказание, а также провокации с целью отмены или смягчения наказания считаются нарушением.</li>
+          </ul>
+        </div>
+
+        <div class="rule"><span class="rule-num">3.3</span> Флуд или спам. <span class="punish">мут 1 час</span>
+          <ul class="rule-list">
+            <li>Сообщения, несущие одинаковый смысл, также расцениваются как флуд (от 3);</li>
+            <li>Если в текущем активном чате при стандартных настройках чата видны все 3 сообщения, то вне зависимости от промежутка между сообщениями — мут.</li>
+            <li>Если два или более человека намеренно пишут одинаковый текст с целью обойти правила, это рассматривается как нарушение и наказывается мутом.</li>
+            <li>Набор в клан от 2 сообщений (включительно).</li>
+            <li>Флуд от 12 символов. (смех от 25)</li>
+          </ul>
+        </div>
+
+        <div class="rule"><span class="rule-num">3.4</span> Оскорбление любыми способами. <span class="punish">мут 1 час</span>
+          <ul class="rule-list">
+            <li>Завуалированные оскорбления также считаются нарушением;</li>
+            <li>За слова: 'Лёгкий', 'Ez', 'Нуб', '0', 'Глупый' наказание не выдаётся.</li>
+          </ul>
+        </div>
+
+        <div class="rule"><span class="rule-num">3.5</span> CAPS в более 50% своего сообщения. <span class="punish">мут 30 минут</span>
+          <ul class="rule-list">
+            <li>Относится к словам свыше 10-и символов, либо к предложениям, которые состоят из 2-х и более слов. (исключения: никнеймы)</li>
+          </ul>
+        </div>
+
+        <div class="rule"><span class="rule-num">3.6</span> Попытка организации флуда. <span class="punish">мут 1 час</span>
+          <ul class="rule-list">
+            <li>Пример: 'Кто первый напишет "+" тому донат'.</li>
+          </ul>
+        </div>
+
+        <div class="rule"><span class="rule-num">3.7</span> Упоминание родных в негативном контексте. <span class="punish">мут 1 час / мут 6 часов</span>
+          <ul class="rule-list">
+            <li>Сообщения по типу 'сын овцы' считаются оскорблением родных;</li>
+            <li>Завуалированные оскорбления/упоминания считаются нарушением.</li>
+          </ul>
+        </div>
+
+        <div class="rule"><span class="rule-num">3.8</span> Политика, дискриминация, деструктивные темы, лудомания, расизм. <span class="punish">мут 1 час / мут 4 часа / IP-бан навсегда</span>
+          <ul class="rule-list">
+            <li>Запрещены нацизм, его символика и любые связанные проявления;</li>
+            <li>Сообщения с фразами вроде 'Слава …' или аналогичными о других странах наказываются мутом;</li>
+            <li>Суицид, самоповреждения;</li>
+            <li>Наркотики, реклама/нормализация веществ;</li>
+            <li>Насилие над собой, другими или животными в любой форме;</li>
+            <li>Романтизация убийц, терактов, культов;</li>
+            <li>Пропаганда криминала, взломов, мошенничества;</li>
+            <li>Национализм, расизм, ксенофобия, сексизм, религиозная пропаганда;</li>
+            <li>Любые проявления нацизма и его символики;</li>
+            <li>Оскорбительные слова ('Негр', 'хохол', 'чурка' и т.д.) также ведут к выдаче мута;</li>
+            <li>Обсуждение религии (кроме праздников) наказывается по ситуации;</li>
+            <li>Распространение ссылок, упоминание платформ для азартных игр или казино, а также организация подобных активностей на сервере.</li>
+          </ul>
+        </div>
+
+        <div class="rule"><span class="rule-num">3.9</span> Использование лексики сексуального характера. <span class="punish">мут 30 минут</span>
+          <ul class="rule-list">
+            <li>Оценка корректности осуществляется с учётом контекста сообщения.</li>
+            <li>Использование аморальных выражений, таких как 'сосал хуй', 'соси', 'хуй', 'член' и подобных, запрещено вне зависимости от контекста.</li>
+          </ul>
+        </div>
+
+        <div class="rule"><span class="rule-num">3.10</span> Оскорбление сервера и провокация администрации/модерации. <span class="punish">мут 2 часа / вечный IP-бан / по решению администрации</span>
+          <ul class="rule-list">
+            <li>Завуалированные оскорбления считаются нарушением.</li>
+          </ul>
+        </div>
+
+        <div class="rule"><span class="rule-num">3.11</span> Запрещён флуд командами передачи внутриигровых средств, телепортирования, /pvp, /suicide. <span class="punish">бан на 1 час</span></div>
+
+        <div class="rule"><span class="rule-num">3.12</span> Наглое попрошайничество у администрации. <span class="punish">мут 30 минут</span>
+          <ul class="rule-list">
+            <li>Не распространяется на модерацию и обычных игроков.</li>
+          </ul>
+        </div>
+
+        <div class="rule"><span class="rule-num">3.13</span> Запрещена имитация системных сообщений. <span class="punish">мут 30 минут</span></div>
+      </div>
+
+      <!-- РАЗДЕЛ 4 -->
+      <div class="rules-section">
+        <div class="rules-section-title"><span class="section-num">4</span> Титулы, перенос доната и восстановление</div>
+
+        <div class="rule"><span class="rule-num">4.1</span> В личных титулах и кастомных привилегиях запрещены маты, оскорбления, упоминания запрещенного ПО, теги и любые слова, нарушающие правила сервера.</div>
+
+        <div class="rule"><span class="rule-num">4.2</span> При создании титула/доната игрок обязан соблюдать все указанные требования.</div>
+
+        <div class="rule"><span class="rule-num">4.3</span> Перенос возможен только между аккаунтами, принадлежащими одному человеку.</div>
+
+        <div class="rule"><span class="rule-num">4.4</span> Донат нельзя перенести с аккаунта, находящегося в бане.</div>
+
+        <div class="rule"><span class="rule-num">4.5</span> Разрешено переносить только что-то одно (привилегию, донат-валюту, кейсы с монетами, кейсы с донатом, кейсы с титулами), однако не между режимами.</div>
+
+        <div class="rule"><span class="rule-num">4.6</span> Перенос осуществляется только в одну сторону и не может быть отменён.</div>
+
+        <div class="rule"><span class="rule-num">4.7</span> При любом нарушении правил при переносе, восстановлении или создании титула администрация имеет право отказать в услуге без возврата средств.</div>
+
+        <div class="rule"><span class="rule-num">4.8</span> Кастомные привилегии и титулы переносить нельзя.</div>
+
+        <div class="rule"><span class="rule-num">4.9</span> Утерянные аккаунты, независимо от причины (взлом, забытый пароль и другие), могут быть восстановлены только при условии оплаты товара "Восстановление аккаунта" на сайте проекта. Также необходимо предоставить техподдержке убедительные доказательства первичного владения аккаунтом. В остальных случаях администрация оставляет за собой право отказать в восстановлении без объяснения причин.</div>
+      </div>
+
+      <div class="info-footer">
+        📩 <b>Вопросы или жалоба?</b> Напиши владельцу <b>meowl</b> в чате сервера <b>free.cloudblaze.org:20719</b> или в Discord <a href="https://discord.gg/p4rEkdctc" target="_blank" style="color:#a5b4fc;text-decoration:underline">discord.gg/p4rEkdctc</a>.
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+const SERVER_IP = 'free.cloudblaze.org:20719';
+const DISCOUNT = 0.40;
+const OWNER_NICK = 'meowl';
+const DISCORD_INVITE = 'https://discord.gg/p4rEkdctc';
+
+const products = [
+  {
+    id:'dmoder', cat:'ranks',
+    name:'DMODER',
+    sub:'Модератор сервера ShirokaRW',
+    price:200, icon:'🛡️', cls:'is-dmoder', badge:'DMODER',
+    features:['Префикс <b>[DMODER]</b>','Все команды <b>/fly /god /heal</b>','Кит PvP <b>каждый день</b>','Мут и бан игроков','Доступ к <b>/vanish</b>','Приоритет в поддержке']
+  },
+  {
+    id:'dadmin', cat:'ranks',
+    name:'DADMIN',
+    sub:'Администратор сервера ShirokaRW',
+    price:300, icon:'⚔️', cls:'is-dadmin', badge:'DADMIN',
+    features:['Префикс <b>[DADMIN]</b>','Все команды <b>/fly /god /heal /feed</b>','Кит PvP <b>2 раза в день</b>','Мут, бан, кик','Доступ к <b>/vanish /ec</b>','Кастомный префикс','Приоритет в поддержке']
+  },
+  {
+    id:'sponsor', cat:'ranks',
+    name:'SPONSOR',
+    sub:'Спонсор сервера ShirokaRW',
+    price:500, icon:'👑', cls:'is-sponsor', badge:'SPONSOR',
+    features:['Префикс <b>[SPONSOR]</b>','Все команды <b>/fly /god /heal /feed</b>','Кит PvP <b>3 раза в день</b>','Мут, бан, кик','Доступ к <b>/vanish /ec /nick</b>','Кастомный префикс','Личный варп','Приоритет в поддержке','Бонус: <b>5 ключей от кейсов</b>']
+  },
+];
+
+let currentCurrency = 'rub';
+const rates = { rub:1, usd:0.011 };
+const symbols = { rub:'₽', usd:'$' };
+
+function openVote()  { document.getElementById('modal-vote').classList.add('active'); document.body.style.overflow='hidden'; }
+function closeVote() { document.getElementById('modal-vote').classList.remove('active'); document.body.style.overflow=''; }
+function openKP()    { document.getElementById('modal-kp').classList.add('active'); document.body.style.overflow='hidden'; }
+function closeKP()   { document.getElementById('modal-kp').classList.remove('active'); document.body.style.overflow=''; }
+function openRules() { document.getElementById('modal-rules').classList.add('active'); document.body.style.overflow='hidden'; }
+function closeRules(){ document.getElementById('modal-rules').classList.remove('active'); document.body.style.overflow=''; }
+
+function finalPrice(base) { return Math.round(base * (1 - DISCOUNT) * 100) / 100; }
+
+function render() {
+  const grid = document.getElementById('products-grid');
+  const cat = document.getElementById('filter-category').value;
+  const q = document.getElementById('search').value.trim().toLowerCase();
+  const rate = rates[currentCurrency];
+  const sym = symbols[currentCurrency];
+  const list = products.filter(p => (cat==='all'||p.cat===cat) && (!q || p.name.toLowerCase().includes(q)));
+
+  grid.innerHTML = list.map(p => {
+    const finalPriceStr = (finalPrice(p.price) * rate).toFixed(rate===1?0:2);
+    const oldPriceStr = (p.price * rate).toFixed(rate===1?0:2);
+    const discountPct = Math.round(DISCOUNT * 100);
+    const featuresHtml = p.features && p.features.length ? `<ul class="product-features">${p.features.map(f=>`<li>${f}</li>`).join('')}</ul>` : '';
+    const badgeHtml = p.badge ? `<div class="product-badge badge-${p.id}">${p.badge}</div>` : '';
+    return `
+    <article class="product-card ${p.cls}">
+      <div class="product-top">
+        <div class="product-icon">${p.icon}</div>
+        ${badgeHtml}
+      </div>
+      <div class="product-info">
+        <div class="product-name">${p.name}</div>
+        <div class="product-subtitle">${p.sub}</div>
+      </div>
+      ${featuresHtml}
+      <div class="product-row">
+        <span class="product-row-label">Количество</span>
+        <div class="product-qty">
+          <button type="button" onclick="changeQty('${p.id}',-1)">−</button>
+          <input type="number" id="qty-${p.id}" value="1" min="1" max="99">
+          <button type="button" onclick="changeQty('${p.id}',1)">+</button>
+        </div>
+      </div>
+      <div class="product-bottom">
+        <div class="product-prices">
+          <span class="product-old">${oldPriceStr}${sym}</span>
+          <span class="product-new">${finalPriceStr}${sym}</span>
+        </div>
+        <button class="btn-add" onclick="addToCart('${p.id}')">Купить</button>
+      </div>
+    </article>`;
+  }).join('');
+}
+
+function changeQty(id, delta) {
+  const el = document.getElementById('qty-'+id);
+  if (!el) return;
+  let v = parseInt(el.value)||1;
+  v = Math.max(1, Math.min(99, v+delta));
+  el.value = v;
+}
+
+/* Открывает модалку "связь по донатам" */
+function addToCart(id) {
+  const p = products.find(x=>x.id===id);
+  const price = finalPrice(p.price) * rates[currentCurrency];
+  const sym = symbols[currentCurrency];
+  document.getElementById('modal-title').textContent = '💬 ' + p.name + ' — ' + price.toFixed(currentCurrency==='rub'?0:2) + sym;
+  document.getElementById('modal-subtitle').textContent = 'По вопросам покупки пиши админам / владельцам';
+  document.getElementById('modal').classList.add('active');
+  document.body.style.overflow='hidden';
+}
+
+function closeModal(){
+  document.getElementById('modal').classList.remove('active');
+  document.body.style.overflow='';
+}
+
+function copyIP() {
+  navigator.clipboard.writeText(SERVER_IP).then(() => {
+    const b = document.getElementById('ip-block');
+    const t = document.getElementById('ip-text');
+    const orig = t.textContent;
+    b.classList.add('copied'); t.textContent = 'Скопировано!';
+    setTimeout(() => { t.textContent = orig; b.classList.remove('copied'); }, 1500);
+  }).catch(() => alert('IP: ' + SERVER_IP));
+}
+
+document.getElementById('filter-category').addEventListener('change', render);
+document.getElementById('filter-currency').addEventListener('change', e=>{ currentCurrency = e.target.value; render(); });
+document.getElementById('search').addEventListener('input', render);
+
+async function updateOnline() {
+  const o = document.getElementById('online-count');
+  const m = document.getElementById('online-max');
+  const st = document.getElementById('owner-status');
+  try {
+    const res = await fetch('https://api.mcsrvstat.us/3/' + SERVER_IP);
+    const data = await res.json();
+    if (data.online) {
+      o.textContent = data.players.online;
+      m.textContent = data.players.max;
+      const list = (data.players.list || []).map(n => (n.name || n).toLowerCase());
+      if (list.includes(OWNER_NICK.toLowerCase())) st.classList.add('online');
+      else st.classList.remove('online');
+    } else {
+      o.textContent = '0'; m.textContent = '0';
+      st.classList.remove('online');
+    }
+  } catch (e) {
+    o.textContent = '0'; m.textContent = '0';
+    st.classList.remove('online');
+  }
+}
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') { closeModal(); closeKP(); closeRules(); closeVote(); }
+});
+
+render();
+updateOnline();
+setInterval(updateOnline, 60000);
+</script>
+</body>
+</html>
