@@ -103,34 +103,56 @@ main{padding:0 24px 80px}
 .discord-inline-btn:hover{transform:translateY(-2px);box-shadow:0 14px 36px rgba(88,101,242,.6)}
 
 .products-section{margin-top:8px}
-.products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px}
+.products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:18px}
 .product-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:22px;display:flex;flex-direction:column;gap:14px;transition:all .25s;position:relative;overflow:hidden}
 .product-card:hover{transform:translateY(-3px);box-shadow:0 15px 40px rgba(0,0,0,.5)}
 .product-card.is-dmoder:hover{border-color:rgba(96,165,250,.7);box-shadow:0 15px 40px rgba(96,165,250,.2)}
 .product-card.is-dadmin:hover{border-color:rgba(239,68,68,.7);box-shadow:0 15px 40px rgba(239,68,68,.2)}
 .product-card.is-sponsor:hover{border-color:rgba(245,158,11,.8);box-shadow:0 15px 45px rgba(245,158,11,.25)}
+.product-card.is-realiki:hover{border-color:rgba(34,211,238,.7);box-shadow:0 15px 40px rgba(34,211,238,.2)}
+.product-card.is-pvpkit:hover{border-color:rgba(192,132,252,.8);box-shadow:0 15px 45px rgba(192,132,252,.25)}
+.product-card.is-pvpkit2:hover{border-color:rgba(251,191,36,.8);box-shadow:0 15px 45px rgba(251,191,36,.25)}
+
 .product-card.is-sponsor{background:linear-gradient(180deg,rgba(245,158,11,.06),var(--surface))}
 .product-card.is-sponsor::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 0%,rgba(245,158,11,.1),transparent 60%);pointer-events:none}
+.product-card.is-realiki{background:linear-gradient(180deg,rgba(34,211,238,.06),var(--surface))}
+.product-card.is-realiki::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 0%,rgba(34,211,238,.1),transparent 60%);pointer-events:none}
+.product-card.is-pvpkit{background:linear-gradient(180deg,rgba(192,132,252,.06),var(--surface))}
+.product-card.is-pvpkit::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 0%,rgba(192,132,252,.12),transparent 60%);pointer-events:none}
+.product-card.is-pvpkit2{background:linear-gradient(180deg,rgba(251,191,36,.07),var(--surface))}
+.product-card.is-pvpkit2::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 0%,rgba(251,191,36,.14),transparent 60%);pointer-events:none}
+
 .product-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;position:relative}
 .product-icon{width:56px;height:56px;display:grid;place-items:center;font-size:28px;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:14px;flex-shrink:0}
 .product-card.is-dmoder .product-icon{background:rgba(96,165,250,.12);border-color:rgba(96,165,250,.35)}
 .product-card.is-dadmin .product-icon{background:rgba(239,68,68,.12);border-color:rgba(239,68,68,.35)}
 .product-card.is-sponsor .product-icon{background:rgba(245,158,11,.15);border-color:rgba(245,158,11,.4);box-shadow:0 0 25px rgba(245,158,11,.25)}
+.product-card.is-realiki .product-icon{background:rgba(34,211,238,.12);border-color:rgba(34,211,238,.4);box-shadow:0 0 25px rgba(34,211,238,.2)}
+.product-card.is-pvpkit .product-icon{background:rgba(192,132,252,.15);border-color:rgba(192,132,252,.45);box-shadow:0 0 25px rgba(192,132,252,.25)}
+.product-card.is-pvpkit2 .product-icon{background:rgba(251,191,36,.15);border-color:rgba(251,191,36,.45);box-shadow:0 0 25px rgba(251,191,36,.25)}
+
 .product-badge{padding:5px 10px;border-radius:6px;font-size:11px;font-weight:800;letter-spacing:.05em;text-transform:uppercase}
 .product-badge.badge-dmoder{background:rgba(96,165,250,.15);border:1px solid rgba(96,165,250,.4);color:#93c5fd}
 .product-badge.badge-dadmin{background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.4);color:#fca5a5}
 .product-badge.badge-sponsor{background:linear-gradient(135deg,rgba(245,158,11,.25),rgba(239,68,68,.15));border:1px solid rgba(245,158,11,.5);color:#fbbf24}
-.product-discount{padding:5px 10px;background:linear-gradient(135deg,#ef4444,#dc2626);color:#fff;border-radius:6px;font-size:12px;font-weight:800;flex-shrink:0;box-shadow:0 4px 14px rgba(239,68,68,.4)}
+.product-badge.badge-realiki{background:rgba(34,211,238,.15);border:1px solid rgba(34,211,238,.4);color:#67e8f9}
+.product-badge.badge-pvpkit{background:linear-gradient(135deg,rgba(192,132,252,.25),rgba(34,211,238,.15));border:1px solid rgba(192,132,252,.5);color:#e9d5ff}
+.product-badge.badge-pvpkit2{background:linear-gradient(135deg,rgba(251,191,36,.3),rgba(239,68,68,.15));border:1px solid rgba(251,191,36,.55);color:#fde68a}
+
 .product-info{flex:1;min-width:0;position:relative}
 .product-name{font-size:17px;font-weight:800;margin-bottom:4px;line-height:1.3;letter-spacing:-.01em}
 .product-subtitle{font-size:12.5px;color:var(--muted);line-height:1.4}
-.product-features{list-style:none;display:flex;flex-direction:column;gap:7px;padding:14px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);position:relative}
-.product-features li{font-size:12.5px;color:var(--muted);display:flex;align-items:center;gap:8px;line-height:1.4}
+.product-features{list-style:none;display:flex;flex-direction:column;gap:6px;padding:12px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);position:relative}
+.product-features li{font-size:12px;color:var(--muted);display:flex;align-items:center;gap:8px;line-height:1.4}
 .product-features li::before{content:'▸';font-weight:700;flex-shrink:0}
 .product-card.is-dmoder .product-features li::before{color:var(--blue)}
 .product-card.is-dadmin .product-features li::before{color:var(--red)}
 .product-card.is-sponsor .product-features li::before{color:var(--orange)}
+.product-card.is-realiki .product-features li::before{color:var(--cyan)}
+.product-card.is-pvpkit .product-features li::before{color:var(--purple)}
+.product-card.is-pvpkit2 .product-features li::before{color:#fbbf24}
 .product-features b{color:var(--text);font-weight:700}
+
 .product-row{display:flex;align-items:center;justify-content:space-between;gap:12px;position:relative}
 .product-row-label{font-size:11px;color:var(--muted-2);text-transform:uppercase;letter-spacing:.06em;font-weight:600}
 .product-qty{display:flex;align-items:center;background:var(--bg);border:1px solid var(--border);border-radius:6px;overflow:hidden;height:30px}
@@ -138,6 +160,7 @@ main{padding:0 24px 80px}
 .product-qty button:hover{background:var(--surface-2);color:var(--text)}
 .product-qty input{width:40px;height:100%;background:transparent;border:none;color:var(--text);text-align:center;font-size:12px;font-weight:600;-moz-appearance:textfield}
 .product-qty input::-webkit-outer-spin-button,.product-qty input::-webkit-inner-spin-button{-webkit-appearance:none}
+
 .product-bottom{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-top:12px;position:relative}
 .product-prices{display:flex;flex-direction:column;gap:2px}
 .product-old{font-size:12px;color:var(--muted-2);text-decoration:line-through}
@@ -145,12 +168,61 @@ main{padding:0 24px 80px}
 .product-card.is-dmoder .product-new{color:var(--blue)}
 .product-card.is-dadmin .product-new{color:var(--red)}
 .product-card.is-sponsor .product-new{color:var(--orange)}
+.product-card.is-realiki .product-new{color:var(--cyan)}
+.product-card.is-pvpkit .product-new{color:var(--purple)}
+.product-card.is-pvpkit2 .product-new{color:#fbbf24}
+
 .btn-add{padding:10px 18px;background:var(--surface-2);border:1px solid var(--border);color:var(--text);border-radius:8px;font-size:13px;font-weight:700;transition:all .15s;white-space:nowrap}
 .btn-add:hover{transform:translateY(-1px)}
 .product-card.is-dmoder .btn-add:hover{background:var(--blue);color:#0a1424;border-color:var(--blue);box-shadow:0 6px 20px rgba(96,165,250,.4)}
 .product-card.is-dadmin .btn-add:hover{background:var(--red);color:#fff;border-color:var(--red);box-shadow:0 6px 20px rgba(239,68,68,.4)}
 .product-card.is-sponsor .btn-add{background:linear-gradient(135deg,#f59e0b,#d97706);color:#fff;border-color:transparent}
 .product-card.is-sponsor .btn-add:hover{box-shadow:0 6px 20px rgba(245,158,11,.6)}
+.product-card.is-realiki .btn-add{background:linear-gradient(135deg,#22d3ee,#0891b2);color:#051318;border-color:transparent}
+.product-card.is-realiki .btn-add:hover{box-shadow:0 6px 20px rgba(34,211,238,.6)}
+.product-card.is-pvpkit .btn-add{background:linear-gradient(135deg,#c084fc,#a855f7);color:#fff;border-color:transparent}
+.product-card.is-pvpkit .btn-add:hover{box-shadow:0 6px 20px rgba(192,132,252,.6)}
+.product-card.is-pvpkit2 .btn-add{background:linear-gradient(135deg,#fbbf24,#d97706);color:#1a0e00;border-color:transparent}
+.product-card.is-pvpkit2 .btn-add:hover{box-shadow:0 6px 20px rgba(251,191,36,.6)}
+
+/* КИТЫ — сетка как в майнкрафте */
+.kit-preview{background:#0d1117;border:2px solid #2f3646;border-radius:6px;padding:8px;margin:4px 0 6px;position:relative}
+.kit-preview-title{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;font-weight:700;margin-bottom:8px;text-align:center}
+.kit-preview-grid{display:grid;grid-template-columns:repeat(9,1fr);gap:2px}
+.kit-slot{
+  aspect-ratio:1;
+  background:#1a1f2b;
+  border:1px solid #2a3142;
+  border-radius:2px;
+  display:grid;
+  place-items:center;
+  font-size:18px;
+  line-height:1;
+  position:relative;
+  transition:all .15s;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.03);
+}
+.kit-slot:hover{background:rgba(192,132,252,.15);border-color:rgba(192,132,252,.5);transform:scale(1.12);z-index:2;box-shadow:0 0 12px rgba(192,132,252,.4)}
+.kit-slot.empty{background:#141820;opacity:.5}
+.kit-slot.empty:hover{transform:none;background:#141820;border-color:#2a3142;box-shadow:none;opacity:.5}
+.kit-slot .qty{
+  position:absolute;
+  bottom:-2px;right:-1px;
+  font-size:9px;
+  font-weight:800;
+  color:#fff;
+  text-shadow:1px 1px 0 #000,-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000;
+  font-family:ui-monospace,monospace;
+  pointer-events:none;
+}
+.kit-preview-row-label{
+  font-size:9px;
+  color:var(--muted-2);
+  text-transform:uppercase;
+  letter-spacing:.06em;
+  margin:6px 0 3px;
+  font-weight:700;
+}
 
 .modal{display:none;position:fixed;inset:0;z-index:100;align-items:center;justify-content:center;padding:20px}
 .modal.active{display:flex}
@@ -207,7 +279,6 @@ main{padding:0 24px 80px}
 .info-list li .num{width:26px;height:26px;flex-shrink:0;display:grid;place-items:center;border-radius:8px;font-size:12px;font-weight:800;background:rgba(34,211,238,.15);color:var(--cyan);font-family:ui-monospace,monospace}
 .info-list.rules li .num{background:rgba(192,132,252,.15);color:var(--purple)}
 .info-list b{color:var(--text);font-weight:600}
-.info-list .bad{color:#fca5a5;font-weight:700}
 
 .rules-content{display:flex;flex-direction:column;gap:22px}
 .rules-section{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:18px 20px}
@@ -215,17 +286,12 @@ main{padding:0 24px 80px}
 .rules-section-title .section-num{width:30px;height:30px;flex-shrink:0;display:grid;place-items:center;background:linear-gradient(135deg,rgba(192,132,252,.2),rgba(192,132,252,.08));border:1px solid rgba(192,132,252,.4);color:var(--purple);border-radius:8px;font-size:13px;font-weight:800;font-family:ui-monospace,monospace}
 .rule{font-size:13px;color:var(--muted);line-height:1.65;padding:10px 0;border-bottom:1px solid rgba(42,49,66,.6)}
 .rule:last-child{border-bottom:none;padding-bottom:0}
-.rule:first-of-type{padding-top:0}
 .rule b{color:var(--text);font-weight:700}
 .rule .rule-num{color:var(--purple);font-weight:800;font-family:ui-monospace,monospace;margin-right:4px}
 .rule .punish{display:inline-block;padding:2px 8px;background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.35);color:#fca5a5;border-radius:6px;font-size:11.5px;font-weight:700;margin-left:4px}
 .rule-sub{padding:8px 0 8px 16px;border-left:2px solid var(--border);margin:6px 0 6px 4px;font-size:12.5px;color:var(--muted-2);line-height:1.6}
-.rule-sub b{color:var(--muted)}
 .rule-list{list-style:none;padding:6px 0 6px 16px;margin:4px 0 4px 4px;border-left:2px solid var(--border);display:flex;flex-direction:column;gap:5px;font-size:12.5px;color:var(--muted-2);line-height:1.55}
 .rule-list li::before{content:'— ';color:var(--purple)}
-.rule-list b{color:var(--muted)}
-.rule a{color:var(--cyan);text-decoration:underline}
-.rule a:hover{color:#67e8f9}
 
 .info-footer{padding:14px 16px;background:rgba(96,165,250,.06);border:1px solid rgba(96,165,250,.25);border-radius:12px;font-size:12.5px;color:#93c5fd;line-height:1.5}
 .info-footer b{color:var(--blue);font-weight:700}
@@ -246,7 +312,6 @@ main{padding:0 24px 80px}
 .btn-secondary{padding:12px 22px;background:var(--surface-2);border:1px solid var(--border);color:var(--text);border-radius:var(--radius-sm);font-size:14px;font-weight:600;transition:all .15s}
 .btn-secondary:hover{background:var(--surface);border-color:#3a4256}
 
-/* Донат-модалка */
 .donate-contact-card{padding:16px 18px;background:var(--surface);border:1px solid var(--border);border-radius:12px}
 .donate-contact-label{font-size:13px;color:var(--muted);margin-bottom:10px}
 .donate-contact-value{display:flex;align-items:center;gap:10px;font-size:16px;font-weight:800;color:var(--orange)}
@@ -276,6 +341,7 @@ main{padding:0 24px 80px}
   .promo-title{font-size:18px}
   .promo-desc{font-size:13px}
   .promo-buttons{flex-direction:column}
+  .kit-slot{font-size:13px}
 }
 </style>
 </head>
@@ -298,7 +364,7 @@ main{padding:0 24px 80px}
 
       <button class="ip-block" id="ip-block" onclick="copyIP()" title="Скопировать IP">
         <span class="ip-label">IP:</span>
-        <span id="ip-text">free.cloudblaze.org:20719</span>
+        <span id="ip-text">free.cloudblaze.org:18462</span>
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
       </button>
 
@@ -324,7 +390,9 @@ main{padding:0 24px 80px}
       <label>Категория</label>
       <select id="filter-category">
         <option value="all">Все категории</option>
+        <option value="kits">Киты PvP</option>
         <option value="ranks">Привилегии</option>
+        <option value="currency">Валюта</option>
       </select>
     </div>
     <div class="filter-group">
@@ -343,7 +411,6 @@ main{padding:0 24px 80px}
 
 <main class="container">
 
-  <!-- ПРОМО-БАННЕР -->
   <div class="promo-banner">
     <div class="promo-inner">
       <div>
@@ -372,7 +439,6 @@ main{padding:0 24px 80px}
     </div>
   </div>
 
-  <!-- БАННЕР: СВЯЗЬ ПО ДОНАТАМ -->
   <div class="payment-banner">
     <div class="payment-banner-icon">💬</div>
     <div class="payment-banner-info">
@@ -403,12 +469,10 @@ main{padding:0 24px 80px}
   <div class="modal-backdrop" onclick="closeVote()"></div>
   <div class="modal-box wide">
     <button class="modal-close" onclick="closeVote()">✕</button>
-
     <div class="modal-head">
       <h3>🗳️ Проголосуй за ShirokaRW</h3>
       <p>Голосуй раз в сутки на мониторингах — поднимай сервер в топ и приводи новых игроков</p>
     </div>
-
     <div class="vote-list">
       <a class="vote-card mclist" href="https://mclist.ru/servers/shirokasmp" target="_blank" rel="noopener">
         <div class="vote-logo">MC</div>
@@ -419,7 +483,6 @@ main{padding:0 24px 80px}
         </div>
         <div class="vote-btn">Голосовать →</div>
       </a>
-
       <a class="vote-card millida" href="https://millida.net/rating/servers/shirokasmp" target="_blank" rel="noopener">
         <div class="vote-logo">M</div>
         <div class="vote-info">
@@ -430,9 +493,8 @@ main{padding:0 24px 80px}
         <div class="vote-btn">Голосовать →</div>
       </a>
     </div>
-
     <div class="vote-tip">
-      💡 <b>Совет:</b> голосуй на обоих сайтах каждый день — так сервер быстрее поднимется в топе, и на него зайдёт больше игроков!
+      💡 <b>Совет:</b> голосуй на обоих сайтах каждый день — так сервер быстрее поднимется в топе!
     </div>
   </div>
 </div>
@@ -442,44 +504,34 @@ main{padding:0 24px 80px}
   <div class="modal-backdrop" onclick="closeModal()"></div>
   <div class="modal-box">
     <button class="modal-close" onclick="closeModal()">✕</button>
-
     <div class="modal-head">
       <h3 id="modal-title">💬 Связь по донатам</h3>
       <p id="modal-subtitle">Свяжись с админами / владельцами</p>
     </div>
-
     <div class="info-section">
-
       <div class="info-highlight discord">
         💬 <b>По вопросам донатов пиши админам / владельцам</b><br>
         Они расскажут, как купить донат и что входит в каждый ранг.
       </div>
-
       <div class="donate-contact-card">
         <div class="donate-contact-label">👑 Владелец сервера</div>
-        <div class="donate-contact-value">
-          <span>👑</span> meowl
-        </div>
+        <div class="donate-contact-value"><span>👑</span> meowl</div>
       </div>
-
       <div class="donate-contact-card">
         <div class="donate-contact-label">🎮 Где связаться</div>
         <div class="donate-contact-list">
           <div>💬 <b style="color:var(--text)">Discord:</b> нажми кнопку ниже</div>
-          <div>🎮 <b style="color:var(--text)">В игре:</b> напиши в чат сервера <code>free.cloudblaze.org:20719</code></div>
+          <div>🎮 <b style="color:var(--text)">В игре:</b> напиши в чат сервера <code>free.cloudblaze.org:18462</code></div>
         </div>
       </div>
-
       <div class="info-highlight ok">
         ✅ <b>Выдача доната — моментальная</b><br>
         После подтверждения оплаты админ выдаст донат сразу — заходи на сервер и играй!
       </div>
-
       <a class="discord-btn" href="https://discord.gg/p4rEkdctc" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.79 19.79 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
         💬 Написать админам в Discord
       </a>
-
       <button class="btn-secondary" style="width:100%" onclick="closeModal()">Закрыть</button>
     </div>
   </div>
@@ -490,18 +542,15 @@ main{padding:0 24px 80px}
   <div class="modal-backdrop" onclick="closeKP()"></div>
   <div class="modal-box wide">
     <button class="modal-close" onclick="closeKP()">✕</button>
-
     <div class="modal-head">
       <h3>📋 Набор КП — присоединиться к команде</h3>
       <p>🔥 ИДЁТ НАБОР НА МОДЕРАЦИЮ! Читай условия ниже</p>
     </div>
-
     <div class="info-section">
       <div class="info-highlight hot">
         🚨 <b>ИДЁТ НАБОР НА МОДЕРАЦИЮ!</b> 🚨<br>
         Мы — лучшая копия RW с топовыми админами. Заявка на КП уже тут!
       </div>
-
       <div class="info-highlight age">
         🎂 <b>Возраст: с 12 лет</b><br>
         Приём в команду открыт для игроков <b>от 12 лет и старше</b>.
@@ -509,7 +558,6 @@ main{padding:0 24px 80px}
           ⚠️ <b>Исключения есть</b> — решение принимает команда проекта индивидуально.
         </div>
       </div>
-
       <div>
         <h4 style="font-size:14px;font-weight:700;margin-bottom:12px;color:var(--text)">📌 Требования:</h4>
         <ul class="info-list">
@@ -520,7 +568,6 @@ main{padding:0 24px 80px}
           <li><span class="num">5</span><div>Онлайн <b>от 2 часов в день</b></div></li>
         </ul>
       </div>
-
       <div>
         <h4 style="font-size:14px;font-weight:700;margin-bottom:12px;color:var(--text)">🛠️ Обязанности:</h4>
         <ul class="info-list">
@@ -530,17 +577,14 @@ main{padding:0 24px 80px}
           <li><span class="num">📢</span><div>Сообщать о багах</div></li>
         </ul>
       </div>
-
       <div class="info-highlight ok">
         🎁 <b>Что ты получишь:</b><br>
         Префикс <b>[МОДЕРАТОР]</b>, доступ к админ-командам, бесплатный кит PvP каждый день.
       </div>
-
       <div class="info-highlight discord">
         💬 <b>Заявки подаются в Discord</b><br>
-        Нажми кнопку ниже → попадёшь на наш Discord-сервер → перейди в канал <b>#заявки</b> и заполни форму по шаблону.
+        Нажми кнопку ниже → попадёшь на наш Discord-сервер → перейди в канал <b>#заявки</b>.
       </div>
-
       <a class="discord-btn" href="https://discord.gg/p4rEkdctc" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.79 19.79 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
         🚀 Подать заявку на МОДЕРАЦИЮ
@@ -554,342 +598,168 @@ main{padding:0 24px 80px}
   <div class="modal-backdrop" onclick="closeRules()"></div>
   <div class="modal-box wide">
     <button class="modal-close" onclick="closeRules()">✕</button>
-
     <div class="modal-head">
       <h3>📜 Правила проекта ShirokaRW</h3>
       <p>Играя на проекте, вы соглашаетесь с правилами и обязуетесь их выполнять</p>
     </div>
-
     <div class="rules-content">
-
-      <!-- РАЗДЕЛ 1 -->
       <div class="rules-section">
         <div class="rules-section-title"><span class="section-num">1</span> Основные положения</div>
-
-        <div class="rule"><span class="rule-num">1.1</span> Играя на проекте, вы соглашаетесь с правилами и обязуетесь их выполнять. Владелец аккаунта несет полную ответственность за его безопасность и действия, совершаемые с его использованием.</div>
-
-        <div class="rule"><span class="rule-num">1.2</span> Администрация вправе заблокировать аккаунт без объяснения причин, уведомления и возможности обжалования. Блокировка может быть временной или бессрочной.</div>
-
-        <div class="rule"><span class="rule-num">1.3</span> Средства, потраченные на услуги, являются пожертвованиями и не подлежат возврату. Администрация не несёт ответственности за ошибки, допущенные при оплате.</div>
-
-        <div class="rule"><span class="rule-num">1.4</span> Администрация не возвращает утраченные ресурсы и прогресс, даже если потеря произошла из-за багов, сбоев или других технических причин.</div>
-
-        <div class="rule"><span class="rule-num">1.5</span> <b>Игровой никнейм.</b> <span class="punish">Бан навсегда</span><br>Ник не должен содержать:
-          <ul class="rule-list">
-            <li>упоминания читов;</li>
-            <li>названия сторонних проектов;</li>
-            <li>ненормативную лексику, оскорбления;</li>
-            <li>сходства с никами команды проекта (например: crftr1 / TheJlun42);</li>
-            <li>упоминания политических деятелей, преступников, террористов и иных общественно опасных лиц;</li>
-            <li>Ник не должен нарушать правила сервера.</li>
-          </ul>
-          <div class="rule-sub">
-            • При блокировке все ресурсы, привилегии, внутриигровая валюта и предметы, связанные с аккаунтом, считаются безвозвратно утерянными.<br>
-            • Нарушение с использованием команды /nick — <span class="punish">Бан 1 день</span><br>
-            • Не уверены, допустим ли никнейм? — Спросите в поддержке: <a href="https://t.me/faketimehq" target="_blank">t.me/faketimehq</a>
-          </div>
-        </div>
-
+        <div class="rule"><span class="rule-num">1.1</span> Играя на проекте, вы соглашаетесь с правилами и обязуетесь их выполнять. Владелец аккаунта несет полную ответственность за его безопасность и действия.</div>
+        <div class="rule"><span class="rule-num">1.2</span> Администрация вправе заблокировать аккаунт без объяснения причин. Блокировка может быть временной или бессрочной.</div>
+        <div class="rule"><span class="rule-num">1.3</span> Средства, потраченные на услуги, не подлежат возврату.</div>
+        <div class="rule"><span class="rule-num">1.4</span> Администрация не возвращает утраченные ресурсы и прогресс.</div>
+        <div class="rule"><span class="rule-num">1.5</span> <b>Игровой никнейм.</b> <span class="punish">Бан навсегда</span></div>
         <div class="rule"><span class="rule-num">1.6</span> Правила могут быть изменены без предварительного уведомления.</div>
-
-        <div class="rule"><span class="rule-num">1.7</span> На обжалование наказания дается 5 дней с момента его выдачи.</div>
-
-        <div class="rule"><span class="rule-num">1.8</span> Сообщения, нарушающие правила, даже в шутку, подлежат наказанию. Администрация не учитывает шуточный контекст.</div>
-
-        <div class="rule"><span class="rule-num">1.9</span> Администрация имеет право наказывать игроков, систематически нарушающих правила. Меры наказания определяются по усмотрению администрации.</div>
-
-        <div class="rule"><span class="rule-num">1.10</span> Администрация имеет право выдавать блокировки на срок, превышающий указанный в правилах, или назначать иные меры наказания по своему усмотрению.</div>
-
-        <div class="rule"><span class="rule-num">1.11</span> Игроки в чёрном списке теряют доступ ко всем частям проекта: игре, информации и техподдержке. Чёрный список представлен в формате открытого реестра — ЧСП FakeTime.<br>Тим с игроком, находящимся в чёрном списке, считается нарушением.</div>
+        <div class="rule"><span class="rule-num">1.7</span> На обжалование наказания дается 5 дней.</div>
+        <div class="rule"><span class="rule-num">1.8</span> Сообщения, нарушающие правила, даже в шутку, подлежат наказанию.</div>
+        <div class="rule"><span class="rule-num">1.9</span> Администрация имеет право наказывать игроков, систематически нарушающих правила.</div>
+        <div class="rule"><span class="rule-num">1.10</span> Администрация имеет право выдавать блокировки на срок выше указанного.</div>
+        <div class="rule"><span class="rule-num">1.11</span> Игроки в чёрном списке теряют доступ ко всем частям проекта.</div>
       </div>
-
-      <!-- РАЗДЕЛ 2 -->
       <div class="rules-section">
         <div class="rules-section-title"><span class="section-num">2</span> Игровой процесс</div>
-
-        <div class="rule"><span class="rule-num">2.1</span> <b>Выдача себя за члена модерации или администрации / Угрозы выдачи бана, мута итд</b> <span class="punish">мут 6 часов / IP-бан от 30 дней</span><br>Включает в себя:
-          <ul class="rule-list">
-            <li>Утверждения о наличии привилегий на других аккаунтах.</li>
-            <li>Попытки проверить других игроков.</li>
-            <li>Сообщения от лица администрации.</li>
-          </ul>
-        </div>
-
-        <div class="rule"><span class="rule-num">2.2</span> <b>Передача аккаунта / Использование чужих аккаунтов</b> <span class="punish">вечный бан в лобби / Бан на 90 дней</span></div>
-
-        <div class="rule"><span class="rule-num">2.3</span> <b>Взлом или попытка взлома чужих аккаунтов</b> <span class="punish">вечный IP-бан в лобби</span>
-          <ul class="rule-list">
-            <li>Игра с чужого аккаунта расценивается как взлом.</li>
-            <li>Продажа/Попытка продажи аккаунта</li>
-          </ul>
-        </div>
-
-        <div class="rule"><span class="rule-num">2.4</span> <b>Использование/Хранение читов, запрещённых модов или программ</b> <span class="punish">IP-бан на 30 дней</span>
-          <ul class="rule-list">
-            <li>Использование или хранение стороннего ПО, дающего игровое преимущество.</li>
-            <li>АнтиЧит может выдать наказание по этому правилу. Наказания от АнтиЧита обжалуются строго через специального бота, а не через команду проекта.</li>
-          </ul>
-          <div class="rule-sub">
-            <b>Примеры запрещённого ПО:</b>
-            <ul class="rule-list">
-              <li>Чит-клиенты, триггербот (автокликер в PvP);</li>
-              <li>Макросы и скрипты, автоматизирующие сложные игровые действия (например: автоторговля, перемещение, Baritone и аналоги). Исключение: AutoFish разрешён;</li>
-              <li>Боты или твинки, имитирующие поведение чит-клиентов (Отсутствие коллизии/KillAura/Урон сквозь блоки);</li>
-              <li>Сценарии, реагирующие на окружение (например, авто-дисконнект при обнаружении игрока рядом);</li>
-              <li>Спам-боты или любые другие скрипты, наносящие вред проекту.</li>
-            </ul>
-            <b>Запрещённые модификации:</b>
-            <ul class="rule-list">
-              <li>Макросы и моды дающие преимущество в PvP (например: TriggerBot);</li>
-              <li>Макросы и моды для автоматического взаимодействия с инвентарем или хранилищем. Исключение: ItemScroller;</li>
-              <li>Моды, для определения сида мира;</li>
-              <li>Моды, частично или полностью выполняющие функции чит-клиентов;</li>
-              <li>Карты и миникарты, частично или полностью выполняющие функции читов;</li>
-              <li>Моды и скрипты, раскрывающие скрытых/невидимых игроков методами, выходящими за рамки стандартных возможностей игры (например: ESP (подсветка контуров точной модели или хитбокса игрока), трейсеры/линии к игрокам).</li>
-            </ul>
-            <b>Примечание:</b> усиленные частицы, HP-индикаторы, подсветка блоков, на которых находится игрок под невидимостью — разрешены.
-            <ul class="rule-list">
-              <li>Любые приложения с возможностью прямой установки запрещённого ПО.</li>
-            </ul>
-            <b>• Важно!</b> Любые изменения в ванильных файлах клиента приравниваются к модификациям.<br><br>
-            <b>— Правила проверки на читы.</b> <span class="punish">Нарушения со стороны игрока расцениваются как нарушение правила 2.4</span><br>
-            <b>Порядок проверки:</b>
-            <ul class="rule-list">
-              <li>Модератор вправе инициировать проверку в любое время, даже без жалоб.</li>
-              <li>Проверка проводится при помощи AnyDesk / RustDesk / RuDesktop / В исключительных случаях (по решению модератора) допускается использование Discord.</li>
-              <li>До начала проверки добровольное признание даёт бан на 20 дней. После начала — признание не снижает срок. Шутки вроде "я читер" приравниваются к признанию. Признание вне процесса проверки также влечёт за собой наказание.</li>
-              <li>Любые формы оскорблений, давления, унижения или попыток принизить сотрудника запрещены.</li>
-              <li>Намеренное затягивание времени, игнорирование указаний и флуд/бред в чат расцениваются как отказ от проверки.</li>
-              <li>Модератор может загрузить дополнительное ПО только с официального сайта. Если модератор предлагает файл напрямую — он нарушает правила.</li>
-            </ul>
-            <b>Правила поведения во время проверки:</b>
-            <ul class="rule-list">
-              <li>Транслирование или запись экрана во время проверки (исключение, если игрок вёл прямую трансляцию на каких-либо стриминговых площадках, в таком случае необходимо скрыть экран во время проверки) расценивается как отказ от проверки.</li>
-              <li>Любое препятствие (задержки, отказ, спор, неадекватность, отключение игры) расценивается как отказ от проверки.</li>
-              <li>Проверяющий обязан записывать процесс проверки. Запись игрока запрещена. В случае жалобы, Администрация может запросить запись у модератора.</li>
-            </ul>
-            <b>Очистка системы:</b>
-            <ul class="rule-list">
-              <li>Запрещается заранее очищать: папку .minecraft, корзину, загрузки, prefetch, shellbag, JournalTrace, recent и так далее.</li>
-              <li>Запрещено выключение или перезапуск служб системы Windows: PcaSvc, CDPSvc, DPS, bam, Использование данных, SysMain, Event Log.</li>
-              <li>Если они отключены — включите. Гайд по включению необходимых служб Windows.</li>
-              <li>Бан может быть выдан, если ЗПО было удалено менее чем за 5 дней до проверки.</li>
-            </ul>
-            Для выявления обходов ЧСП, блокировок и других нарушений некоторые сотрудники могут проводить проверку социальных сетей игрока. Обратите внимание: такие проверки могут проводить только сотрудники, указанные ниже списком. Обычным модераторам проверять социальные сети запрещено — если такое произошло, отключайте сеанс с модератором и сообщите в поддержку в тг <a href="https://t.me/faketimehq" target="_blank">@faketimehq</a>.
-            <ul class="rule-list">
-              <li>crftr</li>
-              <li>TheJlun</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="rule"><span class="rule-num">2.4.1</span> Запрещён тим с игроком, который нарушает правило 2.4. <span class="punish">IP-бан 14 дней</span></div>
-
-        <div class="rule"><span class="rule-num">2.4.2</span> Запрещено распространение запрещенного ПО. <span class="punish">вечный IP-бан в лобби</span></div>
-
-        <div class="rule"><span class="rule-num">2.5</span> <b>Сделки с гарантом</b> <span class="punish">IP-бан 14 дней</span><br>Во время проведения сделок с гарантом запрещено:
-          <ul class="rule-list">
-            <li>обманывать гаранта;</li>
-            <li>срывать сделку.</li>
-          </ul>
-          <b>Условия проведения сделки:</b>
-          <ul class="rule-list">
-            <li>Сделка проводится на спавне при участии трёх лиц: гаранта и двух игроков.</li>
-            <li>Гарантом может быть только представитель команды проекта с рангом «Стажёр» или выше.</li>
-            <li>Вмешательство посторонних лиц, не участвующих в сделке, запрещено и карается наказанием.</li>
-            <li>Сделка считается завершённой, когда оба участника получили свои предметы.</li>
-          </ul>
-          <b>Важно:</b> если сделка проведена без гаранта и один из участников оказался обманут — жалоба рассматриваться не будет, даже при наличии доказательств.
-        </div>
-
-        <div class="rule"><span class="rule-num">2.6</span> Запрещена любая форма монетизации игровых ценностей: торговля за реальные деньги или любые неигровые ценности; просьбы или предложения пополнить чужой счёт, кошелёк или баланс; кооперация с игроками, занимающимися такой монетизацией; использование игровых ресурсов или ценностей в качестве платёжного средства за услуги, не относящиеся к проекту. <span class="punish">Наказание назначается администрацией</span></div>
-
-        <div class="rule"><span class="rule-num">2.7</span> Запрещены любые действия, мешающие работе модерации или администрации. <span class="punish">Наказание назначается администрацией</span></div>
-
-        <div class="rule"><span class="rule-num">2.8</span> Запрещены любые виды казино и азартных игр на сторонних платформах, не связанных с сервером. <span class="punish">Наказание назначается администрацией</span>
-          <ul class="rule-list">
-            <li>Запрещены казино-боты и проведение азартных игр в чате.</li>
-            <li>Разрешены только казино основанные на ванильных механиках игры или механизмах, без подкруток и внешнего вмешательства.</li>
-          </ul>
-        </div>
-
-        <div class="rule"><span class="rule-num">2.9</span> Запрещено обходить игровое наказание: играть со второго аккаунта, если на другом выдана блокировка; писать в чат, если на одном из твинков выдан мут. <span class="punish">Дублирование наказания по IP на аккаунт, с которого было нарушено правило. Срок удваивается</span>
-          <ul class="rule-list">
-            <li>Незнание о наличии наказания на другом аккаунте не освобождает от ответственности (исключение — совпадение IP-адреса).</li>
-          </ul>
-        </div>
-
-        <div class="rule"><span class="rule-num">2.10</span> Запрещено использование, распространение, сокрытие от администрации, а также умышленное неуведомление об обнаруженных игровых ошибках (багах, уязвимостях, недоработках), вне зависимости от того, дают ли они игровое преимущество или нет. К нарушениям относятся: личное использование багов, передача информации о них другим игрокам, демонстрация способов их применения, а также отказ сообщить администрации о найденной ошибке. <span class="punish">Бан от 3 дней</span></div>
-
-        <div class="rule"><span class="rule-num">2.11</span> Запрещено строить механизмы/выполнять действия, вызывающие сильную нагрузку на сервер. <span class="punish">Наказание назначается администрацией</span></div>
-
-        <div class="rule"><span class="rule-num">2.12</span> Запрещено распространение личных данных игроков без их согласия: ФИО, адрес, номер телефона, фото и так далее, в том числе и за пределами сервера. <span class="punish">От перманентного IP-мута до перманентного IP-бана в лобби</span>
-          <ul class="rule-list">
-            <li>Доксинг, сватинг, угрозы публикации личной информации.</li>
-          </ul>
-        </div>
-
-        <div class="rule"><span class="rule-num">2.13</span> Запрещено иметь предметы с оскорбительным названием или нарушающим правила сервера. <span class="punish">бан 2 часа</span> (найденный предмет изымается)</div>
-
-        <div class="rule"><span class="rule-num">2.14</span> Запрещено взаимодействие или помощь игрокам сверх лимита режима: совместные PvP/PvE-действия, защита, рейды, фарм, передача предметов, ресурсов или валюты, обмен информацией для координации, а также согласованные действия через сторонние средства связи. Чередование тиммейтов не спасает от лимита — все, с кем игрок был тиммейтом, считаются тиммейтами одновременно. Не действует, если игроки изначально не были тиммейтами и не получали общей выгоды. <span class="punish">IP-бан на 30 дней</span></div>
+        <div class="rule"><span class="rule-num">2.1</span> Выдача себя за модерацию. <span class="punish">мут 6 часов / IP-бан от 30 дней</span></div>
+        <div class="rule"><span class="rule-num">2.2</span> Передача аккаунта. <span class="punish">вечный бан в лобби / Бан 90 дней</span></div>
+        <div class="rule"><span class="rule-num">2.3</span> Взлом чужих аккаунтов. <span class="punish">вечный IP-бан</span></div>
+        <div class="rule"><span class="rule-num">2.4</span> Читы и запрещённые моды. <span class="punish">IP-бан 30 дней</span></div>
+        <div class="rule"><span class="rule-num">2.4.1</span> Тим с нарушителем правила 2.4. <span class="punish">IP-бан 14 дней</span></div>
+        <div class="rule"><span class="rule-num">2.4.2</span> Распространение запрещённого ПО. <span class="punish">вечный IP-бан</span></div>
+        <div class="rule"><span class="rule-num">2.5</span> Сделки с гарантом. <span class="punish">IP-бан 14 дней</span></div>
+        <div class="rule"><span class="rule-num">2.6</span> Монетизация игровых ценностей.</div>
+        <div class="rule"><span class="rule-num">2.7</span> Действия, мешающие модерации.</div>
+        <div class="rule"><span class="rule-num">2.8</span> Казино и азартные игры.</div>
+        <div class="rule"><span class="rule-num">2.9</span> Обход наказания. <span class="punish">Срок удваивается</span></div>
+        <div class="rule"><span class="rule-num">2.10</span> Использование багов. <span class="punish">Бан от 3 дней</span></div>
+        <div class="rule"><span class="rule-num">2.11</span> Нагрузка на сервер.</div>
+        <div class="rule"><span class="rule-num">2.12</span> Распространение личных данных. <span class="punish">IP-мут / IP-бан</span></div>
+        <div class="rule"><span class="rule-num">2.13</span> Оскорбительные названия предметов. <span class="punish">бан 2 часа</span></div>
+        <div class="rule"><span class="rule-num">2.14</span> Взаимодействие сверх лимита режима. <span class="punish">IP-бан 30 дней</span></div>
       </div>
-
-      <!-- РАЗДЕЛ 3 -->
       <div class="rules-section">
         <div class="rules-section-title"><span class="section-num">3</span> Правила чата</div>
-
-        <div class="rule" style="padding-top:0"><b>— Модерируются все виды чата.</b></div>
-
-        <div class="rule"><span class="rule-num">3.1</span> Запрещена реклама любого сервера, магазина игровых/неигровых ресурсов, ПО, ютуберов, в том числе упоминание/призыв. <span class="punish">мут 8 часов / бан 14 дней / бан навсегда</span>
-          <ul class="rule-list">
-            <li>Любое упоминание сервера (в том числе его аббревиатуры или попытки скрыть её) ведёт к муту на 5 часов.</li>
-            <li>Реклама стрима на нашем сервере не считается нарушением, если в ходе стрима отсутствует реклама других серверов, их упоминание или демонстрация игры на сторонних проектах, кроме FakeTime.</li>
-            <li>Исключения: HolyWorld, FunTime, ReallyWorld, Hypixel, Cristalix, DiamondWorld.</li>
-          </ul>
-        </div>
-
-        <div class="rule"><span class="rule-num">3.2</span> Наглое вмешательство в чужие наказания. <span class="punish">мут 30 минут</span>
-          <ul class="rule-list">
-            <li>Запрещено вмешиваться в решения модераторов по наказаниям, которые они выдали другим игрокам.</li>
-            <li>Попытки оспорить или изменить чужое наказание, а также провокации с целью отмены или смягчения наказания считаются нарушением.</li>
-          </ul>
-        </div>
-
-        <div class="rule"><span class="rule-num">3.3</span> Флуд или спам. <span class="punish">мут 1 час</span>
-          <ul class="rule-list">
-            <li>Сообщения, несущие одинаковый смысл, также расцениваются как флуд (от 3);</li>
-            <li>Если в текущем активном чате при стандартных настройках чата видны все 3 сообщения, то вне зависимости от промежутка между сообщениями — мут.</li>
-            <li>Если два или более человека намеренно пишут одинаковый текст с целью обойти правила, это рассматривается как нарушение и наказывается мутом.</li>
-            <li>Набор в клан от 2 сообщений (включительно).</li>
-            <li>Флуд от 12 символов. (смех от 25)</li>
-          </ul>
-        </div>
-
-        <div class="rule"><span class="rule-num">3.4</span> Оскорбление любыми способами. <span class="punish">мут 1 час</span>
-          <ul class="rule-list">
-            <li>Завуалированные оскорбления также считаются нарушением;</li>
-            <li>За слова: 'Лёгкий', 'Ez', 'Нуб', '0', 'Глупый' наказание не выдаётся.</li>
-          </ul>
-        </div>
-
-        <div class="rule"><span class="rule-num">3.5</span> CAPS в более 50% своего сообщения. <span class="punish">мут 30 минут</span>
-          <ul class="rule-list">
-            <li>Относится к словам свыше 10-и символов, либо к предложениям, которые состоят из 2-х и более слов. (исключения: никнеймы)</li>
-          </ul>
-        </div>
-
-        <div class="rule"><span class="rule-num">3.6</span> Попытка организации флуда. <span class="punish">мут 1 час</span>
-          <ul class="rule-list">
-            <li>Пример: 'Кто первый напишет "+" тому донат'.</li>
-          </ul>
-        </div>
-
-        <div class="rule"><span class="rule-num">3.7</span> Упоминание родных в негативном контексте. <span class="punish">мут 1 час / мут 6 часов</span>
-          <ul class="rule-list">
-            <li>Сообщения по типу 'сын овцы' считаются оскорблением родных;</li>
-            <li>Завуалированные оскорбления/упоминания считаются нарушением.</li>
-          </ul>
-        </div>
-
-        <div class="rule"><span class="rule-num">3.8</span> Политика, дискриминация, деструктивные темы, лудомания, расизм. <span class="punish">мут 1 час / мут 4 часа / IP-бан навсегда</span>
-          <ul class="rule-list">
-            <li>Запрещены нацизм, его символика и любые связанные проявления;</li>
-            <li>Сообщения с фразами вроде 'Слава …' или аналогичными о других странах наказываются мутом;</li>
-            <li>Суицид, самоповреждения;</li>
-            <li>Наркотики, реклама/нормализация веществ;</li>
-            <li>Насилие над собой, другими или животными в любой форме;</li>
-            <li>Романтизация убийц, терактов, культов;</li>
-            <li>Пропаганда криминала, взломов, мошенничества;</li>
-            <li>Национализм, расизм, ксенофобия, сексизм, религиозная пропаганда;</li>
-            <li>Любые проявления нацизма и его символики;</li>
-            <li>Оскорбительные слова ('Негр', 'хохол', 'чурка' и т.д.) также ведут к выдаче мута;</li>
-            <li>Обсуждение религии (кроме праздников) наказывается по ситуации;</li>
-            <li>Распространение ссылок, упоминание платформ для азартных игр или казино, а также организация подобных активностей на сервере.</li>
-          </ul>
-        </div>
-
-        <div class="rule"><span class="rule-num">3.9</span> Использование лексики сексуального характера. <span class="punish">мут 30 минут</span>
-          <ul class="rule-list">
-            <li>Оценка корректности осуществляется с учётом контекста сообщения.</li>
-            <li>Использование аморальных выражений, таких как 'сосал хуй', 'соси', 'хуй', 'член' и подобных, запрещено вне зависимости от контекста.</li>
-          </ul>
-        </div>
-
-        <div class="rule"><span class="rule-num">3.10</span> Оскорбление сервера и провокация администрации/модерации. <span class="punish">мут 2 часа / вечный IP-бан / по решению администрации</span>
-          <ul class="rule-list">
-            <li>Завуалированные оскорбления считаются нарушением.</li>
-          </ul>
-        </div>
-
-        <div class="rule"><span class="rule-num">3.11</span> Запрещён флуд командами передачи внутриигровых средств, телепортирования, /pvp, /suicide. <span class="punish">бан на 1 час</span></div>
-
-        <div class="rule"><span class="rule-num">3.12</span> Наглое попрошайничество у администрации. <span class="punish">мут 30 минут</span>
-          <ul class="rule-list">
-            <li>Не распространяется на модерацию и обычных игроков.</li>
-          </ul>
-        </div>
-
-        <div class="rule"><span class="rule-num">3.13</span> Запрещена имитация системных сообщений. <span class="punish">мут 30 минут</span></div>
+        <div class="rule"><b>— Модерируются все виды чата.</b></div>
+        <div class="rule"><span class="rule-num">3.1</span> Реклама. <span class="punish">мут 8 часов / бан 14 дней</span></div>
+        <div class="rule"><span class="rule-num">3.2</span> Вмешательство в чужие наказания. <span class="punish">мут 30 минут</span></div>
+        <div class="rule"><span class="rule-num">3.3</span> Флуд или спам. <span class="punish">мут 1 час</span></div>
+        <div class="rule"><span class="rule-num">3.4</span> Оскорбление. <span class="punish">мут 1 час</span></div>
+        <div class="rule"><span class="rule-num">3.5</span> CAPS. <span class="punish">мут 30 минут</span></div>
+        <div class="rule"><span class="rule-num">3.6</span> Организация флуда. <span class="punish">мут 1 час</span></div>
+        <div class="rule"><span class="rule-num">3.7</span> Упоминание родных. <span class="punish">мут 1 час / 6 часов</span></div>
+        <div class="rule"><span class="rule-num">3.8</span> Политика, расизм, деструктив. <span class="punish">мут / IP-бан навсегда</span></div>
+        <div class="rule"><span class="rule-num">3.9</span> Лексика сексуального характера. <span class="punish">мут 30 минут</span></div>
+        <div class="rule"><span class="rule-num">3.10</span> Оскорбление сервера. <span class="punish">мут 2 часа / IP-бан</span></div>
+        <div class="rule"><span class="rule-num">3.11</span> Флуд командами. <span class="punish">бан 1 час</span></div>
+        <div class="rule"><span class="rule-num">3.12</span> Попрошайничество. <span class="punish">мут 30 минут</span></div>
+        <div class="rule"><span class="rule-num">3.13</span> Имитация системных сообщений. <span class="punish">мут 30 минут</span></div>
       </div>
-
-      <!-- РАЗДЕЛ 4 -->
       <div class="rules-section">
-        <div class="rules-section-title"><span class="section-num">4</span> Титулы, перенос доната и восстановление</div>
-
-        <div class="rule"><span class="rule-num">4.1</span> В личных титулах и кастомных привилегиях запрещены маты, оскорбления, упоминания запрещенного ПО, теги и любые слова, нарушающие правила сервера.</div>
-
-        <div class="rule"><span class="rule-num">4.2</span> При создании титула/доната игрок обязан соблюдать все указанные требования.</div>
-
-        <div class="rule"><span class="rule-num">4.3</span> Перенос возможен только между аккаунтами, принадлежащими одному человеку.</div>
-
-        <div class="rule"><span class="rule-num">4.4</span> Донат нельзя перенести с аккаунта, находящегося в бане.</div>
-
-        <div class="rule"><span class="rule-num">4.5</span> Разрешено переносить только что-то одно (привилегию, донат-валюту, кейсы с монетами, кейсы с донатом, кейсы с титулами), однако не между режимами.</div>
-
-        <div class="rule"><span class="rule-num">4.6</span> Перенос осуществляется только в одну сторону и не может быть отменён.</div>
-
-        <div class="rule"><span class="rule-num">4.7</span> При любом нарушении правил при переносе, восстановлении или создании титула администрация имеет право отказать в услуге без возврата средств.</div>
-
-        <div class="rule"><span class="rule-num">4.8</span> Кастомные привилегии и титулы переносить нельзя.</div>
-
-        <div class="rule"><span class="rule-num">4.9</span> Утерянные аккаунты, независимо от причины (взлом, забытый пароль и другие), могут быть восстановлены только при условии оплаты товара "Восстановление аккаунта" на сайте проекта. Также необходимо предоставить техподдержке убедительные доказательства первичного владения аккаунтом. В остальных случаях администрация оставляет за собой право отказать в восстановлении без объяснения причин.</div>
+        <div class="rules-section-title"><span class="section-num">4</span> Титулы и перенос доната</div>
+        <div class="rule"><span class="rule-num">4.1</span> В титулах запрещены маты и оскорбления.</div>
+        <div class="rule"><span class="rule-num">4.2</span> При создании титула нужно соблюдать требования.</div>
+        <div class="rule"><span class="rule-num">4.3</span> Перенос только между аккаунтами одного человека.</div>
+        <div class="rule"><span class="rule-num">4.4</span> Донат нельзя перенести с аккаунта в бане.</div>
+        <div class="rule"><span class="rule-num">4.5</span> Переносить можно только что-то одно.</div>
+        <div class="rule"><span class="rule-num">4.6</span> Перенос в одну сторону.</div>
+        <div class="rule"><span class="rule-num">4.7</span> При нарушении — отказ без возврата.</div>
+        <div class="rule"><span class="rule-num">4.8</span> Кастомные привилегии не переносятся.</div>
+        <div class="rule"><span class="rule-num">4.9</span> Восстановление только через оплату товара.</div>
       </div>
-
       <div class="info-footer">
-        📩 <b>Вопросы или жалоба?</b> Напиши владельцу <b>meowl</b> в чате сервера <b>free.cloudblaze.org:20719</b> или в Discord <a href="https://discord.gg/p4rEkdctc" target="_blank" style="color:#a5b4fc;text-decoration:underline">discord.gg/p4rEkdctc</a>.
+        📩 <b>Вопросы или жалоба?</b> Напиши владельцу <b>meowl</b> в чате сервера <b>free.cloudblaze.org:18462</b> или в Discord <a href="https://discord.gg/p4rEkdctc" target="_blank" style="color:#a5b4fc;text-decoration:underline">discord.gg/p4rEkdctc</a>.
       </div>
-
     </div>
   </div>
 </div>
 
 <script>
-const SERVER_IP = 'free.cloudblaze.org:20719';
+const SERVER_IP = 'free.cloudblaze.org:18462';
 const DISCOUNT = 0.40;
 const OWNER_NICK = 'meowl';
 const DISCORD_INVITE = 'https://discord.gg/p4rEkdctc';
 
+/* ===== СЕТКИ КИТОВ (9×5, как в майнкрафте) ===== */
+/* КИТ PvP — первый скриншот: топор, лук, тотемы, яблоки, зелья, элитры, незерит, аметист */
+const KIT_PVP = [
+  {e:'🪓',q:'1'}, {e:'🗿',q:'32'}, {e:'🥏',q:'16'}, {e:'🏹',q:'1'}, {e:'🍏',q:'32'}, {e:'🧪',q:'1'}, null, null, {e:'🔥',q:'1'},
+  {e:'🍎',q:'64'},{e:'🗿',q:'32'},{e:'🗿',q:'32'},{e:'🥏',q:'16'},{e:'🛡️',q:'1'}, null, null, null, {e:'🧪',q:'1'},
+  {e:'🍎',q:'64'},{e:'🗿',q:'32'},{e:'🗿',q:'32'},{e:'🟢',q:'64'},null, null, null, null, {e:'🧪',q:'1'},
+  {e:'🍎',q:'64'},{e:'🗿',q:'32'},{e:'🟢',q:'64'},{e:'🥏',q:'16'}, {e:'⛏️',q:'1'}, {e:'🧪',q:'1'}, null, null, {e:'🧪',q:'1'},
+  {e:'🟣',q:'1'}, {e:'🟣',q:'1'}, {e:'🟣',q:'1'}, {e:'🟣',q:'1'}, null, null, null, null, {e:'🔮',q:'1'}
+];
+
+/* КИТ PvP 2 — второй скриншот: зачарованные предметы, шалкер, кристаллы, жемчуг */
+const KIT_PVP2 = [
+  {e:'🏹',q:'1'}, {e:'🗿',q:'16'},{e:'🗿',q:'16'},{e:'🍏',q:'64'},{e:'🟣',q:'4'}, {e:'🖤',q:'64'},{e:'⛏️',q:'1'}, {e:'🗡️',q:'1'}, {e:'🗿',q:'16'},
+  {e:'🍎',q:'16'},{e:'🥏',q:'16'},{e:'🥏',q:'16'},{e:'⚡',q:'64'},{e:'🍏',q:'16'},{e:'🗿',q:'32'},{e:'🍏',q:'16'},{e:'🧪',q:'1'}, null,
+  {e:'🥏',q:'64'},{e:'⛏️',q:'1'}, {e:'🍏',q:'16'},{e:'🍏',q:'64'},{e:'🍏',q:'64'},{e:'🧪',q:'1'}, {e:'🟫',q:'16'},{e:'🔵',q:'1'}, {e:'💧',q:'1'}
+];
+
 const products = [
+  {
+    id:'pvpkit', cat:'kits',
+    name:'КИТ PvP',
+    sub:'Стандартный PvP-набор',
+    price:100, icon:'⚔️', cls:'is-pvpkit', badge:'PvP',
+    preview: KIT_PVP,
+    previewLabel: 'Инвентарь Toper_RW',
+    features:[
+      '<b>Зачарованный топор</b> и меч',
+      '<b>Лук</b> с зачарованиями',
+      '<b>Тотемы</b> (32 шт)',
+      '<b>Золотые яблоки</b> (64 шт)',
+      '<b>Энчантед яблоки</b> (32 шт)',
+      '<b>Зелья</b> силы/скорости/регена',
+      '<b>Элитры</b> + фейерверки',
+      '<b>Незеритовая броня</b>',
+    ]
+  },
+  {
+    id:'pvpkit2', cat:'kits',
+    name:'КИТ PvP 2',
+    sub:'Прокачанный PvP-набор',
+    price:200, icon:'👑', cls:'is-pvpkit2', badge:'TOP',
+    preview: KIT_PVP2,
+    previewLabel: 'Инвентарь (прокачанный кит)',
+    features:[
+      '<b>Улучшенный лук</b> + зачарования',
+      '<b>Незеритовая броня</b> + инструменты',
+      '<b>Тотемы</b> (16 шт)',
+      '<b>Золотые яблоки</b> (64+16 шт)',
+      '<b>Энчантед яблоки</b> (32 шт)',
+      '<b>Шалкер</b> с ресурсами',
+      '<b>Кристаллы Энда</b> (4 шт)',
+      '<b>Жемчуг Энда</b> (16 шт)',
+      '<b>Ведро воды</b> + зелья',
+    ]
+  },
   {
     id:'dmoder', cat:'ranks',
     name:'DMODER',
     sub:'Модератор сервера ShirokaRW',
     price:200, icon:'🛡️', cls:'is-dmoder', badge:'DMODER',
-    features:['Префикс <b>[DMODER]</b>','Все команды <b>/fly /god /heal</b>','Кит PvP <b>каждый день</b>','Мут и бан игроков','Доступ к <b>/vanish</b>','Приоритет в поддержке']
+    features:['Префикс <b>[DMODER]</b>','Все команды <b>/fly /god /heal</b>','Кит PvP <b>каждый день</b>','Мут и бан игроков','Доступ к <b>/vanish</b>']
   },
   {
     id:'dadmin', cat:'ranks',
     name:'DADMIN',
     sub:'Администратор сервера ShirokaRW',
     price:300, icon:'⚔️', cls:'is-dadmin', badge:'DADMIN',
-    features:['Префикс <b>[DADMIN]</b>','Все команды <b>/fly /god /heal /feed</b>','Кит PvP <b>2 раза в день</b>','Мут, бан, кик','Доступ к <b>/vanish /ec</b>','Кастомный префикс','Приоритет в поддержке']
+    features:['Префикс <b>[DADMIN]</b>','Все команды <b>/fly /god /heal /feed</b>','Кит PvP <b>2 раза в день</b>','Мут, бан, кик','Доступ к <b>/vanish /ec</b>','Кастомный префикс']
   },
   {
     id:'sponsor', cat:'ranks',
     name:'SPONSOR',
     sub:'Спонсор сервера ShirokaRW',
-    price:500, icon:'👑', cls:'is-sponsor', badge:'SPONSOR',
-    features:['Префикс <b>[SPONSOR]</b>','Все команды <b>/fly /god /heal /feed</b>','Кит PvP <b>3 раза в день</b>','Мут, бан, кик','Доступ к <b>/vanish /ec /nick</b>','Кастомный префикс','Личный варп','Приоритет в поддержке','Бонус: <b>5 ключей от кейсов</b>']
+    price:500, icon:'💎', cls:'is-sponsor', badge:'SPONSOR',
+    features:['Префикс <b>[SPONSOR]</b>','Все команды <b>/fly /god /heal /feed</b>','Кит PvP <b>3 раза в день</b>','Мут, бан, кик','Доступ к <b>/vanish /ec /nick</b>','Личный варп','Бонус: <b>5 ключей от кейсов</b>']
+  },
+  {
+    id:'realiki', cat:'currency',
+    name:'РИЛИКИ',
+    sub:'Игровая валюта сервера ShirokaRW',
+    price:50, icon:'🪙', cls:'is-realiki', badge:'NEW',
+    features:['🪙 <b>Игровая валюта</b>','Покупай что угодно у игроков','Обменивай на ресурсы','Работает на всём сервере']
   },
 ];
 
@@ -906,6 +776,20 @@ function closeRules(){ document.getElementById('modal-rules').classList.remove('
 
 function finalPrice(base) { return Math.round(base * (1 - DISCOUNT) * 100) / 100; }
 
+function renderKitGrid(preview) {
+  if (!preview) return '';
+  return `
+    <div class="kit-preview">
+      <div class="kit-preview-grid">
+        ${preview.map(s => {
+          if (!s) return `<div class="kit-slot empty"></div>`;
+          const q = s.q ? `<span class="qty">${s.q}</span>` : '';
+          return `<div class="kit-slot" title="${s.e}${s.q ? ' ×'+s.q : ''}">${s.e}${q}</div>`;
+        }).join('')}
+      </div>
+    </div>`;
+}
+
 function render() {
   const grid = document.getElementById('products-grid');
   const cat = document.getElementById('filter-category').value;
@@ -918,8 +802,11 @@ function render() {
     const finalPriceStr = (finalPrice(p.price) * rate).toFixed(rate===1?0:2);
     const oldPriceStr = (p.price * rate).toFixed(rate===1?0:2);
     const discountPct = Math.round(DISCOUNT * 100);
-    const featuresHtml = p.features && p.features.length ? `<ul class="product-features">${p.features.map(f=>`<li>${f}</li>`).join('')}</ul>` : '';
     const badgeHtml = p.badge ? `<div class="product-badge badge-${p.id}">${p.badge}</div>` : '';
+    const previewHtml = renderKitGrid(p.preview);
+    const featuresHtml = p.features && p.features.length
+      ? `<ul class="product-features">${p.features.map(f=>`<li>${f}</li>`).join('')}</ul>` : '';
+
     return `
     <article class="product-card ${p.cls}">
       <div class="product-top">
@@ -930,6 +817,7 @@ function render() {
         <div class="product-name">${p.name}</div>
         <div class="product-subtitle">${p.sub}</div>
       </div>
+      ${previewHtml}
       ${featuresHtml}
       <div class="product-row">
         <span class="product-row-label">Количество</span>
@@ -958,13 +846,15 @@ function changeQty(id, delta) {
   el.value = v;
 }
 
-/* Открывает модалку "связь по донатам" */
 function addToCart(id) {
   const p = products.find(x=>x.id===id);
-  const price = finalPrice(p.price) * rates[currentCurrency];
+  const qty = parseInt(document.getElementById('qty-'+id).value)||1;
+  const price = finalPrice(p.price) * qty * rates[currentCurrency];
   const sym = symbols[currentCurrency];
-  document.getElementById('modal-title').textContent = '💬 ' + p.name + ' — ' + price.toFixed(currentCurrency==='rub'?0:2) + sym;
-  document.getElementById('modal-subtitle').textContent = 'По вопросам покупки пиши админам / владельцам';
+
+  document.getElementById('modal-title').textContent = p.icon + ' ' + p.name;
+  document.getElementById('modal-subtitle').innerHTML =
+    `Количество: <b>${qty}</b> шт · Сумма: <b style="color:#4ade80">${price.toFixed(currentCurrency==='rub'?0:2)}${sym}</b>`;
   document.getElementById('modal').classList.add('active');
   document.body.style.overflow='hidden';
 }
