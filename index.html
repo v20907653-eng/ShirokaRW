@@ -3,17 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ShirokaRW — Магазин</title>
+<title>SolistTime — Магазин</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
   --bg:#0f1115;--bg-2:#161a22;--surface:#1a1f2b;--surface-2:#232936;
-  --border:#2a3142;--text:#e8ecf5;--muted:#8b93a7;--muted-2:#5c6478;
+  --border:#2a3142;--border-2:#3a4256;
+  --text:#e8ecf5;--muted:#8b93a7;--muted-2:#5c6478;
   --green:#4ade80;--green-2:#22c55e;--red:#ef4444;--orange:#f59e0b;
-  --purple:#c084fc;--cyan:#22d3ee;--blue:#60a5fa;
+  --purple:#c084fc;--cyan:#22d3ee;--blue:#60a5fa;--gold:#fbbf24;
   --radius:12px;--radius-sm:8px;
 }
 html{scroll-behavior:smooth}
@@ -28,7 +29,7 @@ button{font:inherit;cursor:pointer;border:none;background:none;color:inherit}
 .topbar-left{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
 .logo{display:flex;align-items:center;gap:10px}
 .logo-icon{width:36px;height:36px;display:grid;place-items:center;background:linear-gradient(135deg,rgba(74,222,128,.15),rgba(34,211,238,.1));border:1px solid rgba(74,222,128,.3);border-radius:9px;font-size:18px}
-.logo-text{font-weight:800;font-size:16px;letter-spacing:-.02em}
+.logo-text{font-weight:900;font-size:16px;letter-spacing:-.02em}
 .ip-block{display:inline-flex;align-items:center;gap:8px;padding:7px 14px;background:rgba(34,211,238,.06);border:1px solid rgba(34,211,238,.25);border-radius:8px;font-size:13px;color:var(--cyan);cursor:pointer;transition:all .15s;font-family:ui-monospace,monospace;font-weight:600}
 .ip-block:hover{background:rgba(34,211,238,.12);border-color:rgba(34,211,238,.5)}
 .ip-block.copied{background:rgba(74,222,128,.15);border-color:rgba(74,222,128,.5);color:var(--green)}
@@ -42,31 +43,31 @@ button{font:inherit;cursor:pointer;border:none;background:none;color:inherit}
 .owner-status.online{background:var(--green);box-shadow:0 0 8px var(--green)}
 
 .nav-btn{display:inline-flex;align-items:center;gap:8px;padding:7px 14px;background:var(--surface);border:1px solid var(--border);border-radius:8px;font-size:13px;font-weight:600;color:var(--text);cursor:pointer;transition:all .15s;white-space:nowrap}
-.nav-btn:hover{background:var(--surface-2);border-color:#3a4256;transform:translateY(-1px)}
+.nav-btn:hover{background:var(--surface-2);border-color:var(--border-2);transform:translateY(-1px)}
+.nav-btn.vote{border-color:rgba(245,158,11,.4);color:#fbbf24;background:linear-gradient(135deg,rgba(245,158,11,.1),rgba(245,158,11,.03))}
+.nav-btn.vote:hover{background:linear-gradient(135deg,rgba(245,158,11,.2),rgba(245,158,11,.08));border-color:rgba(245,158,11,.7)}
 .nav-btn.kp{border-color:rgba(34,211,238,.35);color:var(--cyan)}
 .nav-btn.kp:hover{background:rgba(34,211,238,.1);border-color:rgba(34,211,238,.6)}
 .nav-btn.rules{border-color:rgba(192,132,252,.35);color:var(--purple)}
 .nav-btn.rules:hover{background:rgba(192,132,252,.1);border-color:rgba(192,132,252,.6)}
-.nav-btn.vote{border-color:rgba(245,158,11,.4);color:#fbbf24;background:linear-gradient(135deg,rgba(245,158,11,.1),rgba(245,158,11,.03))}
-.nav-btn.vote:hover{background:linear-gradient(135deg,rgba(245,158,11,.2),rgba(245,158,11,.08));border-color:rgba(245,158,11,.7);box-shadow:0 6px 20px rgba(245,158,11,.25)}
 .nav-btn.ds{border-color:rgba(88,101,242,.5);color:#a5b4fc;background:rgba(88,101,242,.08)}
 .nav-btn.ds:hover{background:rgba(88,101,242,.18);border-color:rgba(88,101,242,.8)}
 
 .topbar-right{display:flex;align-items:center;gap:12px}
 .online-badge{display:inline-flex;align-items:center;gap:8px;padding:7px 14px;background:rgba(74,222,128,.06);border:1px solid rgba(74,222,128,.2);border-radius:8px;font-size:13px;color:var(--muted)}
-.online-badge b{color:var(--text);font-weight:600}
+.online-badge b{color:var(--text);font-weight:700}
 .online-dot{width:7px;height:7px;background:var(--green);border-radius:50%;box-shadow:0 0 8px var(--green);animation:pulse-dot 2s infinite}
 @keyframes pulse-dot{0%,100%{opacity:1}50%{opacity:.4}}
 
 .filterbar{background:var(--bg-2);border-bottom:1px solid var(--border);padding:14px 0;position:sticky;top:64px;z-index:40}
 .filterbar-inner{display:flex;align-items:flex-end;gap:16px;flex-wrap:wrap}
 .filter-group{display:flex;flex-direction:column;gap:5px;min-width:160px}
-.filter-group label{font-size:11px;color:var(--muted-2);text-transform:uppercase;letter-spacing:.06em;font-weight:600}
-.filter-group select{padding:9px 30px 9px 12px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:13px;cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238b93a7' stroke-width='2.5'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center}
+.filter-group label{font-size:11px;color:var(--muted-2);text-transform:uppercase;letter-spacing:.06em;font-weight:700}
+.filter-group select{padding:9px 30px 9px 12px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:13px;cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238b93a7' stroke-width='2.5'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center;font-family:inherit}
 .filter-group select:focus{outline:none;border-color:var(--green)}
 .filter-search{position:relative;flex:1;min-width:200px;max-width:320px;display:flex;align-items:center}
 .filter-search svg{position:absolute;left:12px;color:var(--muted-2)}
-.filter-search input{width:100%;padding:9px 12px 9px 38px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:13px}
+.filter-search input{width:100%;padding:9px 12px 9px 38px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:13px;font-family:inherit}
 .filter-search input:focus{outline:none;border-color:var(--green)}
 
 main{padding:0 24px 80px}
@@ -76,11 +77,11 @@ main{padding:0 24px 80px}
 .promo-banner::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 10% 20%,rgba(245,158,11,.15),transparent 40%),radial-gradient(circle at 90% 80%,rgba(192,132,252,.12),transparent 40%);pointer-events:none}
 .promo-inner{position:relative;display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center}
 .promo-tag{display:inline-block;padding:5px 12px;background:linear-gradient(135deg,#ef4444,#dc2626);color:#fff;border-radius:100px;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;margin-bottom:12px;box-shadow:0 4px 14px rgba(239,68,68,.5)}
-.promo-title{font-size:24px;font-weight:800;letter-spacing:-.02em;line-height:1.2;margin-bottom:10px}
+.promo-title{font-size:24px;font-weight:900;letter-spacing:-.02em;line-height:1.2;margin-bottom:10px}
 .promo-title .gradient{background:linear-gradient(135deg,#fbbf24,#f59e0b,#ef4444);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 .promo-desc{font-size:14px;color:#e8ecf5;line-height:1.55;margin-bottom:14px;max-width:640px}
 .promo-desc b{color:var(--orange);font-weight:800}
-.promo-features{list-style:none;display:flex;flex-wrap:wrap;gap:10px;margin-bottom:0}
+.promo-features{list-style:none;display:flex;flex-wrap:wrap;gap:10px}
 .promo-features li{padding:7px 14px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:100px;font-size:12.5px;font-weight:600;display:flex;align-items:center;gap:6px}
 .promo-features li b{color:var(--green);font-weight:800}
 .promo-buttons{display:flex;flex-direction:column;gap:10px;min-width:220px}
@@ -92,8 +93,8 @@ main{padding:0 24px 80px}
 
 .payment-banner{margin:0 0 24px;background:linear-gradient(135deg,rgba(96,165,250,.1),rgba(192,132,252,.06));border:1px solid rgba(96,165,250,.4);border-radius:16px;padding:24px 28px;display:grid;grid-template-columns:auto 1fr auto;gap:24px;align-items:center}
 .payment-banner-icon{width:64px;height:64px;display:grid;place-items:center;font-size:32px;background:rgba(96,165,250,.12);border:1px solid rgba(96,165,250,.4);border-radius:16px;flex-shrink:0}
-.payment-banner-label{font-size:11px;color:#93c5fd;text-transform:uppercase;letter-spacing:.1em;font-weight:700;margin-bottom:8px}
-.payment-banner-title{font-size:17px;font-weight:700;margin-bottom:10px;line-height:1.35}
+.payment-banner-label{font-size:11px;color:#93c5fd;text-transform:uppercase;letter-spacing:.1em;font-weight:800;margin-bottom:8px}
+.payment-banner-title{font-size:17px;font-weight:800;margin-bottom:10px;line-height:1.35}
 .payment-banner-title b{color:#93c5fd}
 .payment-banner-note{font-size:12.5px;color:#c7d2fe;line-height:1.5}
 .payment-banner-note b{color:#a5b4fc}
@@ -103,220 +104,173 @@ main{padding:0 24px 80px}
 .discord-inline-btn:hover{transform:translateY(-2px);box-shadow:0 14px 36px rgba(88,101,242,.6)}
 
 .products-section{margin-top:8px}
-.products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:18px}
-.product-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:22px;display:flex;flex-direction:column;gap:14px;transition:all .25s;position:relative;overflow:hidden}
-.product-card:hover{transform:translateY(-3px);box-shadow:0 15px 40px rgba(0,0,0,.5)}
-.product-card.is-dmoder:hover{border-color:rgba(96,165,250,.7);box-shadow:0 15px 40px rgba(96,165,250,.2)}
-.product-card.is-dadmin:hover{border-color:rgba(239,68,68,.7);box-shadow:0 15px 40px rgba(239,68,68,.2)}
-.product-card.is-sponsor:hover{border-color:rgba(245,158,11,.8);box-shadow:0 15px 45px rgba(245,158,11,.25)}
-.product-card.is-realiki:hover{border-color:rgba(34,211,238,.7);box-shadow:0 15px 40px rgba(34,211,238,.2)}
-.product-card.is-pvpkit:hover{border-color:rgba(192,132,252,.8);box-shadow:0 15px 45px rgba(192,132,252,.25)}
-.product-card.is-pvpkit2:hover{border-color:rgba(251,191,36,.8);box-shadow:0 15px 45px rgba(251,191,36,.25)}
+.products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:20px}
+.product-card{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius);padding:22px;display:flex;flex-direction:column;gap:14px;transition:all .25s;position:relative;overflow:hidden}
+.product-card:hover{transform:translateY(-4px);box-shadow:0 18px 45px rgba(0,0,0,.5)}
+.product-card.is-dmoder:hover{border-color:rgba(96,165,250,.8);box-shadow:0 18px 45px rgba(96,165,250,.25)}
+.product-card.is-dadmin:hover{border-color:rgba(239,68,68,.8);box-shadow:0 18px 45px rgba(239,68,68,.25)}
+.product-card.is-pvpkit:hover{border-color:rgba(192,132,252,.85);box-shadow:0 18px 50px rgba(192,132,252,.3)}
+.product-card.is-pvpkit2:hover{border-color:rgba(251,191,36,.85);box-shadow:0 18px 50px rgba(251,191,36,.3)}
+.product-card.is-sponsor:hover{border-color:rgba(251,191,36,.9);box-shadow:0 18px 50px rgba(251,191,36,.35)}
+.product-card.is-realiki:hover{border-color:rgba(34,211,238,.8);box-shadow:0 18px 45px rgba(34,211,238,.25)}
 
-.product-card.is-sponsor{background:linear-gradient(180deg,rgba(245,158,11,.06),var(--surface))}
-.product-card.is-sponsor::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 0%,rgba(245,158,11,.1),transparent 60%);pointer-events:none}
-.product-card.is-realiki{background:linear-gradient(180deg,rgba(34,211,238,.06),var(--surface))}
-.product-card.is-realiki::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 0%,rgba(34,211,238,.1),transparent 60%);pointer-events:none}
 .product-card.is-pvpkit{background:linear-gradient(180deg,rgba(192,132,252,.06),var(--surface))}
-.product-card.is-pvpkit::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 0%,rgba(192,132,252,.12),transparent 60%);pointer-events:none}
 .product-card.is-pvpkit2{background:linear-gradient(180deg,rgba(251,191,36,.07),var(--surface))}
-.product-card.is-pvpkit2::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 0%,rgba(251,191,36,.14),transparent 60%);pointer-events:none}
+.product-card.is-sponsor{background:linear-gradient(180deg,rgba(251,191,36,.07),var(--surface))}
+.product-card.is-realiki{background:linear-gradient(180deg,rgba(34,211,238,.06),var(--surface))}
 
 .product-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;position:relative}
-.product-icon{width:56px;height:56px;display:grid;place-items:center;font-size:28px;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:14px;flex-shrink:0}
-.product-card.is-dmoder .product-icon{background:rgba(96,165,250,.12);border-color:rgba(96,165,250,.35)}
-.product-card.is-dadmin .product-icon{background:rgba(239,68,68,.12);border-color:rgba(239,68,68,.35)}
-.product-card.is-sponsor .product-icon{background:rgba(245,158,11,.15);border-color:rgba(245,158,11,.4);box-shadow:0 0 25px rgba(245,158,11,.25)}
-.product-card.is-realiki .product-icon{background:rgba(34,211,238,.12);border-color:rgba(34,211,238,.4);box-shadow:0 0 25px rgba(34,211,238,.2)}
-.product-card.is-pvpkit .product-icon{background:rgba(192,132,252,.15);border-color:rgba(192,132,252,.45);box-shadow:0 0 25px rgba(192,132,252,.25)}
-.product-card.is-pvpkit2 .product-icon{background:rgba(251,191,36,.15);border-color:rgba(251,191,36,.45);box-shadow:0 0 25px rgba(251,191,36,.25)}
+.product-icon{width:60px;height:60px;display:grid;place-items:center;font-size:30px;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:14px;flex-shrink:0}
+.product-card.is-dmoder .product-icon{background:rgba(96,165,250,.12);border-color:rgba(96,165,250,.4);box-shadow:0 0 22px rgba(96,165,250,.2)}
+.product-card.is-dadmin .product-icon{background:rgba(239,68,68,.12);border-color:rgba(239,68,68,.4);box-shadow:0 0 22px rgba(239,68,68,.2)}
+.product-card.is-pvpkit .product-icon{background:rgba(192,132,252,.15);border-color:rgba(192,132,252,.5);box-shadow:0 0 25px rgba(192,132,252,.3)}
+.product-card.is-pvpkit2 .product-icon{background:rgba(251,191,36,.15);border-color:rgba(251,191,36,.5);box-shadow:0 0 25px rgba(251,191,36,.3)}
+.product-card.is-sponsor .product-icon{background:rgba(251,191,36,.15);border-color:rgba(251,191,36,.5);box-shadow:0 0 25px rgba(251,191,36,.3)}
+.product-card.is-realiki .product-icon{background:rgba(34,211,238,.12);border-color:rgba(34,211,238,.4);box-shadow:0 0 22px rgba(34,211,238,.2)}
 
 .product-badge{padding:5px 10px;border-radius:6px;font-size:11px;font-weight:800;letter-spacing:.05em;text-transform:uppercase}
 .product-badge.badge-dmoder{background:rgba(96,165,250,.15);border:1px solid rgba(96,165,250,.4);color:#93c5fd}
 .product-badge.badge-dadmin{background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.4);color:#fca5a5}
-.product-badge.badge-sponsor{background:linear-gradient(135deg,rgba(245,158,11,.25),rgba(239,68,68,.15));border:1px solid rgba(245,158,11,.5);color:#fbbf24}
+.product-badge.badge-pvpkit{background:linear-gradient(135deg,rgba(192,132,252,.3),rgba(34,211,238,.15));border:1px solid rgba(192,132,252,.55);color:#e9d5ff}
+.product-badge.badge-pvpkit2{background:linear-gradient(135deg,rgba(251,191,36,.3),rgba(239,68,68,.15));border:1px solid rgba(251,191,36,.6);color:#fde68a}
+.product-badge.badge-sponsor{background:linear-gradient(135deg,rgba(251,191,36,.3),rgba(236,72,153,.15));border:1px solid rgba(251,191,36,.6);color:#fbbf24}
 .product-badge.badge-realiki{background:rgba(34,211,238,.15);border:1px solid rgba(34,211,238,.4);color:#67e8f9}
-.product-badge.badge-pvpkit{background:linear-gradient(135deg,rgba(192,132,252,.25),rgba(34,211,238,.15));border:1px solid rgba(192,132,252,.5);color:#e9d5ff}
-.product-badge.badge-pvpkit2{background:linear-gradient(135deg,rgba(251,191,36,.3),rgba(239,68,68,.15));border:1px solid rgba(251,191,36,.55);color:#fde68a}
 
-.product-info{flex:1;min-width:0;position:relative}
-.product-name{font-size:17px;font-weight:800;margin-bottom:4px;line-height:1.3;letter-spacing:-.01em}
+.product-info{flex:1;min-width:0}
+.product-name{font-size:18px;font-weight:900;margin-bottom:4px;line-height:1.3;letter-spacing:-.01em}
 .product-subtitle{font-size:12.5px;color:var(--muted);line-height:1.4}
-.product-features{list-style:none;display:flex;flex-direction:column;gap:6px;padding:12px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);position:relative}
+.product-features{list-style:none;display:flex;flex-direction:column;gap:6px;padding:12px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
 .product-features li{font-size:12px;color:var(--muted);display:flex;align-items:center;gap:8px;line-height:1.4}
-.product-features li::before{content:'▸';font-weight:700;flex-shrink:0}
+.product-features li::before{content:'▸';font-weight:900;flex-shrink:0}
 .product-card.is-dmoder .product-features li::before{color:var(--blue)}
 .product-card.is-dadmin .product-features li::before{color:var(--red)}
-.product-card.is-sponsor .product-features li::before{color:var(--orange)}
-.product-card.is-realiki .product-features li::before{color:var(--cyan)}
 .product-card.is-pvpkit .product-features li::before{color:var(--purple)}
-.product-card.is-pvpkit2 .product-features li::before{color:#fbbf24}
-.product-features b{color:var(--text);font-weight:700}
+.product-card.is-pvpkit2 .product-features li::before{color:var(--gold)}
+.product-card.is-sponsor .product-features li::before{color:var(--gold)}
+.product-card.is-realiki .product-features li::before{color:var(--cyan)}
+.product-features b{color:var(--text);font-weight:800}
 
-.product-row{display:flex;align-items:center;justify-content:space-between;gap:12px;position:relative}
-.product-row-label{font-size:11px;color:var(--muted-2);text-transform:uppercase;letter-spacing:.06em;font-weight:600}
-.product-qty{display:flex;align-items:center;background:var(--bg);border:1px solid var(--border);border-radius:6px;overflow:hidden;height:30px}
-.product-qty button{width:28px;height:100%;color:var(--muted);font-size:14px}
+.product-row{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.product-row-label{font-size:11px;color:var(--muted-2);text-transform:uppercase;letter-spacing:.06em;font-weight:700}
+.product-qty{display:flex;align-items:center;background:var(--bg);border:1px solid var(--border);border-radius:6px;overflow:hidden;height:32px}
+.product-qty button{width:30px;height:100%;color:var(--muted);font-size:15px;font-weight:700}
 .product-qty button:hover{background:var(--surface-2);color:var(--text)}
-.product-qty input{width:40px;height:100%;background:transparent;border:none;color:var(--text);text-align:center;font-size:12px;font-weight:600;-moz-appearance:textfield}
+.product-qty input{width:42px;height:100%;background:transparent;border:none;color:var(--text);text-align:center;font-size:13px;font-weight:700;-moz-appearance:textfield;font-family:inherit}
 .product-qty input::-webkit-outer-spin-button,.product-qty input::-webkit-inner-spin-button{-webkit-appearance:none}
 
-.product-bottom{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-top:12px;position:relative}
+.product-bottom{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-top:12px}
 .product-prices{display:flex;flex-direction:column;gap:2px}
 .product-old{font-size:12px;color:var(--muted-2);text-decoration:line-through}
-.product-new{font-size:22px;font-weight:800;line-height:1}
+.product-new{font-size:24px;font-weight:900;line-height:1;letter-spacing:-.02em}
 .product-card.is-dmoder .product-new{color:var(--blue)}
 .product-card.is-dadmin .product-new{color:var(--red)}
-.product-card.is-sponsor .product-new{color:var(--orange)}
-.product-card.is-realiki .product-new{color:var(--cyan)}
 .product-card.is-pvpkit .product-new{color:var(--purple)}
-.product-card.is-pvpkit2 .product-new{color:#fbbf24}
+.product-card.is-pvpkit2 .product-new{color:var(--gold)}
+.product-card.is-sponsor .product-new{color:var(--gold)}
+.product-card.is-realiki .product-new{color:var(--cyan)}
 
-.btn-add{padding:10px 18px;background:var(--surface-2);border:1px solid var(--border);color:var(--text);border-radius:8px;font-size:13px;font-weight:700;transition:all .15s;white-space:nowrap}
+.btn-add{padding:11px 20px;background:var(--surface-2);border:1px solid var(--border);color:var(--text);border-radius:8px;font-size:13px;font-weight:800;transition:all .15s;white-space:nowrap}
 .btn-add:hover{transform:translateY(-1px)}
-.product-card.is-dmoder .btn-add:hover{background:var(--blue);color:#0a1424;border-color:var(--blue);box-shadow:0 6px 20px rgba(96,165,250,.4)}
-.product-card.is-dadmin .btn-add:hover{background:var(--red);color:#fff;border-color:var(--red);box-shadow:0 6px 20px rgba(239,68,68,.4)}
-.product-card.is-sponsor .btn-add{background:linear-gradient(135deg,#f59e0b,#d97706);color:#fff;border-color:transparent}
-.product-card.is-sponsor .btn-add:hover{box-shadow:0 6px 20px rgba(245,158,11,.6)}
-.product-card.is-realiki .btn-add{background:linear-gradient(135deg,#22d3ee,#0891b2);color:#051318;border-color:transparent}
-.product-card.is-realiki .btn-add:hover{box-shadow:0 6px 20px rgba(34,211,238,.6)}
-.product-card.is-pvpkit .btn-add{background:linear-gradient(135deg,#c084fc,#a855f7);color:#fff;border-color:transparent}
-.product-card.is-pvpkit .btn-add:hover{box-shadow:0 6px 20px rgba(192,132,252,.6)}
-.product-card.is-pvpkit2 .btn-add{background:linear-gradient(135deg,#fbbf24,#d97706);color:#1a0e00;border-color:transparent}
-.product-card.is-pvpkit2 .btn-add:hover{box-shadow:0 6px 20px rgba(251,191,36,.6)}
+.product-card.is-dmoder .btn-add{background:linear-gradient(135deg,#3b82f6,#1d4ed8);border-color:transparent;color:#fff}
+.product-card.is-dmoder .btn-add:hover{box-shadow:0 8px 22px rgba(59,130,246,.5)}
+.product-card.is-dadmin .btn-add{background:linear-gradient(135deg,#ef4444,#b91c1c);border-color:transparent;color:#fff}
+.product-card.is-dadmin .btn-add:hover{box-shadow:0 8px 22px rgba(239,68,68,.5)}
+.product-card.is-pvpkit .btn-add{background:linear-gradient(135deg,#c084fc,#a855f7);border-color:transparent;color:#fff}
+.product-card.is-pvpkit .btn-add:hover{box-shadow:0 8px 22px rgba(192,132,252,.5)}
+.product-card.is-pvpkit2 .btn-add{background:linear-gradient(135deg,#fbbf24,#d97706);border-color:transparent;color:#1a0e00}
+.product-card.is-pvpkit2 .btn-add:hover{box-shadow:0 8px 22px rgba(251,191,36,.5)}
+.product-card.is-sponsor .btn-add{background:linear-gradient(135deg,#fbbf24,#d97706);border-color:transparent;color:#1a0e00}
+.product-card.is-sponsor .btn-add:hover{box-shadow:0 8px 22px rgba(251,191,36,.5)}
+.product-card.is-realiki .btn-add{background:linear-gradient(135deg,#22d3ee,#0891b2);border-color:transparent;color:#051318}
+.product-card.is-realiki .btn-add:hover{box-shadow:0 8px 22px rgba(34,211,238,.5)}
 
-/* КИТЫ — сетка как в майнкрафте */
-.kit-preview{background:#0d1117;border:2px solid #2f3646;border-radius:6px;padding:8px;margin:4px 0 6px;position:relative}
-.kit-preview-title{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;font-weight:700;margin-bottom:8px;text-align:center}
+/* КИТ — сетка как в майнкрафте */
+.kit-preview{background:rgba(0,0,0,.35);border:1.5px solid var(--border);border-radius:8px;padding:10px;margin:4px 0 6px}
 .kit-preview-grid{display:grid;grid-template-columns:repeat(9,1fr);gap:2px}
-.kit-slot{
-  aspect-ratio:1;
-  background:#1a1f2b;
-  border:1px solid #2a3142;
-  border-radius:2px;
-  display:grid;
-  place-items:center;
-  font-size:18px;
-  line-height:1;
-  position:relative;
-  transition:all .15s;
-  box-shadow:inset 0 0 0 1px rgba(255,255,255,.03);
-}
-.kit-slot:hover{background:rgba(192,132,252,.15);border-color:rgba(192,132,252,.5);transform:scale(1.12);z-index:2;box-shadow:0 0 12px rgba(192,132,252,.4)}
-.kit-slot.empty{background:#141820;opacity:.5}
-.kit-slot.empty:hover{transform:none;background:#141820;border-color:#2a3142;box-shadow:none;opacity:.5}
-.kit-slot .qty{
-  position:absolute;
-  bottom:-2px;right:-1px;
-  font-size:9px;
-  font-weight:800;
-  color:#fff;
-  text-shadow:1px 1px 0 #000,-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000;
-  font-family:ui-monospace,monospace;
-  pointer-events:none;
-}
-.kit-preview-row-label{
-  font-size:9px;
-  color:var(--muted-2);
-  text-transform:uppercase;
-  letter-spacing:.06em;
-  margin:6px 0 3px;
-  font-weight:700;
-}
+.kit-slot{aspect-ratio:1;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:3px;display:grid;place-items:center;font-size:17px;line-height:1;position:relative;transition:all .15s}
+.kit-slot:hover{background:rgba(192,132,252,.2);border-color:rgba(192,132,252,.5);transform:scale(1.15);z-index:2;box-shadow:0 0 12px rgba(192,132,252,.5)}
+.kit-slot.empty{background:rgba(0,0,0,.25);opacity:.4}
+.kit-slot.empty:hover{transform:none;background:rgba(0,0,0,.25);border-color:rgba(255,255,255,.08);box-shadow:none;opacity:.4}
+.kit-slot .qty{position:absolute;bottom:-2px;right:-1px;font-size:9px;font-weight:900;color:#fff;text-shadow:1px 1px 0 #000,-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000;font-family:ui-monospace,monospace;pointer-events:none}
 
 .modal{display:none;position:fixed;inset:0;z-index:100;align-items:center;justify-content:center;padding:20px}
 .modal.active{display:flex}
 .modal-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(4px)}
-.modal-box{position:relative;width:100%;max-width:460px;background:var(--bg-2);border:1px solid var(--border);border-radius:16px;padding:28px;box-shadow:0 30px 80px rgba(0,0,0,.6);animation:modalIn .25s;max-height:90vh;overflow-y:auto}
+.modal-box{position:relative;width:100%;max-width:480px;background:var(--bg-2);border:1.5px solid var(--border-2);border-radius:16px;padding:28px;box-shadow:0 30px 80px rgba(0,0,0,.6);animation:modalIn .25s;max-height:90vh;overflow-y:auto}
 .modal-box.wide{max-width:760px}
 @keyframes modalIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
 .modal-close{position:absolute;top:16px;right:16px;width:32px;height:32px;display:grid;place-items:center;color:var(--muted);font-size:14px;border-radius:8px;z-index:2}
 .modal-close:hover{background:var(--surface);color:var(--text)}
 .modal-head{text-align:center;margin-bottom:22px}
-.modal-head h3{font-size:20px;font-weight:800;margin-bottom:6px;letter-spacing:-.02em}
+.modal-head h3{font-size:20px;font-weight:900;margin-bottom:6px;letter-spacing:-.02em}
 .modal-head p{color:var(--muted);font-size:13px}
 
 .vote-list{display:flex;flex-direction:column;gap:12px;margin-bottom:18px}
 .vote-card{display:flex;align-items:center;gap:16px;padding:18px 20px;background:var(--surface);border:1px solid var(--border);border-radius:14px;text-decoration:none;color:inherit;transition:all .2s;position:relative;overflow:hidden}
-.vote-card:hover{transform:translateY(-3px);border-color:#3a4256;box-shadow:0 15px 35px rgba(0,0,0,.4)}
-.vote-card.mclist:hover{border-color:rgba(74,222,128,.6);box-shadow:0 15px 35px rgba(74,222,128,.15)}
-.vote-card.millida:hover{border-color:rgba(96,165,250,.6);box-shadow:0 15px 35px rgba(96,165,250,.15)}
+.vote-card:hover{transform:translateY(-3px);border-color:var(--border-2);box-shadow:0 15px 35px rgba(0,0,0,.4)}
+.vote-card.mclist:hover{border-color:rgba(74,222,128,.6)}
+.vote-card.millida:hover{border-color:rgba(96,165,250,.6)}
 .vote-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px}
 .vote-card.mclist::before{background:linear-gradient(180deg,#4ade80,#22c55e)}
 .vote-card.millida::before{background:linear-gradient(180deg,#60a5fa,#3b82f6)}
-.vote-logo{width:52px;height:52px;flex-shrink:0;display:grid;place-items:center;border-radius:12px;font-size:20px;font-weight:800;font-family:ui-monospace,monospace}
+.vote-logo{width:52px;height:52px;flex-shrink:0;display:grid;place-items:center;border-radius:12px;font-size:20px;font-weight:900;font-family:ui-monospace,monospace}
 .vote-card.mclist .vote-logo{background:rgba(74,222,128,.12);border:1px solid rgba(74,222,128,.35);color:var(--green)}
 .vote-card.millida .vote-logo{background:rgba(96,165,250,.12);border:1px solid rgba(96,165,250,.35);color:var(--blue)}
 .vote-info{flex:1;min-width:0}
-.vote-name{font-size:15px;font-weight:700;letter-spacing:-.01em;margin-bottom:3px}
+.vote-name{font-size:15px;font-weight:800;margin-bottom:3px}
 .vote-desc{font-size:12px;color:var(--muted);line-height:1.4}
 .vote-url{font-size:11px;color:var(--muted-2);font-family:ui-monospace,monospace;margin-top:4px}
-.vote-btn{padding:9px 16px;border-radius:8px;font-size:12.5px;font-weight:700;flex-shrink:0;display:flex;align-items:center;gap:6px;transition:all .15s}
+.vote-btn{padding:9px 16px;border-radius:8px;font-size:12.5px;font-weight:800;flex-shrink:0}
 .vote-card.mclist .vote-btn{background:rgba(74,222,128,.15);color:var(--green);border:1px solid rgba(74,222,128,.35)}
 .vote-card.mclist:hover .vote-btn{background:var(--green);color:#04140a}
 .vote-card.millida .vote-btn{background:rgba(96,165,250,.15);color:var(--blue);border:1px solid rgba(96,165,250,.35)}
-.vote-card.millida:hover .vote-btn{background:var(--blue);color:#0a1424}
-
+.vote-card.millida:hover .vote-btn{background:var(--blue);color:#fff}
 .vote-tip{padding:14px 16px;background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.25);border-radius:12px;color:#fbbf24;font-size:12.5px;line-height:1.5;text-align:center}
-.vote-tip b{color:var(--orange);font-weight:700}
+.vote-tip b{color:var(--orange);font-weight:800}
 
 .info-section{display:flex;flex-direction:column;gap:16px}
-.info-highlight{padding:16px 18px;border-radius:12px;font-size:13.5px;line-height:1.6}
-.info-highlight.age{background:linear-gradient(135deg,rgba(34,211,238,.1),rgba(34,211,238,.04));border:1px solid rgba(34,211,238,.35);color:#a5f3fc}
-.info-highlight.age b{color:var(--cyan);font-weight:800;font-size:15px}
-.info-highlight.warn{background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.25);color:#fbbf24}
-.info-highlight.warn b{color:var(--orange);font-weight:700}
-.info-highlight.ok{background:rgba(74,222,128,.08);border:1px solid rgba(74,222,128,.25);color:#bbf7d0}
-.info-highlight.ok b{color:var(--green);font-weight:700}
-.info-highlight.discord{background:linear-gradient(135deg,rgba(88,101,242,.12),rgba(88,101,242,.05));border:1px solid rgba(88,101,242,.4);color:#c7d2fe}
-.info-highlight.discord b{color:#a5b4fc;font-weight:800}
+.info-highlight{padding:16px 18px;border-radius:12px;font-size:13.5px;line-height:1.6;border:1px solid}
+.info-highlight.age{background:linear-gradient(135deg,rgba(34,211,238,.1),rgba(34,211,238,.04));border-color:rgba(34,211,238,.35);color:#a5f3fc}
+.info-highlight.age b{color:var(--cyan);font-weight:900}
+.info-highlight.warn{background:rgba(245,158,11,.08);border-color:rgba(245,158,11,.25);color:#fbbf24}
+.info-highlight.warn b{color:var(--orange);font-weight:800}
+.info-highlight.ok{background:rgba(74,222,128,.08);border-color:rgba(74,222,128,.25);color:#bbf7d0}
+.info-highlight.ok b{color:var(--green);font-weight:800}
+.info-highlight.discord{background:linear-gradient(135deg,rgba(88,101,242,.12),rgba(88,101,242,.05));border-color:rgba(88,101,242,.4);color:#c7d2fe}
+.info-highlight.discord b{color:#a5b4fc;font-weight:900}
 .info-highlight.hot{background:linear-gradient(135deg,rgba(239,68,68,.15),rgba(245,158,11,.1));border:2px solid rgba(239,68,68,.5);color:#fecaca;text-align:center;font-size:14.5px}
 .info-highlight.hot b{color:#fca5a5;font-weight:900;font-size:16px}
 
 .info-list{list-style:none;display:flex;flex-direction:column;gap:10px}
-.info-list li{display:flex;gap:12px;padding:12px 14px;background:var(--surface);border:1px solid var(--border);border-radius:10px;font-size:13px;color:var(--muted);line-height:1.5;transition:all .15s}
-.info-list li:hover{background:var(--surface-2);border-color:#3a4256}
+.info-list li{display:flex;gap:12px;padding:12px 14px;background:var(--surface);border:1px solid var(--border);border-radius:10px;font-size:13px;color:var(--muted);line-height:1.5}
 .info-list li .num{width:26px;height:26px;flex-shrink:0;display:grid;place-items:center;border-radius:8px;font-size:12px;font-weight:800;background:rgba(34,211,238,.15);color:var(--cyan);font-family:ui-monospace,monospace}
-.info-list.rules li .num{background:rgba(192,132,252,.15);color:var(--purple)}
-.info-list b{color:var(--text);font-weight:600}
+.info-list b{color:var(--text);font-weight:700}
 
-.rules-content{display:flex;flex-direction:column;gap:22px}
+.rules-content{display:flex;flex-direction:column;gap:20px}
 .rules-section{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:18px 20px}
-.rules-section-title{font-size:15px;font-weight:800;color:var(--text);margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;letter-spacing:-.01em}
+.rules-section-title{font-size:15px;font-weight:900;margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px}
 .rules-section-title .section-num{width:30px;height:30px;flex-shrink:0;display:grid;place-items:center;background:linear-gradient(135deg,rgba(192,132,252,.2),rgba(192,132,252,.08));border:1px solid rgba(192,132,252,.4);color:var(--purple);border-radius:8px;font-size:13px;font-weight:800;font-family:ui-monospace,monospace}
 .rule{font-size:13px;color:var(--muted);line-height:1.65;padding:10px 0;border-bottom:1px solid rgba(42,49,66,.6)}
 .rule:last-child{border-bottom:none;padding-bottom:0}
 .rule b{color:var(--text);font-weight:700}
-.rule .rule-num{color:var(--purple);font-weight:800;font-family:ui-monospace,monospace;margin-right:4px}
-.rule .punish{display:inline-block;padding:2px 8px;background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.35);color:#fca5a5;border-radius:6px;font-size:11.5px;font-weight:700;margin-left:4px}
-.rule-sub{padding:8px 0 8px 16px;border-left:2px solid var(--border);margin:6px 0 6px 4px;font-size:12.5px;color:var(--muted-2);line-height:1.6}
-.rule-list{list-style:none;padding:6px 0 6px 16px;margin:4px 0 4px 4px;border-left:2px solid var(--border);display:flex;flex-direction:column;gap:5px;font-size:12.5px;color:var(--muted-2);line-height:1.55}
-.rule-list li::before{content:'— ';color:var(--purple)}
+.rule .rule-num{color:var(--purple);font-weight:900;font-family:ui-monospace,monospace;margin-right:4px}
+.rule .punish{display:inline-block;padding:2px 8px;background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.35);color:#fca5a5;border-radius:6px;font-size:11.5px;font-weight:800;margin-left:4px}
 
 .info-footer{padding:14px 16px;background:rgba(96,165,250,.06);border:1px solid rgba(96,165,250,.25);border-radius:12px;font-size:12.5px;color:#93c5fd;line-height:1.5}
-.info-footer b{color:var(--blue);font-weight:700}
+.info-footer b{color:var(--blue);font-weight:800}
 
-.discord-btn{
-  display:inline-flex;align-items:center;justify-content:center;gap:12px;
-  width:100%;padding:16px 24px;margin-top:4px;
-  background:linear-gradient(135deg,#5865F2,#4752c4);
-  color:#fff;border-radius:12px;
-  font-size:15px;font-weight:700;letter-spacing:-.01em;
-  text-decoration:none;cursor:pointer;
-  box-shadow:0 8px 28px rgba(88,101,242,.45);
-  transition:all .2s;
-}
-.discord-btn:hover{transform:translateY(-2px);box-shadow:0 14px 40px rgba(88,101,242,.6);background:linear-gradient(135deg,#6772f3,#5865F2)}
+.discord-btn{display:inline-flex;align-items:center;justify-content:center;gap:12px;width:100%;padding:16px 24px;margin-top:4px;background:linear-gradient(135deg,#5865F2,#4752c4);color:#fff;border-radius:12px;font-size:15px;font-weight:800;text-decoration:none;cursor:pointer;box-shadow:0 8px 28px rgba(88,101,242,.45);transition:all .2s}
+.discord-btn:hover{transform:translateY(-2px);box-shadow:0 14px 40px rgba(88,101,242,.6)}
 .discord-btn svg{width:22px;height:22px;flex-shrink:0}
 
-.btn-secondary{padding:12px 22px;background:var(--surface-2);border:1px solid var(--border);color:var(--text);border-radius:var(--radius-sm);font-size:14px;font-weight:600;transition:all .15s}
-.btn-secondary:hover{background:var(--surface);border-color:#3a4256}
+.btn-secondary{padding:12px 22px;background:var(--surface-2);border:1px solid var(--border);color:var(--text);border-radius:var(--radius-sm);font-size:14px;font-weight:700;transition:all .15s;font-family:inherit}
+.btn-secondary:hover{background:var(--surface);border-color:var(--purple);color:var(--purple)}
 
 .donate-contact-card{padding:16px 18px;background:var(--surface);border:1px solid var(--border);border-radius:12px}
 .donate-contact-label{font-size:13px;color:var(--muted);margin-bottom:10px}
 .donate-contact-value{display:flex;align-items:center;gap:10px;font-size:16px;font-weight:800;color:var(--orange)}
 .donate-contact-list{display:flex;flex-direction:column;gap:8px;font-size:13px}
-.donate-contact-list code{font-family:ui-monospace,monospace;background:rgba(255,255,255,.06);padding:2px 8px;border-radius:6px;color:var(--cyan)}
+.donate-contact-list code{font-family:ui-monospace,monospace;background:rgba(34,211,238,.1);padding:2px 8px;border-radius:6px;color:var(--cyan);border:1px solid rgba(34,211,238,.25)}
 
 @media(max-width:1024px){
   .payment-banner{grid-template-columns:auto 1fr;gap:20px}
@@ -338,7 +292,7 @@ main{padding:0 24px 80px}
   .modal-box{padding:22px 18px}
   .vote-btn{display:none}
   .promo-banner{padding:20px 18px}
-  .promo-title{font-size:18px}
+  .promo-title{font-size:19px}
   .promo-desc{font-size:13px}
   .promo-buttons{flex-direction:column}
   .kit-slot{font-size:13px}
@@ -352,13 +306,13 @@ main{padding:0 24px 80px}
     <div class="topbar-left">
       <a href="#" class="logo">
         <span class="logo-icon">⛏️</span>
-        <span class="logo-text">ShirokaRW</span>
+        <span class="logo-text">SolistTime</span>
       </a>
 
       <div class="owner-block" title="Владелец сервера">
         <span class="owner-crown">👑</span>
         <span class="owner-label">Владелец:</span>
-        <span class="owner-nick">meowl</span>
+        <span class="owner-nick">solist</span>
         <span class="owner-status" id="owner-status"></span>
       </div>
 
@@ -368,12 +322,10 @@ main{padding:0 24px 80px}
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
       </button>
 
-      <button class="nav-btn vote" onclick="openVote()" title="Проголосовать за сервер">🗳️ Проголосовать</button>
-      <button class="nav-btn kp" onclick="openKP()" title="Набор КП">📋 Набор КП</button>
-      <button class="nav-btn rules" onclick="openRules()" title="Правила сервера">📜 Правила</button>
-      <a class="nav-btn ds" href="https://discord.gg/p4rEkdctc" target="_blank" rel="noopener" title="Discord сервера">
-        💬 Discord
-      </a>
+      <button class="nav-btn vote" onclick="openVote()">🗳️ Проголосовать</button>
+      <button class="nav-btn kp" onclick="openKP()">📋 Набор КП</button>
+      <button class="nav-btn rules" onclick="openRules()">📜 Правила</button>
+      <a class="nav-btn ds" href="https://discord.gg/p4rEkdctc" target="_blank" rel="noopener">💬 Discord</a>
     </div>
     <div class="topbar-right">
       <div class="online-badge">
@@ -403,7 +355,7 @@ main{padding:0 24px 80px}
       </select>
     </div>
     <div class="filter-search">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
       <input type="text" id="search" placeholder="Поиск товара...">
     </div>
   </div>
@@ -416,25 +368,21 @@ main{padding:0 24px 80px}
       <div>
         <span class="promo-tag">🔥 ИДЁТ НАБОР НА МОДЕРАЦИЮ</span>
         <h2 class="promo-title">
-          Наш сервер — <span class="gradient">лучшая копия RW</span> — бустит очень хорошими админами!
+          Сервер <span class="gradient">SolistTime</span> — лучшие киты и привилегии!
         </h2>
         <p class="promo-desc">
-          Заявка на КП <b>уже тут</b> — прямо на сайте! Хочешь стать частью команды? Подай заявку в Discord и вступай в ряды модерации. <b>Лучшие админы</b> — только у нас!
+          Заявка на КП <b>уже тут</b> — прямо на сайте! Хочешь стать частью команды? Подай заявку в Discord. Лучшие киты PvP и донаты — только у нас!
         </p>
         <ul class="promo-features">
-          <li>⭐ <b>Лучшая копия RW</b></li>
+          <li>⭐ <b>Лучшие киты</b></li>
           <li>👑 <b>Топ админы</b></li>
           <li>🚀 <b>Буст сервера</b></li>
           <li>🎯 <b>Быстрый ответ</b></li>
         </ul>
       </div>
       <div class="promo-buttons">
-        <button class="promo-btn kp-btn" onclick="openKP()">
-          📋 Заявка на КП уже тут!
-        </button>
-        <a class="promo-btn ds-btn" href="https://discord.gg/p4rEkdctc" target="_blank" rel="noopener">
-          💬 Подать в Discord
-        </a>
+        <button class="promo-btn kp-btn" onclick="openKP()">📋 Заявка на КП уже тут!</button>
+        <a class="promo-btn ds-btn" href="https://discord.gg/p4rEkdctc" target="_blank" rel="noopener">💬 Подать в Discord</a>
       </div>
     </div>
   </div>
@@ -447,11 +395,9 @@ main{padding:0 24px 80px}
         По вопросам донатов пиши <b>админам / владельцам</b> сервера
       </div>
       <div class="payment-banner-note">
-        📩 Свяжись с владельцем <b>meowl</b> или админами в <b>Discord</b> — они расскажут, как купить донат и что входит в каждый ранг.
+        📩 Свяжись с владельцем <b>solist</b> или админами в <b>Discord</b> — они расскажут, как купить донат.
       </div>
-      <a class="discord-inline-btn" href="https://discord.gg/p4rEkdctc" target="_blank" rel="noopener">
-        💬 Написать в Discord
-      </a>
+      <a class="discord-inline-btn" href="https://discord.gg/p4rEkdctc" target="_blank" rel="noopener">💬 Написать в Discord</a>
     </div>
     <div class="payment-banner-badge">
       <span>⚡</span>
@@ -464,21 +410,21 @@ main{padding:0 24px 80px}
   </section>
 </main>
 
-<!-- МОДАЛКА: ПРОГОЛОСОВАТЬ -->
+<!-- VOTE -->
 <div class="modal" id="modal-vote">
   <div class="modal-backdrop" onclick="closeVote()"></div>
   <div class="modal-box wide">
     <button class="modal-close" onclick="closeVote()">✕</button>
     <div class="modal-head">
-      <h3>🗳️ Проголосуй за ShirokaRW</h3>
-      <p>Голосуй раз в сутки на мониторингах — поднимай сервер в топ и приводи новых игроков</p>
+      <h3>🗳️ Проголосуй за SolistTime</h3>
+      <p>Голосуй раз в сутки на мониторингах — поднимай сервер в топ</p>
     </div>
     <div class="vote-list">
       <a class="vote-card mclist" href="https://mclist.ru/servers/shirokasmp" target="_blank" rel="noopener">
         <div class="vote-logo">MC</div>
         <div class="vote-info">
           <div class="vote-name">MCLIST</div>
-          <div class="vote-desc">Мониторинг серверов Minecraft — голосование раз в 24 часа</div>
+          <div class="vote-desc">Мониторинг серверов Minecraft</div>
           <div class="vote-url">mclist.ru/servers/shirokasmp</div>
         </div>
         <div class="vote-btn">Голосовать →</div>
@@ -487,19 +433,17 @@ main{padding:0 24px 80px}
         <div class="vote-logo">M</div>
         <div class="vote-info">
           <div class="vote-name">Millida</div>
-          <div class="vote-desc">Рейтинг серверов с живым онлайном и отзывами игроков</div>
+          <div class="vote-desc">Рейтинг серверов с живым онлайном</div>
           <div class="vote-url">millida.net/rating/servers/shirokasmp</div>
         </div>
         <div class="vote-btn">Голосовать →</div>
       </a>
     </div>
-    <div class="vote-tip">
-      💡 <b>Совет:</b> голосуй на обоих сайтах каждый день — так сервер быстрее поднимется в топе!
-    </div>
+    <div class="vote-tip">💡 <b>Совет:</b> голосуй каждый день — сервер быстрее поднимется в топе!</div>
   </div>
 </div>
 
-<!-- МОДАЛКА: СВЯЗЬ ПО ДОНАТАМ -->
+<!-- DONATE -->
 <div class="modal" id="modal">
   <div class="modal-backdrop" onclick="closeModal()"></div>
   <div class="modal-box">
@@ -511,79 +455,66 @@ main{padding:0 24px 80px}
     <div class="info-section">
       <div class="info-highlight discord">
         💬 <b>По вопросам донатов пиши админам / владельцам</b><br>
-        Они расскажут, как купить донат и что входит в каждый ранг.
+        Они расскажут, как купить и что входит в каждый товар.
       </div>
       <div class="donate-contact-card">
         <div class="donate-contact-label">👑 Владелец сервера</div>
-        <div class="donate-contact-value"><span>👑</span> meowl</div>
+        <div class="donate-contact-value"><span>👑</span> solist</div>
       </div>
       <div class="donate-contact-card">
         <div class="donate-contact-label">🎮 Где связаться</div>
         <div class="donate-contact-list">
           <div>💬 <b style="color:var(--text)">Discord:</b> нажми кнопку ниже</div>
-          <div>🎮 <b style="color:var(--text)">В игре:</b> напиши в чат сервера <code>free.cloudblaze.org:18462</code></div>
+          <div>🎮 <b style="color:var(--text)">В игре:</b> <code>free.cloudblaze.org:18462</code></div>
         </div>
       </div>
       <div class="info-highlight ok">
-        ✅ <b>Выдача доната — моментальная</b><br>
-        После подтверждения оплаты админ выдаст донат сразу — заходи на сервер и играй!
+        ✅ <b>Выдача — моментальная</b><br>
+        После подтверждения оплаты админ выдаст товар сразу.
       </div>
       <a class="discord-btn" href="https://discord.gg/p4rEkdctc" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.79 19.79 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
-        💬 Написать админам в Discord
+        💬 Написать в Discord
       </a>
       <button class="btn-secondary" style="width:100%" onclick="closeModal()">Закрыть</button>
     </div>
   </div>
 </div>
 
-<!-- МОДАЛКА: НАБОР КП -->
+<!-- KP -->
 <div class="modal" id="modal-kp">
   <div class="modal-backdrop" onclick="closeKP()"></div>
   <div class="modal-box wide">
     <button class="modal-close" onclick="closeKP()">✕</button>
     <div class="modal-head">
       <h3>📋 Набор КП — присоединиться к команде</h3>
-      <p>🔥 ИДЁТ НАБОР НА МОДЕРАЦИЮ! Читай условия ниже</p>
+      <p>🔥 ИДЁТ НАБОР НА МОДЕРАЦИЮ!</p>
     </div>
     <div class="info-section">
       <div class="info-highlight hot">
         🚨 <b>ИДЁТ НАБОР НА МОДЕРАЦИЮ!</b> 🚨<br>
-        Мы — лучшая копия RW с топовыми админами. Заявка на КП уже тут!
+        Заявка на КП уже тут!
       </div>
       <div class="info-highlight age">
         🎂 <b>Возраст: с 12 лет</b><br>
-        Приём в команду открыт для игроков <b>от 12 лет и старше</b>.
+        Приём открыт для игроков <b>от 12 лет и старше</b>.
         <div style="margin-top:12px;padding-top:12px;border-top:1px dashed rgba(34,211,238,.35);font-size:13px;color:#67e8f9">
           ⚠️ <b>Исключения есть</b> — решение принимает команда проекта индивидуально.
         </div>
       </div>
       <div>
-        <h4 style="font-size:14px;font-weight:700;margin-bottom:12px;color:var(--text)">📌 Требования:</h4>
+        <h4 style="font-size:14px;font-weight:800;margin-bottom:12px">📌 Требования:</h4>
         <ul class="info-list">
           <li><span class="num">1</span><div>Возраст <b>от 12 лет</b></div></li>
-          <li><span class="num">2</span><div>Играть на сервере <b>не менее 7 дней</b></div></li>
-          <li><span class="num">3</span><div>Быть <b>адекватным</b> и не нарушать правила</div></li>
-          <li><span class="num">4</span><div>Иметь <b>Discord</b> для связи</div></li>
+          <li><span class="num">2</span><div>Играть <b>не менее 7 дней</b></div></li>
+          <li><span class="num">3</span><div>Быть <b>адекватным</b></div></li>
+          <li><span class="num">4</span><div>Иметь <b>Discord</b></div></li>
           <li><span class="num">5</span><div>Онлайн <b>от 2 часов в день</b></div></li>
-        </ul>
-      </div>
-      <div>
-        <h4 style="font-size:14px;font-weight:700;margin-bottom:12px;color:var(--text)">🛠️ Обязанности:</h4>
-        <ul class="info-list">
-          <li><span class="num">💬</span><div>Помогать новым игрокам</div></li>
-          <li><span class="num">⚖️</span><div>Следить за порядком</div></li>
-          <li><span class="num">🚫</span><div>Фиксировать нарушения</div></li>
-          <li><span class="num">📢</span><div>Сообщать о багах</div></li>
         </ul>
       </div>
       <div class="info-highlight ok">
         🎁 <b>Что ты получишь:</b><br>
-        Префикс <b>[МОДЕРАТОР]</b>, доступ к админ-командам, бесплатный кит PvP каждый день.
-      </div>
-      <div class="info-highlight discord">
-        💬 <b>Заявки подаются в Discord</b><br>
-        Нажми кнопку ниже → попадёшь на наш Discord-сервер → перейди в канал <b>#заявки</b>.
+        Префикс <b>[МОДЕРАТОР]</b>, админ-команды, бесплатный кит PvP каждый день.
       </div>
       <a class="discord-btn" href="https://discord.gg/p4rEkdctc" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.79 19.79 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
@@ -593,80 +524,66 @@ main{padding:0 24px 80px}
   </div>
 </div>
 
-<!-- МОДАЛКА: ПРАВИЛА -->
+<!-- RULES -->
 <div class="modal" id="modal-rules">
   <div class="modal-backdrop" onclick="closeRules()"></div>
   <div class="modal-box wide">
     <button class="modal-close" onclick="closeRules()">✕</button>
     <div class="modal-head">
-      <h3>📜 Правила проекта ShirokaRW</h3>
-      <p>Играя на проекте, вы соглашаетесь с правилами и обязуетесь их выполнять</p>
+      <h3>📜 Правила SolistTime</h3>
+      <p>Играя на проекте, вы соглашаетесь с правилами</p>
     </div>
     <div class="rules-content">
       <div class="rules-section">
         <div class="rules-section-title"><span class="section-num">1</span> Основные положения</div>
-        <div class="rule"><span class="rule-num">1.1</span> Играя на проекте, вы соглашаетесь с правилами и обязуетесь их выполнять. Владелец аккаунта несет полную ответственность за его безопасность и действия.</div>
-        <div class="rule"><span class="rule-num">1.2</span> Администрация вправе заблокировать аккаунт без объяснения причин. Блокировка может быть временной или бессрочной.</div>
+        <div class="rule"><span class="rule-num">1.1</span> Играя на проекте, вы соглашаетесь с правилами.</div>
+        <div class="rule"><span class="rule-num">1.2</span> Администрация вправе заблокировать аккаунт без объяснения причин.</div>
         <div class="rule"><span class="rule-num">1.3</span> Средства, потраченные на услуги, не подлежат возврату.</div>
-        <div class="rule"><span class="rule-num">1.4</span> Администрация не возвращает утраченные ресурсы и прогресс.</div>
+        <div class="rule"><span class="rule-num">1.4</span> Администрация не возвращает утраченные ресурсы.</div>
         <div class="rule"><span class="rule-num">1.5</span> <b>Игровой никнейм.</b> <span class="punish">Бан навсегда</span></div>
-        <div class="rule"><span class="rule-num">1.6</span> Правила могут быть изменены без предварительного уведомления.</div>
-        <div class="rule"><span class="rule-num">1.7</span> На обжалование наказания дается 5 дней.</div>
-        <div class="rule"><span class="rule-num">1.8</span> Сообщения, нарушающие правила, даже в шутку, подлежат наказанию.</div>
-        <div class="rule"><span class="rule-num">1.9</span> Администрация имеет право наказывать игроков, систематически нарушающих правила.</div>
-        <div class="rule"><span class="rule-num">1.10</span> Администрация имеет право выдавать блокировки на срок выше указанного.</div>
-        <div class="rule"><span class="rule-num">1.11</span> Игроки в чёрном списке теряют доступ ко всем частям проекта.</div>
+        <div class="rule"><span class="rule-num">1.6</span> Правила могут быть изменены без уведомления.</div>
+        <div class="rule"><span class="rule-num">1.7</span> На обжалование наказания даётся 5 дней.</div>
+        <div class="rule"><span class="rule-num">1.8</span> Нарушения в шутку тоже наказываются.</div>
+        <div class="rule"><span class="rule-num">1.9</span> Систематические нарушители наказываются строже.</div>
+        <div class="rule"><span class="rule-num">1.10</span> Администрация может выдать блокировку выше срока.</div>
+        <div class="rule"><span class="rule-num">1.11</span> Игроки в ЧС теряют доступ ко всем частям проекта.</div>
       </div>
       <div class="rules-section">
         <div class="rules-section-title"><span class="section-num">2</span> Игровой процесс</div>
-        <div class="rule"><span class="rule-num">2.1</span> Выдача себя за модерацию. <span class="punish">мут 6 часов / IP-бан от 30 дней</span></div>
-        <div class="rule"><span class="rule-num">2.2</span> Передача аккаунта. <span class="punish">вечный бан в лобби / Бан 90 дней</span></div>
-        <div class="rule"><span class="rule-num">2.3</span> Взлом чужих аккаунтов. <span class="punish">вечный IP-бан</span></div>
+        <div class="rule"><span class="rule-num">2.1</span> Выдача за модерацию. <span class="punish">мут 6 часов</span></div>
+        <div class="rule"><span class="rule-num">2.2</span> Передача аккаунта. <span class="punish">бан 90 дней</span></div>
+        <div class="rule"><span class="rule-num">2.3</span> Взлом аккаунтов. <span class="punish">вечный IP-бан</span></div>
         <div class="rule"><span class="rule-num">2.4</span> Читы и запрещённые моды. <span class="punish">IP-бан 30 дней</span></div>
-        <div class="rule"><span class="rule-num">2.4.1</span> Тим с нарушителем правила 2.4. <span class="punish">IP-бан 14 дней</span></div>
-        <div class="rule"><span class="rule-num">2.4.2</span> Распространение запрещённого ПО. <span class="punish">вечный IP-бан</span></div>
         <div class="rule"><span class="rule-num">2.5</span> Сделки с гарантом. <span class="punish">IP-бан 14 дней</span></div>
         <div class="rule"><span class="rule-num">2.6</span> Монетизация игровых ценностей.</div>
-        <div class="rule"><span class="rule-num">2.7</span> Действия, мешающие модерации.</div>
+        <div class="rule"><span class="rule-num">2.7</span> Мешать модерации.</div>
         <div class="rule"><span class="rule-num">2.8</span> Казино и азартные игры.</div>
         <div class="rule"><span class="rule-num">2.9</span> Обход наказания. <span class="punish">Срок удваивается</span></div>
         <div class="rule"><span class="rule-num">2.10</span> Использование багов. <span class="punish">Бан от 3 дней</span></div>
         <div class="rule"><span class="rule-num">2.11</span> Нагрузка на сервер.</div>
         <div class="rule"><span class="rule-num">2.12</span> Распространение личных данных. <span class="punish">IP-мут / IP-бан</span></div>
-        <div class="rule"><span class="rule-num">2.13</span> Оскорбительные названия предметов. <span class="punish">бан 2 часа</span></div>
-        <div class="rule"><span class="rule-num">2.14</span> Взаимодействие сверх лимита режима. <span class="punish">IP-бан 30 дней</span></div>
+        <div class="rule"><span class="rule-num">2.13</span> Оскорбительные предметы. <span class="punish">бан 2 часа</span></div>
+        <div class="rule"><span class="rule-num">2.14</span> Взаимодействие сверх лимита.</div>
       </div>
       <div class="rules-section">
         <div class="rules-section-title"><span class="section-num">3</span> Правила чата</div>
         <div class="rule"><b>— Модерируются все виды чата.</b></div>
         <div class="rule"><span class="rule-num">3.1</span> Реклама. <span class="punish">мут 8 часов / бан 14 дней</span></div>
-        <div class="rule"><span class="rule-num">3.2</span> Вмешательство в чужие наказания. <span class="punish">мут 30 минут</span></div>
+        <div class="rule"><span class="rule-num">3.2</span> Вмешательство в наказания. <span class="punish">мут 30 минут</span></div>
         <div class="rule"><span class="rule-num">3.3</span> Флуд или спам. <span class="punish">мут 1 час</span></div>
         <div class="rule"><span class="rule-num">3.4</span> Оскорбление. <span class="punish">мут 1 час</span></div>
         <div class="rule"><span class="rule-num">3.5</span> CAPS. <span class="punish">мут 30 минут</span></div>
         <div class="rule"><span class="rule-num">3.6</span> Организация флуда. <span class="punish">мут 1 час</span></div>
         <div class="rule"><span class="rule-num">3.7</span> Упоминание родных. <span class="punish">мут 1 час / 6 часов</span></div>
-        <div class="rule"><span class="rule-num">3.8</span> Политика, расизм, деструктив. <span class="punish">мут / IP-бан навсегда</span></div>
+        <div class="rule"><span class="rule-num">3.8</span> Политика, расизм. <span class="punish">мут / IP-бан навсегда</span></div>
         <div class="rule"><span class="rule-num">3.9</span> Лексика сексуального характера. <span class="punish">мут 30 минут</span></div>
         <div class="rule"><span class="rule-num">3.10</span> Оскорбление сервера. <span class="punish">мут 2 часа / IP-бан</span></div>
         <div class="rule"><span class="rule-num">3.11</span> Флуд командами. <span class="punish">бан 1 час</span></div>
         <div class="rule"><span class="rule-num">3.12</span> Попрошайничество. <span class="punish">мут 30 минут</span></div>
         <div class="rule"><span class="rule-num">3.13</span> Имитация системных сообщений. <span class="punish">мут 30 минут</span></div>
       </div>
-      <div class="rules-section">
-        <div class="rules-section-title"><span class="section-num">4</span> Титулы и перенос доната</div>
-        <div class="rule"><span class="rule-num">4.1</span> В титулах запрещены маты и оскорбления.</div>
-        <div class="rule"><span class="rule-num">4.2</span> При создании титула нужно соблюдать требования.</div>
-        <div class="rule"><span class="rule-num">4.3</span> Перенос только между аккаунтами одного человека.</div>
-        <div class="rule"><span class="rule-num">4.4</span> Донат нельзя перенести с аккаунта в бане.</div>
-        <div class="rule"><span class="rule-num">4.5</span> Переносить можно только что-то одно.</div>
-        <div class="rule"><span class="rule-num">4.6</span> Перенос в одну сторону.</div>
-        <div class="rule"><span class="rule-num">4.7</span> При нарушении — отказ без возврата.</div>
-        <div class="rule"><span class="rule-num">4.8</span> Кастомные привилегии не переносятся.</div>
-        <div class="rule"><span class="rule-num">4.9</span> Восстановление только через оплату товара.</div>
-      </div>
       <div class="info-footer">
-        📩 <b>Вопросы или жалоба?</b> Напиши владельцу <b>meowl</b> в чате сервера <b>free.cloudblaze.org:18462</b> или в Discord <a href="https://discord.gg/p4rEkdctc" target="_blank" style="color:#a5b4fc;text-decoration:underline">discord.gg/p4rEkdctc</a>.
+        📩 <b>Вопросы?</b> Напиши <b>solist</b> в Discord <a href="https://discord.gg/p4rEkdctc" target="_blank" style="color:#60a5fa;text-decoration:underline">discord.gg/p4rEkdctc</a>.
       </div>
     </div>
   </div>
@@ -675,11 +592,8 @@ main{padding:0 24px 80px}
 <script>
 const SERVER_IP = 'free.cloudblaze.org:18462';
 const DISCOUNT = 0.40;
-const OWNER_NICK = 'meowl';
-const DISCORD_INVITE = 'https://discord.gg/p4rEkdctc';
+const OWNER_NICK = 'solist';
 
-/* ===== СЕТКИ КИТОВ (9×5, как в майнкрафте) ===== */
-/* КИТ PvP — первый скриншот: топор, лук, тотемы, яблоки, зелья, элитры, незерит, аметист */
 const KIT_PVP = [
   {e:'🪓',q:'1'}, {e:'🗿',q:'32'}, {e:'🥏',q:'16'}, {e:'🏹',q:'1'}, {e:'🍏',q:'32'}, {e:'🧪',q:'1'}, null, null, {e:'🔥',q:'1'},
   {e:'🍎',q:'64'},{e:'🗿',q:'32'},{e:'🗿',q:'32'},{e:'🥏',q:'16'},{e:'🛡️',q:'1'}, null, null, null, {e:'🧪',q:'1'},
@@ -687,8 +601,6 @@ const KIT_PVP = [
   {e:'🍎',q:'64'},{e:'🗿',q:'32'},{e:'🟢',q:'64'},{e:'🥏',q:'16'}, {e:'⛏️',q:'1'}, {e:'🧪',q:'1'}, null, null, {e:'🧪',q:'1'},
   {e:'🟣',q:'1'}, {e:'🟣',q:'1'}, {e:'🟣',q:'1'}, {e:'🟣',q:'1'}, null, null, null, null, {e:'🔮',q:'1'}
 ];
-
-/* КИТ PvP 2 — второй скриншот: зачарованные предметы, шалкер, кристаллы, жемчуг */
 const KIT_PVP2 = [
   {e:'🏹',q:'1'}, {e:'🗿',q:'16'},{e:'🗿',q:'16'},{e:'🍏',q:'64'},{e:'🟣',q:'4'}, {e:'🖤',q:'64'},{e:'⛏️',q:'1'}, {e:'🗡️',q:'1'}, {e:'🗿',q:'16'},
   {e:'🍎',q:'16'},{e:'🥏',q:'16'},{e:'🥏',q:'16'},{e:'⚡',q:'64'},{e:'🍏',q:'16'},{e:'🗿',q:'32'},{e:'🍏',q:'16'},{e:'🧪',q:'1'}, null,
@@ -697,70 +609,23 @@ const KIT_PVP2 = [
 
 const products = [
   {
-    id:'pvpkit', cat:'kits',
-    name:'КИТ PvP',
-    sub:'Стандартный PvP-набор',
-    price:100, icon:'⚔️', cls:'is-pvpkit', badge:'PvP',
-    preview: KIT_PVP,
-    previewLabel: 'Инвентарь Toper_RW',
-    features:[
-      '<b>Зачарованный топор</b> и меч',
-      '<b>Лук</b> с зачарованиями',
-      '<b>Тотемы</b> (32 шт)',
-      '<b>Золотые яблоки</b> (64 шт)',
-      '<b>Энчантед яблоки</b> (32 шт)',
-      '<b>Зелья</b> силы/скорости/регена',
-      '<b>Элитры</b> + фейерверки',
-      '<b>Незеритовая броня</b>',
-    ]
+    id:'pvpkit', cat:'kits', name:'КИТ PvP ЛУЧШИЙ', sub:'Топовый PvP-набор с элитрами',
+    price:100, icon:'⚔️', cls:'is-pvpkit', badge:'BEST', preview: KIT_PVP,
+    features:['<b>Зачарованный топор</b>','<b>Лук</b> с зачарованиями','<b>Тотемы</b> (32 шт)','<b>Золотые яблоки</b> (64 шт)','<b>Энчантед яблоки</b> (32 шт)','<b>Зелья</b> силы/скорости','<b>Элитры</b> + фейерверки','<b>Незеритовая броня</b>']
   },
   {
-    id:'pvpkit2', cat:'kits',
-    name:'КИТ PvP 2',
-    sub:'Прокачанный PvP-набор',
-    price:200, icon:'👑', cls:'is-pvpkit2', badge:'TOP',
-    preview: KIT_PVP2,
-    previewLabel: 'Инвентарь (прокачанный кит)',
-    features:[
-      '<b>Улучшенный лук</b> + зачарования',
-      '<b>Незеритовая броня</b> + инструменты',
-      '<b>Тотемы</b> (16 шт)',
-      '<b>Золотые яблоки</b> (64+16 шт)',
-      '<b>Энчантед яблоки</b> (32 шт)',
-      '<b>Шалкер</b> с ресурсами',
-      '<b>Кристаллы Энда</b> (4 шт)',
-      '<b>Жемчуг Энда</b> (16 шт)',
-      '<b>Ведро воды</b> + зелья',
-    ]
+    id:'pvpkit2', cat:'kits', name:'КИТ PvP ЛУЧШИЙ 2', sub:'Прокачанный PvP-набор',
+    price:200, icon:'👑', cls:'is-pvpkit2', badge:'TOP', preview: KIT_PVP2,
+    features:['<b>Улучшенный лук</b>','<b>Незеритовая броня</b>','<b>Тотемы</b> (16 шт)','<b>Золотые яблоки</b> (80 шт)','<b>Энчантед яблоки</b> (32 шт)','<b>Шалкер</b> с ресурсами','<b>Кристаллы Энда</b>','<b>Жемчуг Энда</b>']
   },
-  {
-    id:'dmoder', cat:'ranks',
-    name:'DMODER',
-    sub:'Модератор сервера ShirokaRW',
-    price:200, icon:'🛡️', cls:'is-dmoder', badge:'DMODER',
-    features:['Префикс <b>[DMODER]</b>','Все команды <b>/fly /god /heal</b>','Кит PvP <b>каждый день</b>','Мут и бан игроков','Доступ к <b>/vanish</b>']
-  },
-  {
-    id:'dadmin', cat:'ranks',
-    name:'DADMIN',
-    sub:'Администратор сервера ShirokaRW',
-    price:300, icon:'⚔️', cls:'is-dadmin', badge:'DADMIN',
-    features:['Префикс <b>[DADMIN]</b>','Все команды <b>/fly /god /heal /feed</b>','Кит PvP <b>2 раза в день</b>','Мут, бан, кик','Доступ к <b>/vanish /ec</b>','Кастомный префикс']
-  },
-  {
-    id:'sponsor', cat:'ranks',
-    name:'SPONSOR',
-    sub:'Спонсор сервера ShirokaRW',
-    price:500, icon:'💎', cls:'is-sponsor', badge:'SPONSOR',
-    features:['Префикс <b>[SPONSOR]</b>','Все команды <b>/fly /god /heal /feed</b>','Кит PvP <b>3 раза в день</b>','Мут, бан, кик','Доступ к <b>/vanish /ec /nick</b>','Личный варп','Бонус: <b>5 ключей от кейсов</b>']
-  },
-  {
-    id:'realiki', cat:'currency',
-    name:'РИЛИКИ',
-    sub:'Игровая валюта сервера ShirokaRW',
-    price:50, icon:'🪙', cls:'is-realiki', badge:'NEW',
-    features:['🪙 <b>Игровая валюта</b>','Покупай что угодно у игроков','Обменивай на ресурсы','Работает на всём сервере']
-  },
+  { id:'dmoder', cat:'ranks', name:'DMODER', sub:'Модератор сервера SolistTime', price:200, icon:'🛡️', cls:'is-dmoder', badge:'DMODER',
+    features:['Префикс <b>[DMODER]</b>','Все команды <b>/fly /god /heal</b>','Кит PvP <b>каждый день</b>','Мут и бан игроков','Доступ к <b>/vanish</b>'] },
+  { id:'dadmin', cat:'ranks', name:'DADMIN', sub:'Администратор сервера SolistTime', price:300, icon:'⚔️', cls:'is-dadmin', badge:'DADMIN',
+    features:['Префикс <b>[DADMIN]</b>','Все команды <b>/fly /god /heal /feed</b>','Кит PvP <b>2 раза в день</b>','Мут, бан, кик','Доступ к <b>/vanish /ec</b>','Кастомный префикс'] },
+  { id:'sponsor', cat:'ranks', name:'SPONSOR', sub:'Спонсор сервера SolistTime', price:500, icon:'💎', cls:'is-sponsor', badge:'SPONSOR',
+    features:['Префикс <b>[SPONSOR]</b>','Все команды <b>/fly /god /heal /feed</b>','Кит PvP <b>3 раза в день</b>','Мут, бан, кик','Доступ к <b>/vanish /ec /nick</b>','Личный варп','Бонус: <b>5 ключей</b>'] },
+  { id:'realiki', cat:'currency', name:'РИЛИКИ', sub:'Игровая валюта SolistTime', price:50, icon:'🪙', cls:'is-realiki', badge:'NEW',
+    features:['🪙 <b>Игровая валюта</b>','Покупай что угодно у игроков','Обменивай на ресурсы','Работает на всём сервере'] },
 ];
 
 let currentCurrency = 'rub';
@@ -801,7 +666,6 @@ function render() {
   grid.innerHTML = list.map(p => {
     const finalPriceStr = (finalPrice(p.price) * rate).toFixed(rate===1?0:2);
     const oldPriceStr = (p.price * rate).toFixed(rate===1?0:2);
-    const discountPct = Math.round(DISCOUNT * 100);
     const badgeHtml = p.badge ? `<div class="product-badge badge-${p.id}">${p.badge}</div>` : '';
     const previewHtml = renderKitGrid(p.preview);
     const featuresHtml = p.features && p.features.length
@@ -851,10 +715,9 @@ function addToCart(id) {
   const qty = parseInt(document.getElementById('qty-'+id).value)||1;
   const price = finalPrice(p.price) * qty * rates[currentCurrency];
   const sym = symbols[currentCurrency];
-
   document.getElementById('modal-title').textContent = p.icon + ' ' + p.name;
   document.getElementById('modal-subtitle').innerHTML =
-    `Количество: <b>${qty}</b> шт · Сумма: <b style="color:#4ade80">${price.toFixed(currentCurrency==='rub'?0:2)}${sym}</b>`;
+    `Количество: <b>${qty}</b> шт · Сумма: <b style="color:#22d3ee">${price.toFixed(currentCurrency==='rub'?0:2)}${sym}</b>`;
   document.getElementById('modal').classList.add('active');
   document.body.style.overflow='hidden';
 }
@@ -881,24 +744,12 @@ document.getElementById('search').addEventListener('input', render);
 async function updateOnline() {
   const o = document.getElementById('online-count');
   const m = document.getElementById('online-max');
-  const st = document.getElementById('owner-status');
   try {
     const res = await fetch('https://api.mcsrvstat.us/3/' + SERVER_IP);
     const data = await res.json();
-    if (data.online) {
-      o.textContent = data.players.online;
-      m.textContent = data.players.max;
-      const list = (data.players.list || []).map(n => (n.name || n).toLowerCase());
-      if (list.includes(OWNER_NICK.toLowerCase())) st.classList.add('online');
-      else st.classList.remove('online');
-    } else {
-      o.textContent = '0'; m.textContent = '0';
-      st.classList.remove('online');
-    }
-  } catch (e) {
-    o.textContent = '0'; m.textContent = '0';
-    st.classList.remove('online');
-  }
+    if (data.online) { o.textContent = data.players.online; m.textContent = data.players.max; }
+    else { o.textContent = '0'; m.textContent = '0'; }
+  } catch (e) { o.textContent = '0'; m.textContent = '0'; }
 }
 
 document.addEventListener('keydown', (e) => {
