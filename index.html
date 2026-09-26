@@ -1,764 +1,382 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SolistTime — Магазин</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-<style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --bg:#0f1115;--bg-2:#161a22;--surface:#1a1f2b;--surface-2:#232936;
-  --border:#2a3142;--border-2:#3a4256;
-  --text:#e8ecf5;--muted:#8b93a7;--muted-2:#5c6478;
-  --green:#4ade80;--green-2:#22c55e;--red:#ef4444;--orange:#f59e0b;
-  --purple:#c084fc;--cyan:#22d3ee;--blue:#60a5fa;--gold:#fbbf24;
-  --radius:12px;--radius-sm:8px;
-}
-html{scroll-behavior:smooth}
-body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.5;min-height:100vh;-webkit-font-smoothing:antialiased}
-a{color:inherit;text-decoration:none}
-button{font:inherit;cursor:pointer;border:none;background:none;color:inherit}
-.container{width:100%;max-width:1400px;margin:0 auto;padding:0 24px}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HolyVisuals - Лучший визуал для Minecraft</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <!-- ВСТРОЕННЫЕ СТИЛИ (CSS) -->
+    <style>
+        :root {
+            --bg-color: #0d0f14;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --text-color: #e0e0e0;
+            --accent-color: #00ffff; /* Неоново-голубой */
+            --accent-hover: #00cccc;
+        }
 
-/* TOPBAR */
-.topbar{background:var(--bg-2);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:50}
-.topbar-inner{display:flex;align-items:center;justify-content:space-between;height:64px;gap:16px}
-.topbar-left{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
-.logo{display:flex;align-items:center;gap:10px}
-.logo-icon{width:36px;height:36px;display:grid;place-items:center;background:linear-gradient(135deg,rgba(74,222,128,.15),rgba(34,211,238,.1));border:1px solid rgba(74,222,128,.3);border-radius:9px;font-size:18px}
-.logo-text{font-weight:900;font-size:16px;letter-spacing:-.02em}
-.ip-block{display:inline-flex;align-items:center;gap:8px;padding:7px 14px;background:rgba(34,211,238,.06);border:1px solid rgba(34,211,238,.25);border-radius:8px;font-size:13px;color:var(--cyan);cursor:pointer;transition:all .15s;font-family:ui-monospace,monospace;font-weight:600}
-.ip-block:hover{background:rgba(34,211,238,.12);border-color:rgba(34,211,238,.5)}
-.ip-block.copied{background:rgba(74,222,128,.15);border-color:rgba(74,222,128,.5);color:var(--green)}
-.ip-block svg{opacity:.7}
-.ip-label{font-size:10px;color:var(--muted-2);font-weight:600;text-transform:uppercase;letter-spacing:.06em}
-.owner-block{display:inline-flex;align-items:center;gap:8px;padding:7px 14px;background:linear-gradient(135deg,rgba(245,158,11,.12),rgba(245,158,11,.05));border:1px solid rgba(245,158,11,.35);border-radius:8px;font-size:13px}
-.owner-crown{font-size:15px;filter:drop-shadow(0 0 6px rgba(245,158,11,.6))}
-.owner-label{font-size:10px;color:var(--muted-2);font-weight:700;text-transform:uppercase;letter-spacing:.08em}
-.owner-nick{font-weight:800;color:var(--orange)}
-.owner-status{width:7px;height:7px;border-radius:50%;background:var(--muted-2);transition:all .3s}
-.owner-status.online{background:var(--green);box-shadow:0 0 8px var(--green)}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+            scroll-behavior: smooth;
+        }
 
-.nav-btn{display:inline-flex;align-items:center;gap:8px;padding:7px 14px;background:var(--surface);border:1px solid var(--border);border-radius:8px;font-size:13px;font-weight:600;color:var(--text);cursor:pointer;transition:all .15s;white-space:nowrap}
-.nav-btn:hover{background:var(--surface-2);border-color:var(--border-2);transform:translateY(-1px)}
-.nav-btn.vote{border-color:rgba(245,158,11,.4);color:#fbbf24;background:linear-gradient(135deg,rgba(245,158,11,.1),rgba(245,158,11,.03))}
-.nav-btn.vote:hover{background:linear-gradient(135deg,rgba(245,158,11,.2),rgba(245,158,11,.08));border-color:rgba(245,158,11,.7)}
-.nav-btn.kp{border-color:rgba(34,211,238,.35);color:var(--cyan)}
-.nav-btn.kp:hover{background:rgba(34,211,238,.1);border-color:rgba(34,211,238,.6)}
-.nav-btn.rules{border-color:rgba(192,132,252,.35);color:var(--purple)}
-.nav-btn.rules:hover{background:rgba(192,132,252,.1);border-color:rgba(192,132,252,.6)}
-.nav-btn.ds{border-color:rgba(88,101,242,.5);color:#a5b4fc;background:rgba(88,101,242,.08)}
-.nav-btn.ds:hover{background:rgba(88,101,242,.18);border-color:rgba(88,101,242,.8)}
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+        }
 
-.topbar-right{display:flex;align-items:center;gap:12px}
-.online-badge{display:inline-flex;align-items:center;gap:8px;padding:7px 14px;background:rgba(74,222,128,.06);border:1px solid rgba(74,222,128,.2);border-radius:8px;font-size:13px;color:var(--muted)}
-.online-badge b{color:var(--text);font-weight:700}
-.online-dot{width:7px;height:7px;background:var(--green);border-radius:50%;box-shadow:0 0 8px var(--green);animation:pulse-dot 2s infinite}
-@keyframes pulse-dot{0%,100%{opacity:1}50%{opacity:.4}}
+        /* Фоновое свечение */
+        .glow-bg {
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, rgba(0, 255, 255, 0.05) 0%, transparent 50%);
+            z-index: -1;
+            pointer-events: none;
+        }
 
-.filterbar{background:var(--bg-2);border-bottom:1px solid var(--border);padding:14px 0;position:sticky;top:64px;z-index:40}
-.filterbar-inner{display:flex;align-items:flex-end;gap:16px;flex-wrap:wrap}
-.filter-group{display:flex;flex-direction:column;gap:5px;min-width:160px}
-.filter-group label{font-size:11px;color:var(--muted-2);text-transform:uppercase;letter-spacing:.06em;font-weight:700}
-.filter-group select{padding:9px 30px 9px 12px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:13px;cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238b93a7' stroke-width='2.5'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center;font-family:inherit}
-.filter-group select:focus{outline:none;border-color:var(--green)}
-.filter-search{position:relative;flex:1;min-width:200px;max-width:320px;display:flex;align-items:center}
-.filter-search svg{position:absolute;left:12px;color:var(--muted-2)}
-.filter-search input{width:100%;padding:9px 12px 9px 38px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:13px;font-family:inherit}
-.filter-search input:focus{outline:none;border-color:var(--green)}
+        /* Навигация */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background: rgba(13, 15, 20, 0.8);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
 
-main{padding:0 24px 80px}
+        .logo {
+            font-size: 24px;
+            font-weight: 900;
+            letter-spacing: 1px;
+            color: #fff;
+        }
 
-.promo-banner{margin:24px 0;background:linear-gradient(135deg,rgba(245,158,11,.15),rgba(239,68,68,.1),rgba(192,132,252,.1));border:2px solid rgba(245,158,11,.5);border-radius:18px;padding:26px 30px;position:relative;overflow:hidden;animation:promoPulse 3s ease-in-out infinite}
-@keyframes promoPulse{0%,100%{box-shadow:0 0 0 rgba(245,158,11,0)}50%{box-shadow:0 0 40px rgba(245,158,11,.35)}}
-.promo-banner::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 10% 20%,rgba(245,158,11,.15),transparent 40%),radial-gradient(circle at 90% 80%,rgba(192,132,252,.12),transparent 40%);pointer-events:none}
-.promo-inner{position:relative;display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center}
-.promo-tag{display:inline-block;padding:5px 12px;background:linear-gradient(135deg,#ef4444,#dc2626);color:#fff;border-radius:100px;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;margin-bottom:12px;box-shadow:0 4px 14px rgba(239,68,68,.5)}
-.promo-title{font-size:24px;font-weight:900;letter-spacing:-.02em;line-height:1.2;margin-bottom:10px}
-.promo-title .gradient{background:linear-gradient(135deg,#fbbf24,#f59e0b,#ef4444);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-.promo-desc{font-size:14px;color:#e8ecf5;line-height:1.55;margin-bottom:14px;max-width:640px}
-.promo-desc b{color:var(--orange);font-weight:800}
-.promo-features{list-style:none;display:flex;flex-wrap:wrap;gap:10px}
-.promo-features li{padding:7px 14px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:100px;font-size:12.5px;font-weight:600;display:flex;align-items:center;gap:6px}
-.promo-features li b{color:var(--green);font-weight:800}
-.promo-buttons{display:flex;flex-direction:column;gap:10px;min-width:220px}
-.promo-btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:14px 22px;border-radius:12px;font-size:14px;font-weight:800;cursor:pointer;transition:all .2s;text-decoration:none;border:none;font-family:inherit}
-.promo-btn.kp-btn{background:linear-gradient(135deg,#4ade80,#22c55e);color:#04140a;box-shadow:0 8px 28px rgba(74,222,128,.5)}
-.promo-btn.kp-btn:hover{transform:translateY(-2px);box-shadow:0 14px 40px rgba(74,222,128,.7)}
-.promo-btn.ds-btn{background:linear-gradient(135deg,#5865F2,#4752c4);color:#fff;box-shadow:0 8px 28px rgba(88,101,242,.5)}
-.promo-btn.ds-btn:hover{transform:translateY(-2px);box-shadow:0 14px 40px rgba(88,101,242,.7)}
+        .logo span {
+            color: var(--accent-color);
+        }
 
-.payment-banner{margin:0 0 24px;background:linear-gradient(135deg,rgba(96,165,250,.1),rgba(192,132,252,.06));border:1px solid rgba(96,165,250,.4);border-radius:16px;padding:24px 28px;display:grid;grid-template-columns:auto 1fr auto;gap:24px;align-items:center}
-.payment-banner-icon{width:64px;height:64px;display:grid;place-items:center;font-size:32px;background:rgba(96,165,250,.12);border:1px solid rgba(96,165,250,.4);border-radius:16px;flex-shrink:0}
-.payment-banner-label{font-size:11px;color:#93c5fd;text-transform:uppercase;letter-spacing:.1em;font-weight:800;margin-bottom:8px}
-.payment-banner-title{font-size:17px;font-weight:800;margin-bottom:10px;line-height:1.35}
-.payment-banner-title b{color:#93c5fd}
-.payment-banner-note{font-size:12.5px;color:#c7d2fe;line-height:1.5}
-.payment-banner-note b{color:#a5b4fc}
-.payment-banner-badge{padding:10px 16px;background:rgba(74,222,128,.1);border:1px solid rgba(74,222,128,.35);border-radius:10px;color:#bbf7d0;font-size:13px;font-weight:700;display:flex;align-items:center;gap:8px;white-space:nowrap}
-.payment-banner-badge b{color:var(--green);font-weight:800}
-.discord-inline-btn{display:inline-flex;align-items:center;gap:10px;margin-top:14px;padding:12px 20px;background:linear-gradient(135deg,#5865F2,#4752c4);color:#fff;border-radius:10px;font-size:14px;font-weight:700;text-decoration:none;box-shadow:0 8px 24px rgba(88,101,242,.4);transition:all .2s}
-.discord-inline-btn:hover{transform:translateY(-2px);box-shadow:0 14px 36px rgba(88,101,242,.6)}
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
 
-.products-section{margin-top:8px}
-.products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:20px}
-.product-card{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius);padding:22px;display:flex;flex-direction:column;gap:14px;transition:all .25s;position:relative;overflow:hidden}
-.product-card:hover{transform:translateY(-4px);box-shadow:0 18px 45px rgba(0,0,0,.5)}
-.product-card.is-dmoder:hover{border-color:rgba(96,165,250,.8);box-shadow:0 18px 45px rgba(96,165,250,.25)}
-.product-card.is-dadmin:hover{border-color:rgba(239,68,68,.8);box-shadow:0 18px 45px rgba(239,68,68,.25)}
-.product-card.is-pvpkit:hover{border-color:rgba(192,132,252,.85);box-shadow:0 18px 50px rgba(192,132,252,.3)}
-.product-card.is-pvpkit2:hover{border-color:rgba(251,191,36,.85);box-shadow:0 18px 50px rgba(251,191,36,.3)}
-.product-card.is-sponsor:hover{border-color:rgba(251,191,36,.9);box-shadow:0 18px 50px rgba(251,191,36,.35)}
-.product-card.is-realiki:hover{border-color:rgba(34,211,238,.8);box-shadow:0 18px 45px rgba(34,211,238,.25)}
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 700;
+            transition: color 0.3s;
+        }
 
-.product-card.is-pvpkit{background:linear-gradient(180deg,rgba(192,132,252,.06),var(--surface))}
-.product-card.is-pvpkit2{background:linear-gradient(180deg,rgba(251,191,36,.07),var(--surface))}
-.product-card.is-sponsor{background:linear-gradient(180deg,rgba(251,191,36,.07),var(--surface))}
-.product-card.is-realiki{background:linear-gradient(180deg,rgba(34,211,238,.06),var(--surface))}
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
 
-.product-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;position:relative}
-.product-icon{width:60px;height:60px;display:grid;place-items:center;font-size:30px;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:14px;flex-shrink:0}
-.product-card.is-dmoder .product-icon{background:rgba(96,165,250,.12);border-color:rgba(96,165,250,.4);box-shadow:0 0 22px rgba(96,165,250,.2)}
-.product-card.is-dadmin .product-icon{background:rgba(239,68,68,.12);border-color:rgba(239,68,68,.4);box-shadow:0 0 22px rgba(239,68,68,.2)}
-.product-card.is-pvpkit .product-icon{background:rgba(192,132,252,.15);border-color:rgba(192,132,252,.5);box-shadow:0 0 25px rgba(192,132,252,.3)}
-.product-card.is-pvpkit2 .product-icon{background:rgba(251,191,36,.15);border-color:rgba(251,191,36,.5);box-shadow:0 0 25px rgba(251,191,36,.3)}
-.product-card.is-sponsor .product-icon{background:rgba(251,191,36,.15);border-color:rgba(251,191,36,.5);box-shadow:0 0 25px rgba(251,191,36,.3)}
-.product-card.is-realiki .product-icon{background:rgba(34,211,238,.12);border-color:rgba(34,211,238,.4);box-shadow:0 0 22px rgba(34,211,238,.2)}
+        /* Главный экран */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+            margin-top: 60px;
+        }
 
-.product-badge{padding:5px 10px;border-radius:6px;font-size:11px;font-weight:800;letter-spacing:.05em;text-transform:uppercase}
-.product-badge.badge-dmoder{background:rgba(96,165,250,.15);border:1px solid rgba(96,165,250,.4);color:#93c5fd}
-.product-badge.badge-dadmin{background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.4);color:#fca5a5}
-.product-badge.badge-pvpkit{background:linear-gradient(135deg,rgba(192,132,252,.3),rgba(34,211,238,.15));border:1px solid rgba(192,132,252,.55);color:#e9d5ff}
-.product-badge.badge-pvpkit2{background:linear-gradient(135deg,rgba(251,191,36,.3),rgba(239,68,68,.15));border:1px solid rgba(251,191,36,.6);color:#fde68a}
-.product-badge.badge-sponsor{background:linear-gradient(135deg,rgba(251,191,36,.3),rgba(236,72,153,.15));border:1px solid rgba(251,191,36,.6);color:#fbbf24}
-.product-badge.badge-realiki{background:rgba(34,211,238,.15);border:1px solid rgba(34,211,238,.4);color:#67e8f9}
+        .glitch-text {
+            font-size: 5rem;
+            font-weight: 900;
+            color: #fff;
+            text-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+            margin-bottom: 20px;
+            letter-spacing: 5px;
+        }
 
-.product-info{flex:1;min-width:0}
-.product-name{font-size:18px;font-weight:900;margin-bottom:4px;line-height:1.3;letter-spacing:-.01em}
-.product-subtitle{font-size:12.5px;color:var(--muted);line-height:1.4}
-.product-features{list-style:none;display:flex;flex-direction:column;gap:6px;padding:12px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
-.product-features li{font-size:12px;color:var(--muted);display:flex;align-items:center;gap:8px;line-height:1.4}
-.product-features li::before{content:'▸';font-weight:900;flex-shrink:0}
-.product-card.is-dmoder .product-features li::before{color:var(--blue)}
-.product-card.is-dadmin .product-features li::before{color:var(--red)}
-.product-card.is-pvpkit .product-features li::before{color:var(--purple)}
-.product-card.is-pvpkit2 .product-features li::before{color:var(--gold)}
-.product-card.is-sponsor .product-features li::before{color:var(--gold)}
-.product-card.is-realiki .product-features li::before{color:var(--cyan)}
-.product-features b{color:var(--text);font-weight:800}
+        .subtitle {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin-bottom: 50px;
+            color: #a0a0a0;
+        }
 
-.product-row{display:flex;align-items:center;justify-content:space-between;gap:12px}
-.product-row-label{font-size:11px;color:var(--muted-2);text-transform:uppercase;letter-spacing:.06em;font-weight:700}
-.product-qty{display:flex;align-items:center;background:var(--bg);border:1px solid var(--border);border-radius:6px;overflow:hidden;height:32px}
-.product-qty button{width:30px;height:100%;color:var(--muted);font-size:15px;font-weight:700}
-.product-qty button:hover{background:var(--surface-2);color:var(--text)}
-.product-qty input{width:42px;height:100%;background:transparent;border:none;color:var(--text);text-align:center;font-size:13px;font-weight:700;-moz-appearance:textfield;font-family:inherit}
-.product-qty input::-webkit-outer-spin-button,.product-qty input::-webkit-inner-spin-button{-webkit-appearance:none}
+        /* Кнопка скачивания */
+        .main-download-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
 
-.product-bottom{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-top:12px}
-.product-prices{display:flex;flex-direction:column;gap:2px}
-.product-old{font-size:12px;color:var(--muted-2);text-decoration:line-through}
-.product-new{font-size:24px;font-weight:900;line-height:1;letter-spacing:-.02em}
-.product-card.is-dmoder .product-new{color:var(--blue)}
-.product-card.is-dadmin .product-new{color:var(--red)}
-.product-card.is-pvpkit .product-new{color:var(--purple)}
-.product-card.is-pvpkit2 .product-new{color:var(--gold)}
-.product-card.is-sponsor .product-new{color:var(--gold)}
-.product-card.is-realiki .product-new{color:var(--cyan)}
+        .btn-download {
+            background: linear-gradient(45deg, #0055ff, var(--accent-color));
+            color: #000;
+            border: none;
+            padding: 20px 50px;
+            font-size: 1.5rem;
+            font-weight: 900;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-transform: uppercase;
+        }
 
-.btn-add{padding:11px 20px;background:var(--surface-2);border:1px solid var(--border);color:var(--text);border-radius:8px;font-size:13px;font-weight:800;transition:all .15s;white-space:nowrap}
-.btn-add:hover{transform:translateY(-1px)}
-.product-card.is-dmoder .btn-add{background:linear-gradient(135deg,#3b82f6,#1d4ed8);border-color:transparent;color:#fff}
-.product-card.is-dmoder .btn-add:hover{box-shadow:0 8px 22px rgba(59,130,246,.5)}
-.product-card.is-dadmin .btn-add{background:linear-gradient(135deg,#ef4444,#b91c1c);border-color:transparent;color:#fff}
-.product-card.is-dadmin .btn-add:hover{box-shadow:0 8px 22px rgba(239,68,68,.5)}
-.product-card.is-pvpkit .btn-add{background:linear-gradient(135deg,#c084fc,#a855f7);border-color:transparent;color:#fff}
-.product-card.is-pvpkit .btn-add:hover{box-shadow:0 8px 22px rgba(192,132,252,.5)}
-.product-card.is-pvpkit2 .btn-add{background:linear-gradient(135deg,#fbbf24,#d97706);border-color:transparent;color:#1a0e00}
-.product-card.is-pvpkit2 .btn-add:hover{box-shadow:0 8px 22px rgba(251,191,36,.5)}
-.product-card.is-sponsor .btn-add{background:linear-gradient(135deg,#fbbf24,#d97706);border-color:transparent;color:#1a0e00}
-.product-card.is-sponsor .btn-add:hover{box-shadow:0 8px 22px rgba(251,191,36,.5)}
-.product-card.is-realiki .btn-add{background:linear-gradient(135deg,#22d3ee,#0891b2);border-color:transparent;color:#051318}
-.product-card.is-realiki .btn-add:hover{box-shadow:0 8px 22px rgba(34,211,238,.5)}
+        .btn-download:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 40px rgba(0, 255, 255, 0.8);
+            background: linear-gradient(45deg, var(--accent-color), #0055ff);
+        }
 
-/* КИТ — сетка как в майнкрафте */
-.kit-preview{background:rgba(0,0,0,.35);border:1.5px solid var(--border);border-radius:8px;padding:10px;margin:4px 0 6px}
-.kit-preview-grid{display:grid;grid-template-columns:repeat(9,1fr);gap:2px}
-.kit-slot{aspect-ratio:1;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:3px;display:grid;place-items:center;font-size:17px;line-height:1;position:relative;transition:all .15s}
-.kit-slot:hover{background:rgba(192,132,252,.2);border-color:rgba(192,132,252,.5);transform:scale(1.15);z-index:2;box-shadow:0 0 12px rgba(192,132,252,.5)}
-.kit-slot.empty{background:rgba(0,0,0,.25);opacity:.4}
-.kit-slot.empty:hover{transform:none;background:rgba(0,0,0,.25);border-color:rgba(255,255,255,.08);box-shadow:none;opacity:.4}
-.kit-slot .qty{position:absolute;bottom:-2px;right:-1px;font-size:9px;font-weight:900;color:#fff;text-shadow:1px 1px 0 #000,-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000;font-family:ui-monospace,monospace;pointer-events:none}
+        .btn-download .icon {
+            font-size: 1.8rem;
+            animation: bounce 2s infinite;
+        }
 
-.modal{display:none;position:fixed;inset:0;z-index:100;align-items:center;justify-content:center;padding:20px}
-.modal.active{display:flex}
-.modal-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(4px)}
-.modal-box{position:relative;width:100%;max-width:480px;background:var(--bg-2);border:1.5px solid var(--border-2);border-radius:16px;padding:28px;box-shadow:0 30px 80px rgba(0,0,0,.6);animation:modalIn .25s;max-height:90vh;overflow-y:auto}
-.modal-box.wide{max-width:760px}
-@keyframes modalIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
-.modal-close{position:absolute;top:16px;right:16px;width:32px;height:32px;display:grid;place-items:center;color:var(--muted);font-size:14px;border-radius:8px;z-index:2}
-.modal-close:hover{background:var(--surface);color:var(--text)}
-.modal-head{text-align:center;margin-bottom:22px}
-.modal-head h3{font-size:20px;font-weight:900;margin-bottom:6px;letter-spacing:-.02em}
-.modal-head p{color:var(--muted);font-size:13px}
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-5px);}
+            60% {transform: translateY(-3px);}
+        }
 
-.vote-list{display:flex;flex-direction:column;gap:12px;margin-bottom:18px}
-.vote-card{display:flex;align-items:center;gap:16px;padding:18px 20px;background:var(--surface);border:1px solid var(--border);border-radius:14px;text-decoration:none;color:inherit;transition:all .2s;position:relative;overflow:hidden}
-.vote-card:hover{transform:translateY(-3px);border-color:var(--border-2);box-shadow:0 15px 35px rgba(0,0,0,.4)}
-.vote-card.mclist:hover{border-color:rgba(74,222,128,.6)}
-.vote-card.millida:hover{border-color:rgba(96,165,250,.6)}
-.vote-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px}
-.vote-card.mclist::before{background:linear-gradient(180deg,#4ade80,#22c55e)}
-.vote-card.millida::before{background:linear-gradient(180deg,#60a5fa,#3b82f6)}
-.vote-logo{width:52px;height:52px;flex-shrink:0;display:grid;place-items:center;border-radius:12px;font-size:20px;font-weight:900;font-family:ui-monospace,monospace}
-.vote-card.mclist .vote-logo{background:rgba(74,222,128,.12);border:1px solid rgba(74,222,128,.35);color:var(--green)}
-.vote-card.millida .vote-logo{background:rgba(96,165,250,.12);border:1px solid rgba(96,165,250,.35);color:var(--blue)}
-.vote-info{flex:1;min-width:0}
-.vote-name{font-size:15px;font-weight:800;margin-bottom:3px}
-.vote-desc{font-size:12px;color:var(--muted);line-height:1.4}
-.vote-url{font-size:11px;color:var(--muted-2);font-family:ui-monospace,monospace;margin-top:4px}
-.vote-btn{padding:9px 16px;border-radius:8px;font-size:12.5px;font-weight:800;flex-shrink:0}
-.vote-card.mclist .vote-btn{background:rgba(74,222,128,.15);color:var(--green);border:1px solid rgba(74,222,128,.35)}
-.vote-card.mclist:hover .vote-btn{background:var(--green);color:#04140a}
-.vote-card.millida .vote-btn{background:rgba(96,165,250,.15);color:var(--blue);border:1px solid rgba(96,165,250,.35)}
-.vote-card.millida:hover .vote-btn{background:var(--blue);color:#fff}
-.vote-tip{padding:14px 16px;background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.25);border-radius:12px;color:#fbbf24;font-size:12.5px;line-height:1.5;text-align:center}
-.vote-tip b{color:var(--orange);font-weight:800}
+        .version {
+            font-size: 0.9rem;
+            color: #666;
+        }
 
-.info-section{display:flex;flex-direction:column;gap:16px}
-.info-highlight{padding:16px 18px;border-radius:12px;font-size:13.5px;line-height:1.6;border:1px solid}
-.info-highlight.age{background:linear-gradient(135deg,rgba(34,211,238,.1),rgba(34,211,238,.04));border-color:rgba(34,211,238,.35);color:#a5f3fc}
-.info-highlight.age b{color:var(--cyan);font-weight:900}
-.info-highlight.warn{background:rgba(245,158,11,.08);border-color:rgba(245,158,11,.25);color:#fbbf24}
-.info-highlight.warn b{color:var(--orange);font-weight:800}
-.info-highlight.ok{background:rgba(74,222,128,.08);border-color:rgba(74,222,128,.25);color:#bbf7d0}
-.info-highlight.ok b{color:var(--green);font-weight:800}
-.info-highlight.discord{background:linear-gradient(135deg,rgba(88,101,242,.12),rgba(88,101,242,.05));border-color:rgba(88,101,242,.4);color:#c7d2fe}
-.info-highlight.discord b{color:#a5b4fc;font-weight:900}
-.info-highlight.hot{background:linear-gradient(135deg,rgba(239,68,68,.15),rgba(245,158,11,.1));border:2px solid rgba(239,68,68,.5);color:#fecaca;text-align:center;font-size:14.5px}
-.info-highlight.hot b{color:#fca5a5;font-weight:900;font-size:16px}
+        /* Секция функций */
+        .features-section {
+            padding: 100px 50px;
+            text-align: center;
+        }
 
-.info-list{list-style:none;display:flex;flex-direction:column;gap:10px}
-.info-list li{display:flex;gap:12px;padding:12px 14px;background:var(--surface);border:1px solid var(--border);border-radius:10px;font-size:13px;color:var(--muted);line-height:1.5}
-.info-list li .num{width:26px;height:26px;flex-shrink:0;display:grid;place-items:center;border-radius:8px;font-size:12px;font-weight:800;background:rgba(34,211,238,.15);color:var(--cyan);font-family:ui-monospace,monospace}
-.info-list b{color:var(--text);font-weight:700}
+        .features-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            color: #fff;
+        }
 
-.rules-content{display:flex;flex-direction:column;gap:20px}
-.rules-section{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:18px 20px}
-.rules-section-title{font-size:15px;font-weight:900;margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px}
-.rules-section-title .section-num{width:30px;height:30px;flex-shrink:0;display:grid;place-items:center;background:linear-gradient(135deg,rgba(192,132,252,.2),rgba(192,132,252,.08));border:1px solid rgba(192,132,252,.4);color:var(--purple);border-radius:8px;font-size:13px;font-weight:800;font-family:ui-monospace,monospace}
-.rule{font-size:13px;color:var(--muted);line-height:1.65;padding:10px 0;border-bottom:1px solid rgba(42,49,66,.6)}
-.rule:last-child{border-bottom:none;padding-bottom:0}
-.rule b{color:var(--text);font-weight:700}
-.rule .rule-num{color:var(--purple);font-weight:900;font-family:ui-monospace,monospace;margin-right:4px}
-.rule .punish{display:inline-block;padding:2px 8px;background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.35);color:#fca5a5;border-radius:6px;font-size:11.5px;font-weight:800;margin-left:4px}
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
 
-.info-footer{padding:14px 16px;background:rgba(96,165,250,.06);border:1px solid rgba(96,165,250,.25);border-radius:12px;font-size:12.5px;color:#93c5fd;line-height:1.5}
-.info-footer b{color:var(--blue);font-weight:800}
+        .feature-card {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: transform 0.3s, border-color 0.3s;
+            text-align: left;
+        }
 
-.discord-btn{display:inline-flex;align-items:center;justify-content:center;gap:12px;width:100%;padding:16px 24px;margin-top:4px;background:linear-gradient(135deg,#5865F2,#4752c4);color:#fff;border-radius:12px;font-size:15px;font-weight:800;text-decoration:none;cursor:pointer;box-shadow:0 8px 28px rgba(88,101,242,.45);transition:all .2s}
-.discord-btn:hover{transform:translateY(-2px);box-shadow:0 14px 40px rgba(88,101,242,.6)}
-.discord-btn svg{width:22px;height:22px;flex-shrink:0}
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-color);
+            box-shadow: 0 10px 30px rgba(0, 255, 255, 0.1);
+        }
 
-.btn-secondary{padding:12px 22px;background:var(--surface-2);border:1px solid var(--border);color:var(--text);border-radius:var(--radius-sm);font-size:14px;font-weight:700;transition:all .15s;font-family:inherit}
-.btn-secondary:hover{background:var(--surface);border-color:var(--purple);color:var(--purple)}
+        .feature-card h3 {
+            color: var(--accent-color);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 10px;
+        }
 
-.donate-contact-card{padding:16px 18px;background:var(--surface);border:1px solid var(--border);border-radius:12px}
-.donate-contact-label{font-size:13px;color:var(--muted);margin-bottom:10px}
-.donate-contact-value{display:flex;align-items:center;gap:10px;font-size:16px;font-weight:800;color:var(--orange)}
-.donate-contact-list{display:flex;flex-direction:column;gap:8px;font-size:13px}
-.donate-contact-list code{font-family:ui-monospace,monospace;background:rgba(34,211,238,.1);padding:2px 8px;border-radius:6px;color:var(--cyan);border:1px solid rgba(34,211,238,.25)}
+        .feature-card ul {
+            list-style: none;
+        }
 
-@media(max-width:1024px){
-  .payment-banner{grid-template-columns:auto 1fr;gap:20px}
-  .payment-banner-badge{grid-column:1/-1;justify-content:center}
-  .promo-inner{grid-template-columns:1fr}
-  .promo-buttons{flex-direction:row;min-width:0}
-  .promo-buttons .promo-btn{flex:1}
-}
-@media(max-width:768px){
-  .container{padding:0 16px}
-  .topbar-inner{height:auto;padding:12px 0;flex-wrap:wrap}
-  .topbar-left{gap:8px}
-  .ip-block,.owner-block,.nav-btn{font-size:12px;padding:6px 10px}
-  .owner-label{display:none}
-  .filter-group{min-width:130px;flex:1}
-  .filter-search{max-width:none;flex-basis:100%}
-  main{padding:0 16px 100px}
-  .payment-banner{padding:20px;grid-template-columns:1fr}
-  .modal-box{padding:22px 18px}
-  .vote-btn{display:none}
-  .promo-banner{padding:20px 18px}
-  .promo-title{font-size:19px}
-  .promo-desc{font-size:13px}
-  .promo-buttons{flex-direction:column}
-  .kit-slot{font-size:13px}
-}
-</style>
+        .feature-card ul li {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            color: #ccc;
+        }
+
+        .feature-card ul li::before {
+            content: "▹";
+            color: var(--accent-color);
+            margin-right: 10px;
+            font-weight: bold;
+        }
+
+        /* Скриншоты */
+        .screenshots-section {
+            padding: 50px 50px 100px;
+            text-align: center;
+        }
+
+        .screenshots-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            color: #fff;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .gallery img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            transition: transform 0.3s;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .gallery img:hover {
+            transform: scale(1.03);
+            border-color: var(--accent-color);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+        }
+
+        /* Подвал */
+        footer {
+            text-align: center;
+            padding: 40px;
+            background: #080a0e;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .disclaimer {
+            font-size: 0.8rem;
+            color: #555;
+            margin-top: 10px;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            nav { padding: 15px 20px; flex-direction: column; gap: 15px; }
+            .glitch-text { font-size: 3rem; }
+            .btn-download { padding: 15px 30px; font-size: 1.2rem; }
+            .features-section, .screenshots-section { padding: 50px 20px; }
+        }
+    </style>
 </head>
 <body>
 
-<header class="topbar">
-  <div class="container topbar-inner">
-    <div class="topbar-left">
-      <a href="#" class="logo">
-        <span class="logo-icon">⛏️</span>
-        <span class="logo-text">SolistTime</span>
-      </a>
+    <div class="glow-bg"></div>
 
-      <div class="owner-block" title="Владелец сервера">
-        <span class="owner-crown">👑</span>
-        <span class="owner-label">Владелец:</span>
-        <span class="owner-nick">solist</span>
-        <span class="owner-status" id="owner-status"></span>
-      </div>
-
-      <button class="ip-block" id="ip-block" onclick="copyIP()" title="Скопировать IP">
-        <span class="ip-label">IP:</span>
-        <span id="ip-text">free.cloudblaze.org:18462</span>
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      </button>
-
-      <button class="nav-btn vote" onclick="openVote()">🗳️ Проголосовать</button>
-      <button class="nav-btn kp" onclick="openKP()">📋 Набор КП</button>
-      <button class="nav-btn rules" onclick="openRules()">📜 Правила</button>
-      <a class="nav-btn ds" href="https://discord.gg/p4rEkdctc" target="_blank" rel="noopener">💬 Discord</a>
-    </div>
-    <div class="topbar-right">
-      <div class="online-badge">
-        <span class="online-dot"></span>
-        <span>Онлайн — <b id="online-count">0</b> / <b id="online-max">0</b></span>
-      </div>
-    </div>
-  </div>
-</header>
-
-<div class="filterbar">
-  <div class="container filterbar-inner">
-    <div class="filter-group">
-      <label>Категория</label>
-      <select id="filter-category">
-        <option value="all">Все категории</option>
-        <option value="kits">Киты PvP</option>
-        <option value="ranks">Привилегии</option>
-        <option value="currency">Валюта</option>
-      </select>
-    </div>
-    <div class="filter-group">
-      <label>Валюта</label>
-      <select id="filter-currency">
-        <option value="rub">РУБЛИ</option>
-        <option value="usd">ДОЛЛАРЫ</option>
-      </select>
-    </div>
-    <div class="filter-search">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-      <input type="text" id="search" placeholder="Поиск товара...">
-    </div>
-  </div>
-</div>
-
-<main class="container">
-
-  <div class="promo-banner">
-    <div class="promo-inner">
-      <div>
-        <span class="promo-tag">🔥 ИДЁТ НАБОР НА МОДЕРАЦИЮ</span>
-        <h2 class="promo-title">
-          Сервер <span class="gradient">SolistTime</span> — лучшие киты и привилегии!
-        </h2>
-        <p class="promo-desc">
-          Заявка на КП <b>уже тут</b> — прямо на сайте! Хочешь стать частью команды? Подай заявку в Discord. Лучшие киты PvP и донаты — только у нас!
-        </p>
-        <ul class="promo-features">
-          <li>⭐ <b>Лучшие киты</b></li>
-          <li>👑 <b>Топ админы</b></li>
-          <li>🚀 <b>Буст сервера</b></li>
-          <li>🎯 <b>Быстрый ответ</b></li>
+    <nav>
+        <div class="logo">Holy<span>Visuals</span></div>
+        <ul class="nav-links">
+            <li><a href="#features">Функции</a></li>
+            <li><a href="#screenshots">Скриншоты</a></li>
+            <li><a href="#download">Скачать</a></li>
         </ul>
-      </div>
-      <div class="promo-buttons">
-        <button class="promo-btn kp-btn" onclick="openKP()">📋 Заявка на КП уже тут!</button>
-        <a class="promo-btn ds-btn" href="https://discord.gg/p4rEkdctc" target="_blank" rel="noopener">💬 Подать в Discord</a>
-      </div>
-    </div>
-  </div>
+    </nav>
 
-  <div class="payment-banner">
-    <div class="payment-banner-icon">💬</div>
-    <div class="payment-banner-info">
-      <div class="payment-banner-label">💬 Связь по донатам</div>
-      <div class="payment-banner-title">
-        По вопросам донатов пиши <b>админам / владельцам</b> сервера
-      </div>
-      <div class="payment-banner-note">
-        📩 Свяжись с владельцем <b>solist</b> или админами в <b>Discord</b> — они расскажут, как купить донат.
-      </div>
-      <a class="discord-inline-btn" href="https://discord.gg/p4rEkdctc" target="_blank" rel="noopener">💬 Написать в Discord</a>
-    </div>
-    <div class="payment-banner-badge">
-      <span>⚡</span>
-      <span>Быстрый <b>ответ</b></span>
-    </div>
-  </div>
-
-  <section class="products-section">
-    <div class="products-grid" id="products-grid"></div>
-  </section>
-</main>
-
-<!-- VOTE -->
-<div class="modal" id="modal-vote">
-  <div class="modal-backdrop" onclick="closeVote()"></div>
-  <div class="modal-box wide">
-    <button class="modal-close" onclick="closeVote()">✕</button>
-    <div class="modal-head">
-      <h3>🗳️ Проголосуй за SolistTime</h3>
-      <p>Голосуй раз в сутки на мониторингах — поднимай сервер в топ</p>
-    </div>
-    <div class="vote-list">
-      <a class="vote-card mclist" href="https://mclist.ru/servers/shirokasmp" target="_blank" rel="noopener">
-        <div class="vote-logo">MC</div>
-        <div class="vote-info">
-          <div class="vote-name">MCLIST</div>
-          <div class="vote-desc">Мониторинг серверов Minecraft</div>
-          <div class="vote-url">mclist.ru/servers/shirokasmp</div>
+    <header class="hero" id="download">
+        <h1 class="glitch-text">HOLYVISUALS</h1>
+        <p class="subtitle">Почувствуй игру на новом уровне. Мощный, красивый и безопасный визуал для Minecraft.</p>
+        
+        <div class="main-download-btn">
+            <button id="downloadBtn" class="btn-download">
+                <span class="icon">⬇</span> СКАЧАТЬ БЕСПЛАТНО
+            </button>
+            <p class="version">Версия: v1.0 | Поддержка: 1.16.5 - 1.20+</p>
         </div>
-        <div class="vote-btn">Голосовать →</div>
-      </a>
-      <a class="vote-card millida" href="https://millida.net/rating/servers/shirokasmp" target="_blank" rel="noopener">
-        <div class="vote-logo">M</div>
-        <div class="vote-info">
-          <div class="vote-name">Millida</div>
-          <div class="vote-desc">Рейтинг серверов с живым онлайном</div>
-          <div class="vote-url">millida.net/rating/servers/shirokasmp</div>
+    </header>
+
+    <section id="features" class="features-section">
+        <h2>Что внутри?</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <h3>Combat</h3>
+                <ul>
+                    <li>ESP (Подсветка игроков)</li>
+                    <li>Near (Радар рядом)</li>
+                    <li>HP (Полоска здоровья)</li>
+                    <li>Mobs (Подсветка мобов)</li>
+                </ul>
+            </div>
+            <div class="feature-card">
+                <h3>Visuals</h3>
+                <ul>
+                    <li>Fullbright (Полная яркость)</li>
+                    <li>Particles (Управление частицами)</li>
+                    <li>Trails (Красивые следы)</li>
+                </ul>
+            </div>
+            <div class="feature-card">
+                <h3>HUD & Misc</h3>
+                <ul>
+                    <li>FPS + Ping</li>
+                    <li>Coords & Direction</li>
+                    <li>Armor & TimeOfDay</li>
+                    <li>BuffWarn (Предупреждение о бафах)</li>
+                </ul>
+            </div>
         </div>
-        <div class="vote-btn">Голосовать →</div>
-      </a>
-    </div>
-    <div class="vote-tip">💡 <b>Совет:</b> голосуй каждый день — сервер быстрее поднимется в топе!</div>
-  </div>
-</div>
+    </section>
 
-<!-- DONATE -->
-<div class="modal" id="modal">
-  <div class="modal-backdrop" onclick="closeModal()"></div>
-  <div class="modal-box">
-    <button class="modal-close" onclick="closeModal()">✕</button>
-    <div class="modal-head">
-      <h3 id="modal-title">💬 Связь по донатам</h3>
-      <p id="modal-subtitle">Свяжись с админами / владельцами</p>
-    </div>
-    <div class="info-section">
-      <div class="info-highlight discord">
-        💬 <b>По вопросам донатов пиши админам / владельцам</b><br>
-        Они расскажут, как купить и что входит в каждый товар.
-      </div>
-      <div class="donate-contact-card">
-        <div class="donate-contact-label">👑 Владелец сервера</div>
-        <div class="donate-contact-value"><span>👑</span> solist</div>
-      </div>
-      <div class="donate-contact-card">
-        <div class="donate-contact-label">🎮 Где связаться</div>
-        <div class="donate-contact-list">
-          <div>💬 <b style="color:var(--text)">Discord:</b> нажми кнопку ниже</div>
-          <div>🎮 <b style="color:var(--text)">В игре:</b> <code>free.cloudblaze.org:18462</code></div>
+    <section id="screenshots" class="screenshots-section">
+        <h2>Как это выглядит в игре</h2>
+        <div class="gallery">
+            <img src="images/screen1.jpg" alt="HolyVisuals Screen 1" onerror="this.src='https://placehold.co/600x400/1a1a1a/00ffff?text=HolyVisuals+Screen+1'">
+            <img src="images/screen2.jpg" alt="HolyVisuals Screen 2" onerror="this.src='https://placehold.co/600x400/1a1a1a/00ffff?text=HolyVisuals+Screen+2'">
+            <img src="images/screen3.jpg" alt="HolyVisuals Screen 3" onerror="this.src='https://placehold.co/600x400/1a1a1a/00ffff?text=HolyVisuals+Screen+3'">
         </div>
-      </div>
-      <div class="info-highlight ok">
-        ✅ <b>Выдача — моментальная</b><br>
-        После подтверждения оплаты админ выдаст товар сразу.
-      </div>
-      <a class="discord-btn" href="https://discord.gg/p4rEkdctc" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.79 19.79 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
-        💬 Написать в Discord
-      </a>
-      <button class="btn-secondary" style="width:100%" onclick="closeModal()">Закрыть</button>
-    </div>
-  </div>
-</div>
+    </section>
 
-<!-- KP -->
-<div class="modal" id="modal-kp">
-  <div class="modal-backdrop" onclick="closeKP()"></div>
-  <div class="modal-box wide">
-    <button class="modal-close" onclick="closeKP()">✕</button>
-    <div class="modal-head">
-      <h3>📋 Набор КП — присоединиться к команде</h3>
-      <p>🔥 ИДЁТ НАБОР НА МОДЕРАЦИЮ!</p>
-    </div>
-    <div class="info-section">
-      <div class="info-highlight hot">
-        🚨 <b>ИДЁТ НАБОР НА МОДЕРАЦИЮ!</b> 🚨<br>
-        Заявка на КП уже тут!
-      </div>
-      <div class="info-highlight age">
-        🎂 <b>Возраст: с 12 лет</b><br>
-        Приём открыт для игроков <b>от 12 лет и старше</b>.
-        <div style="margin-top:12px;padding-top:12px;border-top:1px dashed rgba(34,211,238,.35);font-size:13px;color:#67e8f9">
-          ⚠️ <b>Исключения есть</b> — решение принимает команда проекта индивидуально.
-        </div>
-      </div>
-      <div>
-        <h4 style="font-size:14px;font-weight:800;margin-bottom:12px">📌 Требования:</h4>
-        <ul class="info-list">
-          <li><span class="num">1</span><div>Возраст <b>от 12 лет</b></div></li>
-          <li><span class="num">2</span><div>Играть <b>не менее 7 дней</b></div></li>
-          <li><span class="num">3</span><div>Быть <b>адекватным</b></div></li>
-          <li><span class="num">4</span><div>Иметь <b>Discord</b></div></li>
-          <li><span class="num">5</span><div>Онлайн <b>от 2 часов в день</b></div></li>
-        </ul>
-      </div>
-      <div class="info-highlight ok">
-        🎁 <b>Что ты получишь:</b><br>
-        Префикс <b>[МОДЕРАТОР]</b>, админ-команды, бесплатный кит PvP каждый день.
-      </div>
-      <a class="discord-btn" href="https://discord.gg/p4rEkdctc" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.79 19.79 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
-        🚀 Подать заявку на МОДЕРАЦИЮ
-      </a>
-    </div>
-  </div>
-</div>
+    <footer>
+        <p>&copy; 2024 HolyVisuals. Создано для настоящих ценителей качества.</p>
+        <p class="disclaimer">Внимание: Использование стороннего ПО может нарушать правила некоторых серверов.</p>
+    </footer>
 
-<!-- RULES -->
-<div class="modal" id="modal-rules">
-  <div class="modal-backdrop" onclick="closeRules()"></div>
-  <div class="modal-box wide">
-    <button class="modal-close" onclick="closeRules()">✕</button>
-    <div class="modal-head">
-      <h3>📜 Правила SolistTime</h3>
-      <p>Играя на проекте, вы соглашаетесь с правилами</p>
-    </div>
-    <div class="rules-content">
-      <div class="rules-section">
-        <div class="rules-section-title"><span class="section-num">1</span> Основные положения</div>
-        <div class="rule"><span class="rule-num">1.1</span> Играя на проекте, вы соглашаетесь с правилами.</div>
-        <div class="rule"><span class="rule-num">1.2</span> Администрация вправе заблокировать аккаунт без объяснения причин.</div>
-        <div class="rule"><span class="rule-num">1.3</span> Средства, потраченные на услуги, не подлежат возврату.</div>
-        <div class="rule"><span class="rule-num">1.4</span> Администрация не возвращает утраченные ресурсы.</div>
-        <div class="rule"><span class="rule-num">1.5</span> <b>Игровой никнейм.</b> <span class="punish">Бан навсегда</span></div>
-        <div class="rule"><span class="rule-num">1.6</span> Правила могут быть изменены без уведомления.</div>
-        <div class="rule"><span class="rule-num">1.7</span> На обжалование наказания даётся 5 дней.</div>
-        <div class="rule"><span class="rule-num">1.8</span> Нарушения в шутку тоже наказываются.</div>
-        <div class="rule"><span class="rule-num">1.9</span> Систематические нарушители наказываются строже.</div>
-        <div class="rule"><span class="rule-num">1.10</span> Администрация может выдать блокировку выше срока.</div>
-        <div class="rule"><span class="rule-num">1.11</span> Игроки в ЧС теряют доступ ко всем частям проекта.</div>
-      </div>
-      <div class="rules-section">
-        <div class="rules-section-title"><span class="section-num">2</span> Игровой процесс</div>
-        <div class="rule"><span class="rule-num">2.1</span> Выдача за модерацию. <span class="punish">мут 6 часов</span></div>
-        <div class="rule"><span class="rule-num">2.2</span> Передача аккаунта. <span class="punish">бан 90 дней</span></div>
-        <div class="rule"><span class="rule-num">2.3</span> Взлом аккаунтов. <span class="punish">вечный IP-бан</span></div>
-        <div class="rule"><span class="rule-num">2.4</span> Читы и запрещённые моды. <span class="punish">IP-бан 30 дней</span></div>
-        <div class="rule"><span class="rule-num">2.5</span> Сделки с гарантом. <span class="punish">IP-бан 14 дней</span></div>
-        <div class="rule"><span class="rule-num">2.6</span> Монетизация игровых ценностей.</div>
-        <div class="rule"><span class="rule-num">2.7</span> Мешать модерации.</div>
-        <div class="rule"><span class="rule-num">2.8</span> Казино и азартные игры.</div>
-        <div class="rule"><span class="rule-num">2.9</span> Обход наказания. <span class="punish">Срок удваивается</span></div>
-        <div class="rule"><span class="rule-num">2.10</span> Использование багов. <span class="punish">Бан от 3 дней</span></div>
-        <div class="rule"><span class="rule-num">2.11</span> Нагрузка на сервер.</div>
-        <div class="rule"><span class="rule-num">2.12</span> Распространение личных данных. <span class="punish">IP-мут / IP-бан</span></div>
-        <div class="rule"><span class="rule-num">2.13</span> Оскорбительные предметы. <span class="punish">бан 2 часа</span></div>
-        <div class="rule"><span class="rule-num">2.14</span> Взаимодействие сверх лимита.</div>
-      </div>
-      <div class="rules-section">
-        <div class="rules-section-title"><span class="section-num">3</span> Правила чата</div>
-        <div class="rule"><b>— Модерируются все виды чата.</b></div>
-        <div class="rule"><span class="rule-num">3.1</span> Реклама. <span class="punish">мут 8 часов / бан 14 дней</span></div>
-        <div class="rule"><span class="rule-num">3.2</span> Вмешательство в наказания. <span class="punish">мут 30 минут</span></div>
-        <div class="rule"><span class="rule-num">3.3</span> Флуд или спам. <span class="punish">мут 1 час</span></div>
-        <div class="rule"><span class="rule-num">3.4</span> Оскорбление. <span class="punish">мут 1 час</span></div>
-        <div class="rule"><span class="rule-num">3.5</span> CAPS. <span class="punish">мут 30 минут</span></div>
-        <div class="rule"><span class="rule-num">3.6</span> Организация флуда. <span class="punish">мут 1 час</span></div>
-        <div class="rule"><span class="rule-num">3.7</span> Упоминание родных. <span class="punish">мут 1 час / 6 часов</span></div>
-        <div class="rule"><span class="rule-num">3.8</span> Политика, расизм. <span class="punish">мут / IP-бан навсегда</span></div>
-        <div class="rule"><span class="rule-num">3.9</span> Лексика сексуального характера. <span class="punish">мут 30 минут</span></div>
-        <div class="rule"><span class="rule-num">3.10</span> Оскорбление сервера. <span class="punish">мут 2 часа / IP-бан</span></div>
-        <div class="rule"><span class="rule-num">3.11</span> Флуд командами. <span class="punish">бан 1 час</span></div>
-        <div class="rule"><span class="rule-num">3.12</span> Попрошайничество. <span class="punish">мут 30 минут</span></div>
-        <div class="rule"><span class="rule-num">3.13</span> Имитация системных сообщений. <span class="punish">мут 30 минут</span></div>
-      </div>
-      <div class="info-footer">
-        📩 <b>Вопросы?</b> Напиши <b>solist</b> в Discord <a href="https://discord.gg/p4rEkdctc" target="_blank" style="color:#60a5fa;text-decoration:underline">discord.gg/p4rEkdctc</a>.
-      </div>
-    </div>
-  </div>
-</div>
+    <!-- ВСТРОЕННЫЙ СКРИПТ (JS) -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const downloadBtn = document.getElementById('downloadBtn');
 
-<script>
-const SERVER_IP = 'free.cloudblaze.org:18462';
-const DISCOUNT = 0.40;
-const OWNER_NICK = 'solist';
+            downloadBtn.addEventListener('click', () => {
+                // ВАЖНО: Здесь указывается имя твоего файла, который лежит рядом с index.html
+                const fileUrl = 'HolyVisuals.jar'; 
+                const fileName = 'HolyVisuals_v1.0.jar';
 
-const KIT_PVP = [
-  {e:'🪓',q:'1'}, {e:'🗿',q:'32'}, {e:'🥏',q:'16'}, {e:'🏹',q:'1'}, {e:'🍏',q:'32'}, {e:'🧪',q:'1'}, null, null, {e:'🔥',q:'1'},
-  {e:'🍎',q:'64'},{e:'🗿',q:'32'},{e:'🗿',q:'32'},{e:'🥏',q:'16'},{e:'🛡️',q:'1'}, null, null, null, {e:'🧪',q:'1'},
-  {e:'🍎',q:'64'},{e:'🗿',q:'32'},{e:'🗿',q:'32'},{e:'🟢',q:'64'},null, null, null, null, {e:'🧪',q:'1'},
-  {e:'🍎',q:'64'},{e:'🗿',q:'32'},{e:'🟢',q:'64'},{e:'🥏',q:'16'}, {e:'⛏️',q:'1'}, {e:'🧪',q:'1'}, null, null, {e:'🧪',q:'1'},
-  {e:'🟣',q:'1'}, {e:'🟣',q:'1'}, {e:'🟣',q:'1'}, {e:'🟣',q:'1'}, null, null, null, null, {e:'🔮',q:'1'}
-];
-const KIT_PVP2 = [
-  {e:'🏹',q:'1'}, {e:'🗿',q:'16'},{e:'🗿',q:'16'},{e:'🍏',q:'64'},{e:'🟣',q:'4'}, {e:'🖤',q:'64'},{e:'⛏️',q:'1'}, {e:'🗡️',q:'1'}, {e:'🗿',q:'16'},
-  {e:'🍎',q:'16'},{e:'🥏',q:'16'},{e:'🥏',q:'16'},{e:'⚡',q:'64'},{e:'🍏',q:'16'},{e:'🗿',q:'32'},{e:'🍏',q:'16'},{e:'🧪',q:'1'}, null,
-  {e:'🥏',q:'64'},{e:'⛏️',q:'1'}, {e:'🍏',q:'16'},{e:'🍏',q:'64'},{e:'🍏',q:'64'},{e:'🧪',q:'1'}, {e:'🟫',q:'16'},{e:'🔵',q:'1'}, {e:'💧',q:'1'}
-];
+                const link = document.createElement('a');
+                link.href = fileUrl;
+                link.download = fileName;
+                
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
 
-const products = [
-  {
-    id:'pvpkit', cat:'kits', name:'КИТ PvP ЛУЧШИЙ', sub:'Топовый PvP-набор с элитрами',
-    price:100, icon:'⚔️', cls:'is-pvpkit', badge:'BEST', preview: KIT_PVP,
-    features:['<b>Зачарованный топор</b>','<b>Лук</b> с зачарованиями','<b>Тотемы</b> (32 шт)','<b>Золотые яблоки</b> (64 шт)','<b>Энчантед яблоки</b> (32 шт)','<b>Зелья</b> силы/скорости','<b>Элитры</b> + фейерверки','<b>Незеритовая броня</b>']
-  },
-  {
-    id:'pvpkit2', cat:'kits', name:'КИТ PvP ЛУЧШИЙ 2', sub:'Прокачанный PvP-набор',
-    price:200, icon:'👑', cls:'is-pvpkit2', badge:'TOP', preview: KIT_PVP2,
-    features:['<b>Улучшенный лук</b>','<b>Незеритовая броня</b>','<b>Тотемы</b> (16 шт)','<b>Золотые яблоки</b> (80 шт)','<b>Энчантед яблоки</b> (32 шт)','<b>Шалкер</b> с ресурсами','<b>Кристаллы Энда</b>','<b>Жемчуг Энда</b>']
-  },
-  { id:'dmoder', cat:'ranks', name:'DMODER', sub:'Модератор сервера SolistTime', price:200, icon:'🛡️', cls:'is-dmoder', badge:'DMODER',
-    features:['Префикс <b>[DMODER]</b>','Все команды <b>/fly /god /heal</b>','Кит PvP <b>каждый день</b>','Мут и бан игроков','Доступ к <b>/vanish</b>'] },
-  { id:'dadmin', cat:'ranks', name:'DADMIN', sub:'Администратор сервера SolistTime', price:300, icon:'⚔️', cls:'is-dadmin', badge:'DADMIN',
-    features:['Префикс <b>[DADMIN]</b>','Все команды <b>/fly /god /heal /feed</b>','Кит PvP <b>2 раза в день</b>','Мут, бан, кик','Доступ к <b>/vanish /ec</b>','Кастомный префикс'] },
-  { id:'sponsor', cat:'ranks', name:'SPONSOR', sub:'Спонсор сервера SolistTime', price:500, icon:'💎', cls:'is-sponsor', badge:'SPONSOR',
-    features:['Префикс <b>[SPONSOR]</b>','Все команды <b>/fly /god /heal /feed</b>','Кит PvP <b>3 раза в день</b>','Мут, бан, кик','Доступ к <b>/vanish /ec /nick</b>','Личный варп','Бонус: <b>5 ключей</b>'] },
-  { id:'realiki', cat:'currency', name:'РИЛИКИ', sub:'Игровая валюта SolistTime', price:50, icon:'🪙', cls:'is-realiki', badge:'NEW',
-    features:['🪙 <b>Игровая валюта</b>','Покупай что угодно у игроков','Обменивай на ресурсы','Работает на всём сервере'] },
-];
-
-let currentCurrency = 'rub';
-const rates = { rub:1, usd:0.011 };
-const symbols = { rub:'₽', usd:'$' };
-
-function openVote()  { document.getElementById('modal-vote').classList.add('active'); document.body.style.overflow='hidden'; }
-function closeVote() { document.getElementById('modal-vote').classList.remove('active'); document.body.style.overflow=''; }
-function openKP()    { document.getElementById('modal-kp').classList.add('active'); document.body.style.overflow='hidden'; }
-function closeKP()   { document.getElementById('modal-kp').classList.remove('active'); document.body.style.overflow=''; }
-function openRules() { document.getElementById('modal-rules').classList.add('active'); document.body.style.overflow='hidden'; }
-function closeRules(){ document.getElementById('modal-rules').classList.remove('active'); document.body.style.overflow=''; }
-
-function finalPrice(base) { return Math.round(base * (1 - DISCOUNT) * 100) / 100; }
-
-function renderKitGrid(preview) {
-  if (!preview) return '';
-  return `
-    <div class="kit-preview">
-      <div class="kit-preview-grid">
-        ${preview.map(s => {
-          if (!s) return `<div class="kit-slot empty"></div>`;
-          const q = s.q ? `<span class="qty">${s.q}</span>` : '';
-          return `<div class="kit-slot" title="${s.e}${s.q ? ' ×'+s.q : ''}">${s.e}${q}</div>`;
-        }).join('')}
-      </div>
-    </div>`;
-}
-
-function render() {
-  const grid = document.getElementById('products-grid');
-  const cat = document.getElementById('filter-category').value;
-  const q = document.getElementById('search').value.trim().toLowerCase();
-  const rate = rates[currentCurrency];
-  const sym = symbols[currentCurrency];
-  const list = products.filter(p => (cat==='all'||p.cat===cat) && (!q || p.name.toLowerCase().includes(q)));
-
-  grid.innerHTML = list.map(p => {
-    const finalPriceStr = (finalPrice(p.price) * rate).toFixed(rate===1?0:2);
-    const oldPriceStr = (p.price * rate).toFixed(rate===1?0:2);
-    const badgeHtml = p.badge ? `<div class="product-badge badge-${p.id}">${p.badge}</div>` : '';
-    const previewHtml = renderKitGrid(p.preview);
-    const featuresHtml = p.features && p.features.length
-      ? `<ul class="product-features">${p.features.map(f=>`<li>${f}</li>`).join('')}</ul>` : '';
-
-    return `
-    <article class="product-card ${p.cls}">
-      <div class="product-top">
-        <div class="product-icon">${p.icon}</div>
-        ${badgeHtml}
-      </div>
-      <div class="product-info">
-        <div class="product-name">${p.name}</div>
-        <div class="product-subtitle">${p.sub}</div>
-      </div>
-      ${previewHtml}
-      ${featuresHtml}
-      <div class="product-row">
-        <span class="product-row-label">Количество</span>
-        <div class="product-qty">
-          <button type="button" onclick="changeQty('${p.id}',-1)">−</button>
-          <input type="number" id="qty-${p.id}" value="1" min="1" max="99">
-          <button type="button" onclick="changeQty('${p.id}',1)">+</button>
-        </div>
-      </div>
-      <div class="product-bottom">
-        <div class="product-prices">
-          <span class="product-old">${oldPriceStr}${sym}</span>
-          <span class="product-new">${finalPriceStr}${sym}</span>
-        </div>
-        <button class="btn-add" onclick="addToCart('${p.id}')">Купить</button>
-      </div>
-    </article>`;
-  }).join('');
-}
-
-function changeQty(id, delta) {
-  const el = document.getElementById('qty-'+id);
-  if (!el) return;
-  let v = parseInt(el.value)||1;
-  v = Math.max(1, Math.min(99, v+delta));
-  el.value = v;
-}
-
-function addToCart(id) {
-  const p = products.find(x=>x.id===id);
-  const qty = parseInt(document.getElementById('qty-'+id).value)||1;
-  const price = finalPrice(p.price) * qty * rates[currentCurrency];
-  const sym = symbols[currentCurrency];
-  document.getElementById('modal-title').textContent = p.icon + ' ' + p.name;
-  document.getElementById('modal-subtitle').innerHTML =
-    `Количество: <b>${qty}</b> шт · Сумма: <b style="color:#22d3ee">${price.toFixed(currentCurrency==='rub'?0:2)}${sym}</b>`;
-  document.getElementById('modal').classList.add('active');
-  document.body.style.overflow='hidden';
-}
-
-function closeModal(){
-  document.getElementById('modal').classList.remove('active');
-  document.body.style.overflow='';
-}
-
-function copyIP() {
-  navigator.clipboard.writeText(SERVER_IP).then(() => {
-    const b = document.getElementById('ip-block');
-    const t = document.getElementById('ip-text');
-    const orig = t.textContent;
-    b.classList.add('copied'); t.textContent = 'Скопировано!';
-    setTimeout(() => { t.textContent = orig; b.classList.remove('copied'); }, 1500);
-  }).catch(() => alert('IP: ' + SERVER_IP));
-}
-
-document.getElementById('filter-category').addEventListener('change', render);
-document.getElementById('filter-currency').addEventListener('change', e=>{ currentCurrency = e.target.value; render(); });
-document.getElementById('search').addEventListener('input', render);
-
-async function updateOnline() {
-  const o = document.getElementById('online-count');
-  const m = document.getElementById('online-max');
-  try {
-    const res = await fetch('https://api.mcsrvstat.us/3/' + SERVER_IP);
-    const data = await res.json();
-    if (data.online) { o.textContent = data.players.online; m.textContent = data.players.max; }
-    else { o.textContent = '0'; m.textContent = '0'; }
-  } catch (e) { o.textContent = '0'; m.textContent = '0'; }
-}
-
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') { closeModal(); closeKP(); closeRules(); closeVote(); }
-});
-
-render();
-updateOnline();
-setInterval(updateOnline, 60000);
-</script>
+                const originalText = downloadBtn.innerHTML;
+                downloadBtn.innerHTML = '<span class="icon">✔</span> СКАЧИВАНИЕ...';
+                downloadBtn.style.background = 'linear-gradient(45deg, #00ff00, #00aa00)';
+                
+                setTimeout(() => {
+                    downloadBtn.innerHTML = originalText;
+                    downloadBtn.style.background = 'linear-gradient(45deg, #0055ff, #00ffff)';
+                }, 3000);
+            });
+        });
+    </script>
 </body>
 </html>
