@@ -6,7 +6,6 @@
     <title>HolyVisuals - Лучший визуал для Minecraft</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
     
-    <!-- ВСТРОЕННЫЕ СТИЛИ (CSS) -->
     <style>
         :root {
             --bg-color: #0d0f14;
@@ -299,7 +298,7 @@
             <button id="downloadBtn" class="btn-download">
                 <span class="icon">⬇</span> СКАЧАТЬ БЕСПЛАТНО
             </button>
-            <p class="version">Версия: v1.0 | Поддержка: 1.16.5 - 1.20+</p>
+            <p class="version">Версия: v1.0 | Формат: .ZIP | Поддержка: 1.16.5 - 1.20+</p>
         </div>
     </header>
 
@@ -349,15 +348,15 @@
         <p class="disclaimer">Внимание: Использование стороннего ПО может нарушать правила некоторых серверов.</p>
     </footer>
 
-    <!-- ВСТРОЕННЫЙ СКРИПТ (JS) -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const downloadBtn = document.getElementById('downloadBtn');
 
             downloadBtn.addEventListener('click', () => {
-                // ВАЖНО: Здесь указывается имя твоего файла, который лежит рядом с index.html
-                const fileUrl = 'HolyVisuals.jar'; 
-                const fileName = 'HolyVisuals_v1.0.jar';
+                // ССЫЛКА НА ТВОЙ АРХИВ
+                const fileUrl = 'holyvisuals.zip'; 
+                // ИМЯ, ПОД КОТОРЫМ СКАЧАЕТСЯ ФАЙЛ
+                const fileName = 'HolyVisuals_v1.0.zip';
 
                 const link = document.createElement('a');
                 link.href = fileUrl;
@@ -367,13 +366,16 @@
                 link.click();
                 document.body.removeChild(link);
 
+                // Визуальный эффект нажатия
                 const originalText = downloadBtn.innerHTML;
                 downloadBtn.innerHTML = '<span class="icon">✔</span> СКАЧИВАНИЕ...';
                 downloadBtn.style.background = 'linear-gradient(45deg, #00ff00, #00aa00)';
+                downloadBtn.style.color = '#fff';
                 
                 setTimeout(() => {
                     downloadBtn.innerHTML = originalText;
                     downloadBtn.style.background = 'linear-gradient(45deg, #0055ff, #00ffff)';
+                    downloadBtn.style.color = '#000';
                 }, 3000);
             });
         });
