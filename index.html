@@ -3,359 +3,461 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HolyVisuals - Лучший визуал для Minecraft</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    <title>HolyVisuals - Меню функций</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --bg-color: #0d0f14;
-            --card-bg: rgba(255, 255, 255, 0.03);
-            --text-color: #e0e0e0;
-            --accent-color: #00ffff; /* Неоново-голубой */
-            --accent-hover: #00cccc;
+            --bg-color: #0a0a0c;
+            --panel-bg: #141418;
+            --card-bg: #1c1c22;
+            --card-hover: #25252d;
+            --text-main: #ffffff;
+            --text-muted: #8b8b99;
+            --accent-blue: #3b82f6; /* Синий цвет из скрина */
+            --accent-glow: rgba(59, 130, 246, 0.5);
+            --border-color: #2a2a35;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Montserrat', sans-serif;
-            scroll-behavior: smooth;
+            font-family: 'Inter', sans-serif;
         }
 
         body {
             background-color: var(--bg-color);
-            color: var(--text-color);
-            overflow-x: hidden;
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            background-image: radial-gradient(circle at top right, rgba(59, 130, 246, 0.1), transparent 40%);
         }
 
-        /* Фоновое свечение */
-        .glow-bg {
-            position: fixed;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle at center, rgba(0, 255, 255, 0.05) 0%, transparent 50%);
-            z-index: -1;
-            pointer-events: none;
+        /* Главное окно (как на скрине) */
+        .menu-container {
+            width: 100%;
+            max-width: 1000px;
+            background-color: var(--panel-bg);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
         }
 
-        /* Навигация */
-        nav {
+        /* Шапка */
+        .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 50px;
-            background: rgba(13, 15, 20, 0.8);
-            backdrop-filter: blur(10px);
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 100;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
+            margin-bottom: 30px;
         }
 
         .logo {
             font-size: 24px;
-            font-weight: 900;
-            letter-spacing: 1px;
-            color: #fff;
+            font-weight: 700;
+            letter-spacing: -0.5px;
         }
 
         .logo span {
-            color: var(--accent-color);
+            color: var(--accent-blue);
         }
 
-        .nav-links {
-            list-style: none;
+        /* Поиск */
+        .search-bar {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 10px 15px;
             display: flex;
-            gap: 30px;
-        }
-
-        .nav-links a {
-            color: var(--text-color);
-            text-decoration: none;
-            font-weight: 700;
-            transition: color 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: var(--accent-color);
-        }
-
-        /* Главный экран */
-        .hero {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
             align-items: center;
-            text-align: center;
-            padding: 0 20px;
-            margin-top: 60px;
+            width: 250px;
+            transition: border-color 0.3s;
         }
 
-        .glitch-text {
-            font-size: 5rem;
-            font-weight: 900;
-            color: #fff;
-            text-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
-            margin-bottom: 20px;
-            letter-spacing: 5px;
+        .search-bar:focus-within {
+            border-color: var(--accent-blue);
         }
 
-        .subtitle {
-            font-size: 1.2rem;
-            max-width: 600px;
-            margin-bottom: 50px;
-            color: #a0a0a0;
+        .search-bar input {
+            background: transparent;
+            border: none;
+            color: var(--text-main);
+            outline: none;
+            width: 100%;
+            font-size: 14px;
+            margin-left: 10px;
         }
 
-        /* Кнопка скачивания */
-        .main-download-btn {
+        .search-bar input::placeholder {
+            color: var(--text-muted);
+        }
+
+        /* Категории (Вкладки) */
+        .categories {
             display: flex;
-            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+
+        .cat-btn {
+            background-color: var(--card-bg);
+            border: 1px solid transparent;
+            color: var(--text-muted);
+            padding: 8px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .cat-btn:hover {
+            background-color: var(--card-hover);
+            color: var(--text-main);
+        }
+
+        .cat-btn.active {
+            background-color: var(--accent-blue);
+            color: #fff;
+            box-shadow: 0 0 15px var(--accent-glow);
+        }
+
+        /* Сетка функций (как на скрине) */
+        .features-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            max-height: 400px;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+
+        /* Скроллбар */
+        .features-grid::-webkit-scrollbar {
+            width: 6px;
+        }
+        .features-grid::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .features-grid::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 10px;
+        }
+
+        /* Карточка функции */
+        .feature-item {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .feature-item:hover {
+            background-color: var(--card-hover);
+            border-color: #3a3a45;
+        }
+
+        .feature-info {
+            display: flex;
             align-items: center;
             gap: 15px;
+        }
+
+        .feature-icon {
+            width: 20px;
+            height: 20px;
+            fill: var(--accent-blue);
+        }
+
+        .feature-name {
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        /* Тумблер (Переключатель) */
+        .toggle-switch {
+            position: relative;
+            width: 44px;
+            height: 24px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: #3a3a45;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background-color: #fff;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: var(--accent-blue);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(20px);
+        }
+
+        /* Кнопка скачивания (внизу) */
+        .download-area {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: center;
         }
 
         .btn-download {
-            background: linear-gradient(45deg, #0055ff, var(--accent-color));
-            color: #000;
+            background: linear-gradient(135deg, var(--accent-blue), #2563eb);
+            color: #fff;
             border: none;
-            padding: 20px 50px;
-            font-size: 1.5rem;
-            font-weight: 900;
-            border-radius: 50px;
+            padding: 15px 40px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 12px;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
             display: flex;
             align-items: center;
-            gap: 15px;
-            text-transform: uppercase;
+            gap: 10px;
         }
 
         .btn-download:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 40px rgba(0, 255, 255, 0.8);
-            background: linear-gradient(45deg, var(--accent-color), #0055ff);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.6);
         }
 
-        .btn-download .icon {
-            font-size: 1.8rem;
-            animation: bounce 2s infinite;
-        }
-
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
-            40% {transform: translateY(-5px);}
-            60% {transform: translateY(-3px);}
-        }
-
-        .version {
-            font-size: 0.9rem;
-            color: #666;
-        }
-
-        /* Секция функций */
-        .features-section {
-            padding: 100px 50px;
-            text-align: center;
-        }
-
-        .features-section h2 {
-            font-size: 2.5rem;
-            margin-bottom: 50px;
-            color: #fff;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .feature-card {
-            background: var(--card-bg);
-            padding: 30px;
-            border-radius: 15px;
-            border: 1px solid rgba(255,255,255,0.05);
-            transition: transform 0.3s, border-color 0.3s;
-            text-align: left;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--accent-color);
-            box-shadow: 0 10px 30px rgba(0, 255, 255, 0.1);
-        }
-
-        .feature-card h3 {
-            color: var(--accent-color);
-            margin-bottom: 20px;
-            font-size: 1.5rem;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            padding-bottom: 10px;
-        }
-
-        .feature-card ul {
-            list-style: none;
-        }
-
-        .feature-card ul li {
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            color: #ccc;
-        }
-
-        .feature-card ul li::before {
-            content: "▹";
-            color: var(--accent-color);
-            margin-right: 10px;
-            font-weight: bold;
-        }
-
-        /* Скриншоты */
-        .screenshots-section {
-            padding: 50px 50px 100px;
-            text-align: center;
-        }
-
-        .screenshots-section h2 {
-            font-size: 2.5rem;
-            margin-bottom: 50px;
-            color: #fff;
-        }
-
-        .gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .gallery img {
-            width: 100%;
-            height: auto;
-            border-radius: 10px;
-            transition: transform 0.3s;
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .gallery img:hover {
-            transform: scale(1.03);
-            border-color: var(--accent-color);
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
-        }
-
-        /* Подвал */
-        footer {
-            text-align: center;
-            padding: 40px;
-            background: #080a0e;
-            border-top: 1px solid rgba(255,255,255,0.05);
-        }
-
-        .disclaimer {
-            font-size: 0.8rem;
-            color: #555;
-            margin-top: 10px;
+        .btn-download:active {
+            transform: translateY(0);
         }
 
         /* Адаптивность */
         @media (max-width: 768px) {
-            nav { padding: 15px 20px; flex-direction: column; gap: 15px; }
-            .glitch-text { font-size: 3rem; }
-            .btn-download { padding: 15px 30px; font-size: 1.2rem; }
-            .features-section, .screenshots-section { padding: 50px 20px; }
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+            .search-bar {
+                width: 100%;
+            }
+            .categories {
+                overflow-x: auto;
+                padding-bottom: 5px;
+            }
+            .cat-btn {
+                white-space: nowrap;
+            }
         }
     </style>
 </head>
 <body>
 
-    <div class="glow-bg"></div>
+    <div class="menu-container">
+        <!-- Шапка -->
+        <div class="header">
+            <div class="logo">Holy<span>Visuals</span></div>
+            <div class="search-bar">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8b8b99" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                <input type="text" placeholder="Search...">
+            </div>
+        </div>
 
-    <nav>
-        <div class="logo">Holy<span>Visuals</span></div>
-        <ul class="nav-links">
-            <li><a href="#features">Функции</a></li>
-            <li><a href="#screenshots">Скриншоты</a></li>
-            <li><a href="#download">Скачать</a></li>
-        </ul>
-    </nav>
-
-    <header class="hero" id="download">
-        <h1 class="glitch-text">HOLYVISUALS</h1>
-        <p class="subtitle">Почувствуй игру на новом уровне. Мощный, красивый и безопасный визуал для Minecraft.</p>
-        
-        <div class="main-download-btn">
-            <button id="downloadBtn" class="btn-download">
-                <span class="icon">⬇</span> СКАЧАТЬ БЕСПЛАТНО
+        <!-- Категории -->
+        <div class="categories">
+            <button class="cat-btn active">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                Visuals
             </button>
-            <p class="version">Версия: v1.0 | Формат: .ZIP | Поддержка: 1.16.5 - 1.20+</p>
+            <button class="cat-btn">Util</button>
+            <button class="cat-btn">Configs</button>
+            <button class="cat-btn">Theme</button>
         </div>
-    </header>
 
-    <section id="features" class="features-section">
-        <h2>Что внутри?</h2>
+        <!-- Сетка функций -->
         <div class="features-grid">
-            <div class="feature-card">
-                <h3>Combat</h3>
-                <ul>
-                    <li>ESP (Подсветка игроков)</li>
-                    <li>Near (Радар рядом)</li>
-                    <li>HP (Полоска здоровья)</li>
-                    <li>Mobs (Подсветка мобов)</li>
-                </ul>
+            <!-- Карточка 1 -->
+            <div class="feature-item">
+                <div class="feature-info">
+                    <svg class="feature-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                    <span class="feature-name">Ambience</span>
+                </div>
+                <label class="toggle-switch">
+                    <input type="checkbox" checked>
+                    <span class="slider"></span>
+                </label>
             </div>
-            <div class="feature-card">
-                <h3>Visuals</h3>
-                <ul>
-                    <li>Fullbright (Полная яркость)</li>
-                    <li>Particles (Управление частицами)</li>
-                    <li>Trails (Красивые следы)</li>
-                </ul>
+
+            <!-- Карточка 2 -->
+            <div class="feature-item">
+                <div class="feature-info">
+                    <svg class="feature-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                    <span class="feature-name">Arrow Nametag</span>
+                </div>
+                <label class="toggle-switch">
+                    <input type="checkbox" checked>
+                    <span class="slider"></span>
+                </label>
             </div>
-            <div class="feature-card">
-                <h3>HUD & Misc</h3>
-                <ul>
-                    <li>FPS + Ping</li>
-                    <li>Coords & Direction</li>
-                    <li>Armor & TimeOfDay</li>
-                    <li>BuffWarn (Предупреждение о бафах)</li>
-                </ul>
+
+            <!-- Карточка 3 -->
+            <div class="feature-item">
+                <div class="feature-info">
+                    <svg class="feature-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                    <span class="feature-name">Block Overlay</span>
+                </div>
+                <label class="toggle-switch">
+                    <input type="checkbox">
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+            <!-- Карточка 4 -->
+            <div class="feature-item">
+                <div class="feature-info">
+                    <svg class="feature-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                    <span class="feature-name">China Hat</span>
+                </div>
+                <label class="toggle-switch">
+                    <input type="checkbox" checked>
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+            <!-- Карточка 5 -->
+            <div class="feature-item">
+                <div class="feature-info">
+                    <svg class="feature-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                    <span class="feature-name">Armor Durability View</span>
+                </div>
+                <label class="toggle-switch">
+                    <input type="checkbox" checked>
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+            <!-- Карточка 6 -->
+            <div class="feature-item">
+                <div class="feature-info">
+                    <svg class="feature-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                    <span class="feature-name">Aspect Ratio</span>
+                </div>
+                <label class="toggle-switch">
+                    <input type="checkbox" checked>
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+            <!-- Карточка 7 -->
+            <div class="feature-item">
+                <div class="feature-info">
+                    <svg class="feature-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                    <span class="feature-name">Body Glow</span>
+                </div>
+                <label class="toggle-switch">
+                    <input type="checkbox">
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+            <!-- Карточка 8 -->
+            <div class="feature-item">
+                <div class="feature-info">
+                    <svg class="feature-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                    <span class="feature-name">Cosmetics</span>
+                </div>
+                <label class="toggle-switch">
+                    <input type="checkbox" checked>
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+            <!-- Карточка 9 -->
+            <div class="feature-item">
+                <div class="feature-info">
+                    <svg class="feature-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                    <span class="feature-name">CritEffect</span>
+                </div>
+                <label class="toggle-switch">
+                    <input type="checkbox">
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+            <!-- Карточка 10 -->
+            <div class="feature-item">
+                <div class="feature-info">
+                    <svg class="feature-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                    <span class="feature-name">Crosshair</span>
+                </div>
+                <label class="toggle-switch">
+                    <input type="checkbox">
+                    <span class="slider"></span>
+                </label>
             </div>
         </div>
-    </section>
 
-    <section id="screenshots" class="screenshots-section">
-        <h2>Как это выглядит в игре</h2>
-        <div class="gallery">
-            <img src="images/screen1.jpg" alt="HolyVisuals Screen 1" onerror="this.src='https://placehold.co/600x400/1a1a1a/00ffff?text=HolyVisuals+Screen+1'">
-            <img src="images/screen2.jpg" alt="HolyVisuals Screen 2" onerror="this.src='https://placehold.co/600x400/1a1a1a/00ffff?text=HolyVisuals+Screen+2'">
-            <img src="images/screen3.jpg" alt="HolyVisuals Screen 3" onerror="this.src='https://placehold.co/600x400/1a1a1a/00ffff?text=HolyVisuals+Screen+3'">
+        <!-- Кнопка скачивания -->
+        <div class="download-area">
+            <button id="downloadBtn" class="btn-download">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                СКАЧАТЬ HOLYVISUALS.ZIP
+            </button>
         </div>
-    </section>
-
-    <footer>
-        <p>&copy; 2024 HolyVisuals. Создано для настоящих ценителей качества.</p>
-        <p class="disclaimer">Внимание: Использование стороннего ПО может нарушать правила некоторых серверов.</p>
-    </footer>
+    </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const downloadBtn = document.getElementById('downloadBtn');
 
+            // Логика переключения вкладок (для красоты)
+            const catBtns = document.querySelectorAll('.cat-btn');
+            catBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    catBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                });
+            });
+
+            // Логика скачивания
             downloadBtn.addEventListener('click', () => {
-                // ССЫЛКА НА ТВОЙ АРХИВ
                 const fileUrl = 'holyvisuals.zip'; 
-                // ИМЯ, ПОД КОТОРЫМ СКАЧАЕТСЯ ФАЙЛ
                 const fileName = 'HolyVisuals_v1.0.zip';
 
                 const link = document.createElement('a');
@@ -366,16 +468,14 @@
                 link.click();
                 document.body.removeChild(link);
 
-                // Визуальный эффект нажатия
+                // Анимация кнопки
                 const originalText = downloadBtn.innerHTML;
-                downloadBtn.innerHTML = '<span class="icon">✔</span> СКАЧИВАНИЕ...';
-                downloadBtn.style.background = 'linear-gradient(45deg, #00ff00, #00aa00)';
-                downloadBtn.style.color = '#fff';
+                downloadBtn.innerHTML = '✔ СКАЧИВАНИЕ...';
+                downloadBtn.style.background = 'linear-gradient(135deg, #10b981, #059669)';
                 
                 setTimeout(() => {
                     downloadBtn.innerHTML = originalText;
-                    downloadBtn.style.background = 'linear-gradient(45deg, #0055ff, #00ffff)';
-                    downloadBtn.style.color = '#000';
+                    downloadBtn.style.background = 'linear-gradient(135deg, #3b82f6, #2563eb)';
                 }, 3000);
             });
         });
